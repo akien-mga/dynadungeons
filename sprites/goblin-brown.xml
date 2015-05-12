@@ -2,26 +2,26 @@
 <resource_file type="SpriteFrames" subresource_count="11" version="1.1" version_name="Godot Engine v1.1.rc2.custom_build">
 	<ext_resource path="res://sprites/goblin-brown/idle-down.png" type="Texture"></ext_resource>
 	<ext_resource path="res://sprites/goblin-brown/idle-up.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/goblin-brown/idle-right.png" type="Texture"></ext_resource>
+	<ext_resource path="res://sprites/goblin-brown/idle-side.png" type="Texture"></ext_resource>
 	<ext_resource path="res://sprites/goblin-brown/walk-down1.png" type="Texture"></ext_resource>
 	<ext_resource path="res://sprites/goblin-brown/walk-down2.png" type="Texture"></ext_resource>
 	<ext_resource path="res://sprites/goblin-brown/walk-up1.png" type="Texture"></ext_resource>
 	<ext_resource path="res://sprites/goblin-brown/walk-up2.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/goblin-brown/walk-right1.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/goblin-brown/walk-right2.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/goblin-brown/walk-right3.png" type="Texture"></ext_resource>
+	<ext_resource path="res://sprites/goblin-brown/walk-side1.png" type="Texture"></ext_resource>
+	<ext_resource path="res://sprites/goblin-brown/walk-side2.png" type="Texture"></ext_resource>
+	<ext_resource path="res://sprites/goblin-brown/walk-side3.png" type="Texture"></ext_resource>
 	<main_resource>
 		<array name="frames" len="10" shared="false">
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/idle-down.png">  </resource>
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/idle-up.png">  </resource>
-			<resource  resource_type="Texture" path="res://sprites/goblin-brown/idle-right.png">  </resource>
+			<resource  resource_type="Texture" path="res://sprites/goblin-brown/idle-side.png">  </resource>
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-down1.png">  </resource>
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-down2.png">  </resource>
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-up1.png">  </resource>
 			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-up2.png">  </resource>
-			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-right1.png">  </resource>
-			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-right2.png">  </resource>
-			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-right3.png">  </resource>
+			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-side1.png">  </resource>
+			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-side2.png">  </resource>
+			<resource  resource_type="Texture" path="res://sprites/goblin-brown/walk-side3.png">  </resource>
 		</array>
 
 	</main_resource>
