@@ -1,6 +1,7 @@
 extends Area2D
 
-export var effect = "bomb_increase"
+const types = [ "bomb_increase", "flame_increase" ]
+export var effect = types[0]
 var global
 
 func _on_body_enter(body):

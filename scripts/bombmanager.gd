@@ -106,6 +106,12 @@ func stop_animation(var trigger_bomb):
 		for pos in bomb.flame_cells:
 			global.tilemap_destr.set_cell(pos.x, pos.y, -1)
 		for pos in bomb.destruct_cells:
+			# Random chance to add a random pickup
+			if (randi() % 100 < global.COLLECTIBLE_RATE):
+				var collectible = global.collectible_scene.instance()
+				collectible.effect = collectible.types[randi() % collectible.types.size()]
+				collectible.set_pos(global.map_to_world(pos))
+				global.collectible_manager.add_child(collectible)
 			global.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
 func bomb_on_tile(var tile_pos):
