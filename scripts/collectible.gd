@@ -9,7 +9,10 @@ func _on_body_enter(body):
 			body.max_bombs += 1
 		elif (effect == "flame_increase" and body.bomb_range < global.MAX_FLAMERANGE):
 			body.bomb_range += 1
-		self.queue_free()
+		get_node("AnimationPlayer").play("pickup")
+
+func _on_AnimationPlayer_finished():
+	self.queue_free()
 
 func _ready():
 	global = get_node("/root/global")
