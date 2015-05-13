@@ -39,7 +39,10 @@ func process_movement(delta):
 	motion = motion.normalized() * MOTION_SPEED * delta
 	move(motion)
 	
-	var slide_attempts = 3
+	# Too many slide attempts provide "jumping" through tiles
+	# TODO: Needs investigating as even with one attempt some unused effects
+	# can be seen when going diagonally against walls
+	var slide_attempts = 1
 	while(is_colliding() and slide_attempts > 0):
 		motion = get_collision_normal().slide(motion)
 		move(motion)
