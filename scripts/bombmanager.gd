@@ -5,7 +5,6 @@ var global
 var bomb_scene = preload("res://scenes/bomb.xscn")
 
 # Constants
-var TILE_SIZE
 const dir = { "up": Vector2(0,-1),
               "down": Vector2(0,1),
               "left": Vector2(-1,0),
@@ -14,6 +13,9 @@ const FLAME_SOURCE = 8
 const FLAME_SMALL = 9
 const FLAME_LONG_MIDDLE = 10
 const FLAME_LONG_END = 11
+
+# Member variables
+var exploding_bombs = []
 
 func place_bomb(var player, cell_pos):
 	var bomb = bomb_scene.instance()
@@ -25,7 +27,7 @@ func place_bomb(var player, cell_pos):
 	bomb.set_pos(global.tilemap_destr.map_to_world(cell_pos) + global.TILE_OFFSET)
 	self.add_child(bomb)
 
-func find_bombs_in_range(var trigger_bomb, cur_bomb = trigger_bomb, exceptions = []):
+func find_chain_and_collisions(var trigger_bomb, cur_bomb = trigger_bomb, exceptions = []):
 	# Cast rays to determine collisions with other bombs, and do that recursively to find the complete chain reaction
 	var space_state = global.level.get_world_2d().get_direct_space_state()
 	if exceptions.empty():
@@ -63,7 +65,7 @@ func find_bombs_in_range(var trigger_bomb, cur_bomb = trigger_bomb, exceptions =
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	
 	for bomb in new_bombs:
-		find_bombs_in_range(trigger_bomb, bomb, exceptions)
+		find_chain_and_collisions(trigger_bomb, bomb, exceptions)
 
 func play_animation(var trigger_bomb):
 	for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:

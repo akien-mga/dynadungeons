@@ -19,11 +19,13 @@ func _on_TimerIdle_timeout():
 
 func _on_AnimationPlayer_finished():
 	# Find collisions and act accordingly
-	global.bomb_manager.find_bombs_in_range(self)
+	global.bomb_manager.find_chain_and_collisions(self)
 	# Free bomb spots for the players as soon as they are triggered
 	for bomb in self.chained_bombs:
 		bomb.player.active_bombs -= 1
 	self.player.active_bombs -= 1
+	# Register as exploding bomb
+	global.bomb_manager.exploding_bombs.append(self)
 	# Play animation corresponding to the explosion of self and its chain reaction
 	global.bomb_manager.play_animation(self)
 
@@ -35,6 +37,7 @@ func _on_TimerAnim_timeout():
 		bomb.player.bomb_collision_exceptions.erase(bomb)
 		bomb.queue_free()
 	self.player.bomb_collision_exceptions.erase(self)
+	global.bomb_manager.exploding_bombs.erase(self)
 	self.queue_free()
 
 func _ready():

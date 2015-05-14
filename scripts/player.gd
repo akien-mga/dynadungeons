@@ -75,14 +75,24 @@ func process_actions():
 	
 	# FIXME: Hardcoded key to kill the player, to test the death animation
 	if (Input.is_action_pressed("suicide")):
-		set_fixed_process(false)
-		get_node("CharSprite").hide()
-		get_node("AnimationPlayer").play("death")
-		dead = true
+		self.die()
+
+func process_explosions():
+	for trigger_bomb in global.bomb_manager.exploding_bombs:
+		for bomb in [ trigger_bomb ]  + trigger_bomb.chained_bombs:
+			if (global.world_to_map(self.get_pos()) in bomb.flame_cells):
+				self.die()
+
+func die():
+	set_fixed_process(false)
+	get_node("CharSprite").hide()
+	get_node("AnimationPlayer").play("death")
+	dead = true
 
 func _fixed_process(delta):
 	process_movement(delta)
 	process_actions()
+	process_explosions()
 	
 	for bomb in bomb_collision_exceptions:
 		if (self.get_pos().x < (bomb.cell_pos.x - 0.5)*global.TILE_SIZE \
