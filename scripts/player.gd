@@ -72,10 +72,6 @@ func process_actions():
 		if (!global.bomb_manager.bomb_on_tile(global.world_to_map(self.get_pos()))):
 			global.bomb_manager.place_bomb(self, global.world_to_map(self.get_pos()))
 			active_bombs += 1
-	
-	# FIXME: Hardcoded key to kill the player, to test the death animation
-	if (Input.is_action_pressed("suicide")):
-		self.die()
 
 func process_explosions():
 	for trigger_bomb in global.bomb_manager.exploding_bombs:
