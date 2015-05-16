@@ -67,7 +67,7 @@ func find_chain_and_collisions(var trigger_bomb, cur_bomb = trigger_bomb, except
 	for bomb in new_bombs:
 		find_chain_and_collisions(trigger_bomb, bomb, exceptions)
 
-func play_animation(var trigger_bomb):
+func start_animation(var trigger_bomb):
 	for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
 		# Display flame "branches" depending on their length
 		for key in dir:
@@ -77,36 +77,40 @@ func play_animation(var trigger_bomb):
 				var transpose = dir[key].y != 0
 				if (bomb.anim_ranges[key] == 1):
 					var pos = bomb.cell_pos + dir[key]
-					bomb.flame_cells.append(pos)
+					bomb.flame_cells.append({'pos': pos, 'tile': FLAME_SMALL, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
 					global.tilemap_destr.set_cell(pos.x, pos.y, FLAME_SMALL, xflip, yflip, transpose)
 				else:
 					for i in range(1, bomb.anim_ranges[key] + 1):
 						var pos = bomb.cell_pos + i*dir[key]
-						bomb.flame_cells.append(pos)
 						var tile_index
 						if (i == bomb.anim_ranges[key]):
 							tile_index = FLAME_LONG_END
 						else:
 							tile_index = FLAME_LONG_MIDDLE
+						bomb.flame_cells.append({'pos': pos, 'tile': tile_index, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
 						global.tilemap_destr.set_cell(pos.x, pos.y, tile_index, xflip, yflip, transpose)
 	
 		for pos in bomb.destruct_cells:
 			# "Exploding" tile ID should be normal tile ID + 1
 			global.tilemap_destr.set_cell(pos.x, pos.y, global.tilemap_destr.get_cell(pos.x, pos.y) + 1)
 	
-	for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
 		# Display "source" flame tile where the bomb is, and hide bomb
 		bomb.get_node("AnimatedSprite").hide()
-		bomb.flame_cells.append(bomb.cell_pos)
+		bomb.flame_cells.append({'pos': bomb.cell_pos, 'tile': FLAME_SOURCE, 'xflip': false, 'yflip': false, 'transpose': false})
 		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE)
 	
 	# Start timer that should trigger the cleanup of the animation
 	trigger_bomb.get_node("AnimatedSprite/TimerAnim").start()
 
+func update_animation(var trigger_bomb):
+	for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
+		for cell_dict in bomb.flame_cells:
+			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + 4*(trigger_bomb.counter % 3), cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
+
 func stop_animation(var trigger_bomb):
 	for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
-		for pos in bomb.flame_cells:
-			global.tilemap_destr.set_cell(pos.x, pos.y, -1)
+		for cell_dict in bomb.flame_cells:
+			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
 		for pos in bomb.destruct_cells:
 			# Random chance to add a random pickup
 			if (randi() % 100 < global.COLLECTIBLE_RATE):
