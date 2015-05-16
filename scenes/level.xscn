@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="4" version="1.1" version_name="Godot Engine v1.1.rc2.custom_build">
+<resource_file type="PackedScene" subresource_count="3" version="1.1" version_name="Godot Engine v1.1.rc2.custom_build">
 	<ext_resource path="res://sprites/tileset.xml" type="TileSet"></ext_resource>
 	<ext_resource path="res://scenes/player.xscn" type="PackedScene"></ext_resource>
-	<ext_resource path="res://scripts/bombmanager.gd" type="Script"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -10,7 +9,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="57">
+			<string_array  len="56">
 				<string> "Level" </string>
 				<string> "Node2D" </string>
 				<string> "_import_path" </string>
@@ -50,7 +49,6 @@
 				<string> "id" </string>
 				<string> "char" </string>
 				<string> "BombManager" </string>
-				<string> "script/script" </string>
 				<string> "CollectibleManager" </string>
 				<string> "Camera2D" </string>
 				<string> "centered" </string>
@@ -72,9 +70,9 @@
 			<string> "node_count" </string>
 			<int> 10 </int>
 			<string> "nodes" </string>
-			<int_array  len="270"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 8, 0, 0, 0, 14, 13, -1, 1, 2, 0, 0, 1, 0, 16, 15, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 17, 7, 18, 9, 19, 10, 20, 11, 21, 12, 22, 13, 23, 7, 24, 14, 25, 14, 26, 2, 27, 5, 28, 3, 29, 3, 30, 15, 12, 16, 0, 1, 0, 16, 31, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 17, 7, 18, 9, 19, 10, 20, 11, 21, 12, 22, 13, 23, 7, 24, 14, 25, 14, 26, 2, 27, 5, 28, 3, 29, 3, 30, 17, 12, 18, 0, 0, 0, 14, 32, -1, 1, 2, 0, 0, 4, 0, 34, 33, 19, 3, 2, 0, 7, 20, 12, 21, 0, 4, 0, 34, 35, 19, 5, 2, 0, 7, 22, 12, 21, 36, 13, 37, 23, 0, 0, 0, 14, 38, -1, 2, 2, 0, 39, 24, 0, 0, 0, 14, 40, -1, 1, 2, 0, 0, 0, 0, 41, 41, -1, 26, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 42, 14, 43, 14, 44, 1, 45, 5, 46, 25, 47, 26, 48, 26, 49, 27, 50, 27, 51, 1, 52, 1, 53, 28, 54, 28, 55, 28, 56, 28, 12, 29, 0 </int_array>
+			<int_array  len="268"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 8, 0, 0, 0, 14, 13, -1, 1, 2, 0, 0, 1, 0, 16, 15, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 17, 7, 18, 9, 19, 10, 20, 11, 21, 12, 22, 13, 23, 7, 24, 14, 25, 14, 26, 2, 27, 5, 28, 3, 29, 3, 30, 15, 12, 16, 0, 1, 0, 16, 31, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 17, 7, 18, 9, 19, 10, 20, 11, 21, 12, 22, 13, 23, 7, 24, 14, 25, 14, 26, 2, 27, 5, 28, 3, 29, 3, 30, 17, 12, 18, 0, 0, 0, 14, 32, -1, 1, 2, 0, 0, 4, 0, 34, 33, 19, 3, 2, 0, 7, 20, 12, 21, 0, 4, 0, 34, 35, 19, 5, 2, 0, 7, 22, 12, 21, 36, 13, 37, 23, 0, 0, 0, 14, 38, -1, 1, 2, 0, 0, 0, 0, 14, 39, -1, 1, 2, 0, 0, 0, 0, 40, 40, -1, 26, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 41, 14, 42, 14, 43, 1, 44, 5, 45, 24, 46, 25, 47, 25, 48, 26, 49, 26, 50, 1, 51, 1, 52, 27, 53, 27, 54, 27, 55, 27, 12, 28, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="30" shared="false">
+			<array  len="29" shared="false">
 				<node_path> "" </node_path>
 				<bool> True </bool>
 				<real> 1 </real>
@@ -91,7 +89,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -121, -22.1414 </vector2>
+							<vector2> -312.321, -108.58 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -111,7 +109,7 @@
 							<string> "snap_step" </string>
 							<vector2> 32, 32 </vector2>
 							<string> "zoom" </string>
-							<real> 2.050548 </real>
+							<real> 1.360375 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -210,9 +208,8 @@
 							<string> "current" </string>
 							<int> 0 </int>
 							<string> "sources" </string>
-							<array  len="5" shared="false">
+							<array  len="4" shared="false">
 								<string> "res://scripts/player.gd" </string>
-								<string> "res://scripts/bombmanager.gd" </string>
 								<string> "res://scripts/bomb.gd" </string>
 								<string> "res://scripts/global.gd" </string>
 								<string> "res://scripts/collectible.gd" </string>
@@ -391,7 +388,6 @@
 				</dictionary>
 				<vector2> 432, 368 </vector2>
 				<string> "goblin-violet" </string>
-				<resource  resource_type="Script" path="res://scripts/bombmanager.gd">  </resource>
 				<vector2> 0.5, 0.5 </vector2>
 				<int> -10000000 </int>
 				<int> 10000000 </int>

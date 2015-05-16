@@ -139,13 +139,13 @@
 				<resource  resource_type="Script" path="res://scripts/bomb.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -250.214, -89.7261 </vector2>
+							<vector2> -322.622, -182.668 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -264,9 +264,8 @@
 							<string> "current" </string>
 							<int> 0 </int>
 							<string> "sources" </string>
-							<array  len="2" shared="false">
+							<array  len="1" shared="false">
 								<string> "res://scripts/bomb.gd" </string>
-								<string> "res://scripts/bombmanager.gd" </string>
 							</array>
 						</dictionary>
 					</dictionary>

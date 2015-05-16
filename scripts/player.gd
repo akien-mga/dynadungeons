@@ -25,6 +25,23 @@ var bomb_range = 2
 var active_bombs = 0
 var bomb_collision_exceptions = []
 
+func place_bomb():
+	var bomb = global.bomb_scene.instance()
+	bomb.cell_pos = global.world_to_map(self.get_pos())
+	bomb.set_pos(global.map_to_world(bomb.cell_pos))
+	bomb.player = self
+	bomb.bomb_range = self.bomb_range
+	bomb.get_node("StaticBody2D").add_collision_exception_with(self)
+	self.bomb_collision_exceptions.append(bomb)
+	global.bomb_manager.add_child(bomb)
+	active_bombs += 1
+
+func die():
+	set_fixed_process(false)
+	get_node("CharSprite").hide()
+	get_node("AnimationPlayer").play("death")
+	dead = true
+
 func process_movement(delta):
 	var motion = Vector2(0,0)
 	
@@ -69,23 +86,18 @@ func process_movement(delta):
 func process_actions():
 	# Drop a bomb on the player's tile
 	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs < max_bombs):
-		if (!global.bomb_manager.bomb_on_tile(global.world_to_map(self.get_pos()))):
-			global.bomb_manager.place_bomb(self, global.world_to_map(self.get_pos()))
-			active_bombs += 1
+		for bomb in bomb_collision_exceptions:
+			if (bomb.cell_pos == global.world_to_map(self.get_pos())):
+				return
+		place_bomb()
 
 func process_explosions():
-	for trigger_bomb in global.bomb_manager.exploding_bombs:
+	for trigger_bomb in global.exploding_bombs:
 		for bomb in [ trigger_bomb ]  + trigger_bomb.chained_bombs:
 			# FIXME: This flame_cells stuff is really getting messy
 			for cell_dict in bomb.flame_cells:
 				if (global.world_to_map(self.get_pos()) == cell_dict.pos):
 					self.die()
-
-func die():
-	set_fixed_process(false)
-	get_node("CharSprite").hide()
-	get_node("AnimationPlayer").play("death")
-	dead = true
 
 func _fixed_process(delta):
 	process_movement(delta)

@@ -17,10 +17,15 @@ var tilemap_destr
 var tilemap_indestr
 
 # Scenes
+const bomb_scene = preload("res://scenes/bomb.xscn")
 const collectible_scene = preload("res://scenes/collectible.xscn")
 
 # Scripts
 const player_script = preload("res://scripts/player.gd")
+
+# Variables
+var exploding_bombs = []
+
 
 func map_to_world(var map_pos):
 	return tilemap_destr.map_to_world(map_pos) + TILE_OFFSET
