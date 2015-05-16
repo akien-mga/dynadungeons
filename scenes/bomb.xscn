@@ -287,7 +287,7 @@
 				</array>
 				<string> "idle" </string>
 				<real> 3 </real>
-				<real> 0.2 </real>
+				<real> 0.15 </real>
 				<resource  resource_type="Shape2D" path="local://3">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
 			</array>

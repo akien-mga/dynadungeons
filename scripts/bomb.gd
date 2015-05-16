@@ -137,7 +137,7 @@ func _on_AnimationPlayer_finished():
 	start_animation()
 
 func _on_TimerAnim_timeout():
-	if (counter < 4):
+	if (counter < 5):
 		update_animation()
 		counter += 1
 		get_node("AnimatedSprite/TimerAnim").start()
