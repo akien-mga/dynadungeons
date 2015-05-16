@@ -76,8 +76,10 @@ func process_actions():
 func process_explosions():
 	for trigger_bomb in global.bomb_manager.exploding_bombs:
 		for bomb in [ trigger_bomb ]  + trigger_bomb.chained_bombs:
-			if (global.world_to_map(self.get_pos()) in bomb.flame_cells):
-				self.die()
+			# FIXME: This flame_cells stuff is really getting messy
+			for cell_dict in bomb.flame_cells:
+				if (global.world_to_map(self.get_pos()) == cell_dict.pos):
+					self.die()
 
 func die():
 	set_fixed_process(false)
