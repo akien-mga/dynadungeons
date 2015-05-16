@@ -40,6 +40,8 @@ func die():
 	set_fixed_process(false)
 	get_node("CharSprite").hide()
 	get_node("AnimationPlayer").play("death")
+	for bomb in global.bomb_manager.get_children():
+		bomb.player = null
 	dead = true
 
 func process_movement(delta):
