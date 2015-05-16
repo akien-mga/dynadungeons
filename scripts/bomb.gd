@@ -93,23 +93,30 @@ func start_animation():
 			# "Exploding" tile ID should be normal tile ID + 1
 			global.tilemap_destr.set_cell(pos.x, pos.y, global.tilemap_destr.get_cell(pos.x, pos.y) + 1)
 	
-		# Display "source" flame tile where the bomb is, and hide bomb
+	# Display "source" flame tile where the bomb is, and hide bomb
+	# This is done in a separate loop to make sure source flames override branches
+	for bomb in [self] + self.chained_bombs:
 		bomb.get_node("AnimatedSprite").hide()
-		bomb.flame_cells.append({'pos': bomb.cell_pos, 'tile': FLAME_SOURCE, 'xflip': false, 'yflip': false, 'transpose': false})
 		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE)
 	
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()
 
 func update_animation():
+	# Update "branch" tiles first
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
 			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + 4*(self.counter % 3), cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
+	
+	# Update "source" tiles afterwards to ensure a nice overlap
+	for bomb in [self] + self.chained_bombs:
+		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE + 4*(self.counter % 3))
 
 func stop_animation():
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
 			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
+		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, -1)
 		for pos in bomb.destruct_cells:
 			# Random chance to add a random pickup
 			if (randi() % 100 < global.COLLECTIBLE_RATE):
