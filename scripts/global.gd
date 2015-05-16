@@ -33,7 +33,7 @@ func map_to_world(var map_pos):
 func world_to_map(var world_pos):
 	return tilemap_destr.world_to_map(world_pos)
 
-func _ready():
+func initialise_level():
 	level = get_node("/root").get_node("Level")
 	map_manager = level.get_node("MapManager")
 	player_manager = level.get_node("PlayerManager")
@@ -41,5 +41,6 @@ func _ready():
 	collectible_manager = level.get_node("CollectibleManager")
 	tilemap_destr = map_manager.get_node("Destructible")
 	tilemap_indestr = map_manager.get_node("Indestructible")
-	
+
+func _ready():
 	randomize()
