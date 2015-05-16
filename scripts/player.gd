@@ -22,8 +22,8 @@ var new_anim = ""
 
 var max_bombs = 3
 var bomb_range = 2
-var active_bombs = 0
-var bomb_collision_exceptions = []
+var active_bombs = []
+var collision_exceptions = []
 
 func place_bomb():
 	var bomb = global.bomb_scene.instance()
@@ -32,9 +32,9 @@ func place_bomb():
 	bomb.player = self
 	bomb.bomb_range = self.bomb_range
 	bomb.get_node("StaticBody2D").add_collision_exception_with(self)
-	self.bomb_collision_exceptions.append(bomb)
+	self.collision_exceptions.append(bomb)
 	global.bomb_manager.add_child(bomb)
-	active_bombs += 1
+	active_bombs.append(bomb)
 
 func die():
 	set_fixed_process(false)
@@ -85,8 +85,8 @@ func process_movement(delta):
 
 func process_actions():
 	# Drop a bomb on the player's tile
-	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs < max_bombs):
-		for bomb in bomb_collision_exceptions:
+	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs.size() < max_bombs):
+		for bomb in collision_exceptions:
 			if (bomb.cell_pos == global.world_to_map(self.get_pos())):
 				return
 		place_bomb()
@@ -104,13 +104,13 @@ func _fixed_process(delta):
 	process_actions()
 	process_explosions()
 	
-	for bomb in bomb_collision_exceptions:
+	for bomb in collision_exceptions:
 		if (self.get_pos().x < (bomb.cell_pos.x - 0.5)*global.TILE_SIZE \
 			or self.get_pos().x > (bomb.cell_pos.x + 1.5)*global.TILE_SIZE \
 			or self.get_pos().y < (bomb.cell_pos.y - 0.5)*global.TILE_SIZE \
 			or self.get_pos().y > (bomb.cell_pos.y + 1.5)*global.TILE_SIZE):
 			bomb.get_node("StaticBody2D").remove_collision_exception_with(self)
-			bomb_collision_exceptions.erase(bomb)
+			collision_exceptions.erase(bomb)
 
 func _on_AnimationPlayer_finished():
 	if (dead):

@@ -128,9 +128,9 @@ func _on_AnimationPlayer_finished():
 	# Free bomb spots for the players as soon as they are triggered
 	for bomb in self.chained_bombs:
 		if (bomb.player extends global.player_script):
-			bomb.player.active_bombs -= 1
+			bomb.player.active_bombs.erase(bomb)
 	if (self.player extends global.player_script):
-		self.player.active_bombs -= 1
+		self.player.active_bombs.erase(self)
 	# Register as exploding bomb
 	global.exploding_bombs.append(self)
 	# Play animation corresponding to the explosion of self and its chain reaction
@@ -146,10 +146,10 @@ func _on_TimerAnim_timeout():
 		# Free chained bombs and trigger bomb
 		for bomb in self.chained_bombs:
 			if (bomb.player extends global.player_script):
-				bomb.player.bomb_collision_exceptions.erase(bomb)
+				bomb.player.collision_exceptions.erase(bomb)
 			bomb.queue_free()
 		if (self.player extends global.player_script):
-			self.player.bomb_collision_exceptions.erase(self)
+			self.player.collision_exceptions.erase(self)
 		global.exploding_bombs.erase(self)
 		self.queue_free()
 
