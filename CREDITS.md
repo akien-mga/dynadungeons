@@ -27,3 +27,8 @@ Matt Hackett, Cem Kalyoncu, /usr/share, Akien and Obani
 
 Obani
 ./sprites/death-anim/*.png
+
+#### Fonts
+
+The Mozilla Foundation and Telefonica S.A.
+./fonts/firasans*.fnt

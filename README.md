@@ -8,8 +8,10 @@ The project is at an early stage of development; the first objective is to reimp
 
 Those are mostly ideas so far, and this is a learning project to get familiar with Godot and game development, so don't put your hopes too high. ;-)
 
-### License
+### Licensing
 
 All non-binary files in this repo are licensed under the GNU General Public License version 3 or later (GPL 3.0+). The full text of the license is given in the [LICENSE.txt](LICENSE.txt) file.
 
 All sprites (PNG files) are under the Creative Commons Attribution license version 3.0 (CC BY 3.0), please refer to the [CREDITS.md](CREDITS.md) file for details.
+
+All fonts are under the SIL Open Font License version 1.1 (OFL 1.1).
