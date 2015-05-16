@@ -62,6 +62,49 @@
 		<int name="tracks/0/interp"> 1 </int>
 		<dictionary name="tracks/0/keys" shared="false">
 			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 0.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<int> 3 </int>
+				<int> 4 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://5">
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				0 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<int> 1 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://6">
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
 			<bool> False </bool>
 			<string> "times" </string>
 			<real_array  len="1"> 				0 </real_array>
@@ -74,8 +117,28 @@
 		</dictionary>
 
 	</resource>
-	<resource type="Animation" path="local://5">
-		<string name="resource/name"> "death" </string>
+	<resource type="Animation" path="local://7">
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				0 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<int> 0 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://8">
 		<real name="length"> 0.5 </real>
 		<bool name="loop"> False </bool>
 		<real name="step"> 0.1 </real>
@@ -109,70 +172,6 @@
 			<array  len="2" shared="false">
 				<bool> True </bool>
 				<bool> False </bool>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://6">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="1"> 				0 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
-			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 0 </int>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://7">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> True </bool>
-			<string> "times" </string>
-			<real_array  len="2"> 				0, 0.5 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="2" shared="false">
-				<int> 3 </int>
-				<int> 4 </int>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://8">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="1"> 				0 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
-			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 1 </int>
 			</array>
 		</dictionary>
 
@@ -228,11 +227,11 @@
 				<string> "root/root" </string>
 				<string> "anims/up" </string>
 				<string> "anims/side" </string>
-				<string> "anims/side_idle" </string>
-				<string> "anims/death" </string>
-				<string> "anims/down_idle" </string>
 				<string> "anims/down" </string>
 				<string> "anims/up_idle" </string>
+				<string> "anims/side_idle" </string>
+				<string> "anims/down_idle" </string>
+				<string> "anims/death" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
@@ -262,13 +261,13 @@
 				<resource  resource_type="Script" path="res://scripts/player.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -73.4194, -33.3613 </vector2>
+							<vector2> -125.806, -59.8136 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -288,7 +287,7 @@
 							<string> "snap_step" </string>
 							<vector2> 32, 32 </vector2>
 							<string> "zoom" </string>
-							<real> 9.553473 </real>
+							<real> 6.33797 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
