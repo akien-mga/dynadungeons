@@ -9,9 +9,6 @@ extends KinematicBody2D
 # Nodes and scenes
 var global
 
-# Constants
-const MOTION_SPEED = 160
-
 # Member variables
 export var id = 1
 export var char = "goblin-brown"
@@ -20,6 +17,7 @@ var old_motion = Vector2()
 var anim = "down_idle"
 var new_anim = ""
 
+var speed = 10
 var max_bombs = 3
 var bomb_range = 2
 var active_bombs = []
@@ -56,7 +54,7 @@ func process_movement(delta):
 	if (Input.is_action_pressed(str(id) + "_move_right")):
 		motion += Vector2(1,0)
 	
-	motion = motion.normalized() * MOTION_SPEED * delta
+	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	move(motion)
 	
 	# Too many slide attempts provide "jumping" through tiles
@@ -95,7 +93,7 @@ func process_actions():
 
 func process_explosions():
 	for trigger_bomb in global.exploding_bombs:
-		for bomb in [ trigger_bomb ]  + trigger_bomb.chained_bombs:
+		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
 			# FIXME: This flame_cells stuff is really getting messy
 			for cell_dict in bomb.flame_cells:
 				if (global.world_to_map(self.get_pos()) == cell_dict.pos):

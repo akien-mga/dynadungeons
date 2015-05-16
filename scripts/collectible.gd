@@ -1,6 +1,6 @@
 extends Area2D
 
-const types = [ "bomb_increase", "flame_increase" ]
+const types = [ "bomb_increase", "flame_increase", "speed_increase" ]
 export var effect = types[0]
 var global
 
@@ -10,6 +10,8 @@ func _on_body_enter(body):
 			body.max_bombs += 1
 		elif (effect == "flame_increase" and body.bomb_range < global.MAX_FLAMERANGE):
 			body.bomb_range += 1
+		elif (effect == "speed_increase" and body.bomb_range < global.MAX_SPEED):
+			body.speed += 1
 		get_node("AnimationPlayer").play("pickup")
 
 func _on_AnimationPlayer_finished():

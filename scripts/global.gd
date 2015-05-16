@@ -5,6 +5,7 @@ const TILE_SIZE = 32
 const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE
 const MAX_BOMBS = 8
 const MAX_FLAMERANGE = 8
+const MAX_SPEED = 20
 const COLLECTIBLE_RATE = 15
 
 # Nodes
