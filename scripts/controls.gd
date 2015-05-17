@@ -33,7 +33,7 @@ func _input(event):
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
 	elif (event.type == InputEvent.KEY):
 		key_pressed = event
-		button.set_text("Key pressed: " + str(key_pressed.scancode))
+		button.set_text(OS.get_scancode_string(event.scancode))
 
 func _ready():
 	global = get_node("/root/global")
@@ -42,4 +42,4 @@ func _ready():
 		for action in inputmap_actions:
 			var button = get_node("Player" + str(id)).get_node(action)
 			button.connect("pressed", self, "wait_for_input", [ id, action ])
-			button.set_text(action)
+			button.set_text("~")
