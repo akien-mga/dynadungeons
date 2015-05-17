@@ -200,14 +200,13 @@
 						<string> "Script" </string>
 						<dictionary  shared="false">
 							<string> "current" </string>
-							<int> 4 </int>
+							<int> 0 </int>
 							<string> "sources" </string>
-							<array  len="5" shared="false">
+							<array  len="4" shared="false">
 								<string> "res://scripts/player.gd" </string>
 								<string> "res://scripts/bomb.gd" </string>
 								<string> "res://scripts/global.gd" </string>
 								<string> "res://scripts/collectible.gd" </string>
-								<string> "res://scripts/menu.gd" </string>
 							</array>
 						</dictionary>
 					</dictionary>

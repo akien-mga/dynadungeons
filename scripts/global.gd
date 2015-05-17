@@ -34,7 +34,7 @@ const player_script = preload("res://scripts/player.gd")
 var nb_players = 2
 var nb_lives = 1
 var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "life_increase" ],
-                     'freq': [ 1, 1, 0.7, 0.05*nb_lives ] }
+                     'freq': [ 100, 100, 70, 5*nb_lives ] }
 
 # Variables
 var exploding_bombs = []
@@ -57,3 +57,7 @@ func initialise_level():
 
 func _ready():
 	randomize()
+	
+	collectibles.sum_freq = 0
+	for freq in collectibles.freq:
+		collectibles.sum_freq += freq
