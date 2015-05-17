@@ -1,5 +1,6 @@
 extends Control
 
+# Nodes
 var global
 var settings
 
@@ -30,14 +31,17 @@ func goto_mainmenu():
 func goto_settings():
 	goto_screen("Settings")
 
+func goto_controls():
+	goto_screen("Controls")
+
 func settings_set_players(value):
 	global.nb_players = value
-	settings.get_node("PlayersLabel").set_text("Players: " + str(settings.get_node("PlayersSlider").get_value()))
+	settings.get_node("NbPlayersLabel").set_text("Players: " + str(global.nb_players))
 
 func _ready():
 	global = get_node("/root/global")
 	settings = get_node("Settings")
 	
 	# Initialisations
-	settings.get_node("PlayersSlider").set_value(global.nb_players)
-	settings.get_node("PlayersLabel").set_text("Players: " + str(settings.get_node("PlayersSlider").get_value()))
+	settings.get_node("NbPlayersSlider").set_value(global.nb_players)
+	settings.get_node("NbPlayersLabel").set_text("Players: " + str(global.nb_players))
