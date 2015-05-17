@@ -2,6 +2,7 @@ extends Node2D
 
 # Nodes
 var global
+var level
 var player
 
 # Constants
@@ -28,17 +29,17 @@ var indestruct_cells = []	# Coordinates of the destructible cells in range
 
 func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	# Cast rays to determine collisions with other bombs, and do that recursively to find the complete chain reaction
-	var space_state = global.level.get_world_2d().get_direct_space_state()
+	var space_state = level.get_world_2d().get_direct_space_state()
 	if exceptions.empty():
 		exceptions.append(trigger_bomb.get_node("StaticBody2D"))
-		exceptions += global.player_manager.get_children()
+		exceptions += level.player_manager.get_children()
 	var new_bombs = []
 	
 	for key in dir:
 		var raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions)
 		
 		# Check first for other bombs that should be triggered
-		while (!raycast.empty() and raycast.collider.get_parent() in global.bomb_manager.get_children()):
+		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
 			var bomb_found = raycast.collider.get_parent()
 			trigger_bomb.chained_bombs.append(bomb_found)
 			new_bombs.append(bomb_found)
@@ -51,14 +52,14 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 		if (raycast.empty()):
 			# No collision in range, so full range for the animation
 			self.anim_ranges[key] = self.bomb_range
-		elif (raycast.collider == global.tilemap_destr or raycast.collider == global.tilemap_indestr):
+		elif (raycast.collider == level.tilemap_destr or raycast.collider == level.tilemap_indestr):
 			# Destructible or indestructible in range, they limit the animation and should be handled differently
-			var target_cell_pos = global.tilemap_destr.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
+			var target_cell_pos = level.tilemap_destr.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - self.cell_pos
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
-			if (raycast.collider == global.tilemap_destr and not target_cell_pos in trigger_bomb.destruct_cells):
+			if (raycast.collider == level.tilemap_destr and not target_cell_pos in trigger_bomb.destruct_cells):
 				trigger_bomb.destruct_cells.append(target_cell_pos)
-			elif (raycast.collider == global.tilemap_indestr and not target_cell_pos in trigger_bomb.indestruct_cells):
+			elif (raycast.collider == level.tilemap_indestr and not target_cell_pos in trigger_bomb.indestruct_cells):
 				trigger_bomb.indestruct_cells.append(target_cell_pos)
 		else:
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
@@ -77,7 +78,7 @@ func start_animation():
 				if (bomb.anim_ranges[key] == 1):
 					var pos = bomb.cell_pos + dir[key]
 					bomb.flame_cells.append({'pos': pos, 'tile': FLAME_SMALL, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
-					global.tilemap_destr.set_cell(pos.x, pos.y, FLAME_SMALL, xflip, yflip, transpose)
+					level.tilemap_destr.set_cell(pos.x, pos.y, FLAME_SMALL, xflip, yflip, transpose)
 				else:
 					for i in range(1, bomb.anim_ranges[key] + 1):
 						var pos = bomb.cell_pos + i*dir[key]
@@ -87,17 +88,17 @@ func start_animation():
 						else:
 							tile_index = FLAME_LONG_MIDDLE
 						bomb.flame_cells.append({'pos': pos, 'tile': tile_index, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
-						global.tilemap_destr.set_cell(pos.x, pos.y, tile_index, xflip, yflip, transpose)
+						level.tilemap_destr.set_cell(pos.x, pos.y, tile_index, xflip, yflip, transpose)
 	
 	for pos in self.destruct_cells:
 		# "Exploding" tile ID should be normal tile ID + 1
-		global.tilemap_destr.set_cell(pos.x, pos.y, global.tilemap_destr.get_cell(pos.x, pos.y) + 1)
+		level.tilemap_destr.set_cell(pos.x, pos.y, level.tilemap_destr.get_cell(pos.x, pos.y) + 1)
 	
 	# Display "source" flame tile where the bomb is, and hide bomb
 	# This is done in a separate loop to make sure source flames override branches
 	for bomb in [self] + self.chained_bombs:
 		bomb.get_node("AnimatedSprite").hide()
-		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE)
+		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE)
 	
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()
@@ -106,17 +107,17 @@ func update_animation():
 	# Update "branch" tiles first
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
-			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + 4*(self.counter % 3), cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
+			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + 4*(self.counter % 3), cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
 	
 	# Update "source" tiles afterwards to ensure a nice overlap
 	for bomb in [self] + self.chained_bombs:
-		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE + 4*(self.counter % 3))
+		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE + 4*(self.counter % 3))
 
 func stop_animation():
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
-			global.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
-		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, -1)
+			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
+		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, -1)
 		for pos in bomb.destruct_cells:
 			# Random chance to add a random pickup
 			if (randi() % 100 < global.COLLECTIBLE_RATE):
@@ -129,9 +130,9 @@ func stop_animation():
 						break
 					sum += global.collectibles.freq[i+1]
 				collectible.effect = global.collectibles.types[index]
-				collectible.set_pos(global.map_to_world(pos))
-				global.collectible_manager.add_child(collectible)
-			global.tilemap_destr.set_cell(pos.x, pos.y, -1)
+				collectible.set_pos(level.map_to_world(pos))
+				level.collectible_manager.add_child(collectible)
+			level.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
 func _on_TimerIdle_timeout():
 	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
@@ -146,7 +147,7 @@ func _on_AnimationPlayer_finished():
 	if (self.player != null):
 		self.player.active_bombs.erase(self)
 	# Register as exploding bomb
-	global.exploding_bombs.append(self)
+	level.exploding_bombs.append(self)
 	# Play animation corresponding to the explosion of self and its chain reaction
 	start_animation()
 
@@ -164,9 +165,10 @@ func _on_TimerAnim_timeout():
 			bomb.queue_free()
 		if (self.player != null):
 			self.player.collision_exceptions.erase(self)
-		global.exploding_bombs.erase(self)
+		level.exploding_bombs.erase(self)
 		self.queue_free()
 
 func _ready():
 	# Initialisations
 	global = get_node("/root/global")
+	level = get_node("/root").get_node("Level")

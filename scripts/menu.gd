@@ -8,15 +8,14 @@ func new_game():
 	get_node("/root").get_node("Menu").queue_free()
 	get_node("/root").add_child(level)
 	OS.set_window_size(Vector2(960,832))
-	global.initialise_level()
 	
 	var player
 	for i in range(global.nb_players):
 		player = global.player_scene.instance()
 		player.id = i+1
 		player.char = global.PLAYER_DATA[i].char
-		player.set_pos(global.map_to_world(global.PLAYER_DATA[i].tile_pos))
-		global.player_manager.add_child(player)
+		player.set_pos(level.map_to_world(global.PLAYER_DATA[i].tile_pos))
+		level.player_manager.add_child(player)
 
 func quit():
 	get_tree().quit()
