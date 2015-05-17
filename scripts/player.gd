@@ -1,29 +1,26 @@
 extends KinematicBody2D
 
-# This is a simple collision demo showing how
-# the kinematic cotroller works.
-# move() will allow to move the node, and will
-# always move it to a non-colliding spot, 
-# as long as it starts from a non-colliding spot too.
-
 # Nodes and scenes
 var global
 
 # Member variables
 export var id = 1
 export var char = "goblin-brown"
-var lives
 var dead = false
 var invincible = false
+
+var active_bombs = []
+var collision_exceptions = []
+
 var old_motion = Vector2()
 var anim = "down_idle"
 var new_anim = ""
 
+# Characteristics
+var lives = 1
 var speed = 10
-var max_bombs = 3
+var bomb_quota = 3
 var bomb_range = 2
-var active_bombs = []
-var collision_exceptions = []
 
 func place_bomb():
 	var bomb = global.bomb_scene.instance()
@@ -91,7 +88,7 @@ func process_movement(delta):
 
 func process_actions():
 	# Drop a bomb on the player's tile
-	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs.size() < max_bombs):
+	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs.size() < bomb_quota):
 		for bomb in collision_exceptions:
 			if (bomb.cell_pos == global.world_to_map(self.get_pos())):
 				return
