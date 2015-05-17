@@ -119,9 +119,10 @@ func stop_animation():
 		global.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, -1)
 		for pos in bomb.destruct_cells:
 			# Random chance to add a random pickup
-			if (randi() % 100 < global.COLLECTIBLE_RATE):
+			var index = randi() % global.collectibles.types.size()
+			if (randi() % 100 < global.COLLECTIBLE_RATE*global.collectibles.freq[index]):
 				var collectible = global.collectible_scene.instance()
-				collectible.effect = collectible.types[randi() % collectible.types.size()]
+				collectible.effect = global.collectibles.types[index]
 				collectible.set_pos(global.map_to_world(pos))
 				global.collectible_manager.add_child(collectible)
 			global.tilemap_destr.set_cell(pos.x, pos.y, -1)

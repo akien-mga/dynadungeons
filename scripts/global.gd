@@ -33,6 +33,8 @@ const player_script = preload("res://scripts/player.gd")
 # Parameters
 var nb_players = 2
 var nb_lives = 1
+var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase" ],
+                     'freq': [ 1, 1, 0.7 ] }
 
 # Variables
 var exploding_bombs = []

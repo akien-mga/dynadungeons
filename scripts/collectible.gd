@@ -1,8 +1,10 @@
 extends Area2D
 
-const types = [ "bomb_increase", "flame_increase", "speed_increase" ]
-export var effect = types[0]
+# Nodes
 var global
+
+# Member variables
+var effect = "bomb_increase"
 
 func _on_body_enter(body):
 	if (body extends global.player_script):
