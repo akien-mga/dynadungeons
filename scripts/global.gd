@@ -7,6 +7,10 @@ const MAX_BOMBS = 8
 const MAX_FLAMERANGE = 8
 const MAX_SPEED = 20
 const COLLECTIBLE_RATE = 15
+const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
+                      {'char': "goblin-violet", 'tile_pos': Vector2(13,11) },
+                      {'char': "goblin-brown", 'tile_pos': Vector2(1,11) },
+                      {'char': "human-orange", 'tile_pos': Vector2(13,1) } ]
 
 # Nodes
 var level
@@ -18,11 +22,16 @@ var tilemap_destr
 var tilemap_indestr
 
 # Scenes
+const level_scene = preload("res://scenes/level.xscn")
+const player_scene = preload("res://scenes/player.xscn")
 const bomb_scene = preload("res://scenes/bomb.xscn")
 const collectible_scene = preload("res://scenes/collectible.xscn")
 
 # Scripts
 const player_script = preload("res://scripts/player.gd")
+
+# Parameters
+var nb_players = 2
 
 # Variables
 var exploding_bombs = []
