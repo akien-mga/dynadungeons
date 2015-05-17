@@ -32,6 +32,7 @@ const player_script = preload("res://scripts/player.gd")
 
 # Parameters
 var nb_players = 2
+var nb_lives = 1
 
 # Variables
 var exploding_bombs = []

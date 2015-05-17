@@ -12,7 +12,9 @@ var global
 # Member variables
 export var id = 1
 export var char = "goblin-brown"
+var lives
 var dead = false
+var invincible = false
 var old_motion = Vector2()
 var anim = "down_idle"
 var new_anim = ""
@@ -38,9 +40,13 @@ func die():
 	set_fixed_process(false)
 	get_node("CharSprite").hide()
 	get_node("AnimationPlayer").play("death")
-	for bomb in global.bomb_manager.get_children():
-		bomb.player = null
-	dead = true
+	lives -= 1
+	if (lives == 0):
+		for bomb in global.bomb_manager.get_children():
+			bomb.player = null
+		dead = true
+	else:
+		get_node("TimerRespawn").start()
 
 func process_movement(delta):
 	var motion = Vector2(0,0)
@@ -102,7 +108,8 @@ func process_explosions():
 func _fixed_process(delta):
 	process_movement(delta)
 	process_actions()
-	process_explosions()
+	if (not invincible):
+		process_explosions()
 	
 	for bomb in collision_exceptions:
 		if (self.get_pos().x < (bomb.cell_pos.x - 0.5)*global.TILE_SIZE \
@@ -112,13 +119,29 @@ func _fixed_process(delta):
 			bomb.get_node("StaticBody2D").remove_collision_exception_with(self)
 			collision_exceptions.erase(bomb)
 
+func _on_TimerRespawn_timeout():
+	if (not invincible):
+		# Resurrect the player in its original spot as it still has lives
+		set_pos(global.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
+		get_node("CharSprite").show()
+		set_fixed_process(true)
+		# This variable makes the player invicible after respawning to prevent spawnkilling
+		# The timer is then reused to remove this protection after a while
+		invincible = true
+		get_node("TimerRespawn").start()
+	else:
+		# Remove post-respawn protection
+		invincible = false
+
 func _on_AnimationPlayer_finished():
 	if (dead):
+		# Completely remove this player from the game
 		self.queue_free()
 
 func _ready():
 	# Initialisations
 	global = get_node("/root/global")
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))
+	lives = global.nb_lives
 	
 	set_fixed_process(true)

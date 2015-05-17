@@ -35,7 +35,11 @@ func goto_controls():
 
 func settings_set_players(value):
 	global.nb_players = value
-	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
+	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(value))
+
+func settings_set_lives(value):
+	global.nb_lives = value
+	get_node("Settings/NbLives/Label").set_text("Lives: " + str(value))
 
 func _ready():
 	global = get_node("/root/global")
@@ -43,3 +47,6 @@ func _ready():
 	# Initialisations
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
+	
+	get_node("Settings/NbLives/Slider").set_value(global.nb_lives)
+	get_node("Settings/NbLives/Label").set_text("Lives: " + str(global.nb_lives))
