@@ -14,6 +14,8 @@ func _on_body_enter(body):
 			body.bomb_range += 1
 		elif (effect == "speed_increase" and body.speed < global.MAX_SPEED):
 			body.speed += 1
+		elif (effect == "life_increase"):
+			body.lives += 1
 		get_node("AnimationPlayer").play("pickup")
 
 func _on_AnimationPlayer_finished():
