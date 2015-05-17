@@ -21,7 +21,7 @@ func new_game():
 func quit():
 	get_tree().quit()
 
-func goto_screen(var screen):
+func goto_screen(screen):
 	set_pos(-get_node(screen).get_pos())
 
 func goto_mainmenu():

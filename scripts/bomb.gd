@@ -26,7 +26,7 @@ var destruct_cells = []		# Coordinates of the destructible cells in range
 var indestruct_cells = []	# Coordinates of the destructible cells in range
 
 
-func find_chain_and_collisions(var trigger_bomb, exceptions = []):
+func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	# Cast rays to determine collisions with other bombs, and do that recursively to find the complete chain reaction
 	var space_state = global.level.get_world_2d().get_direct_space_state()
 	if exceptions.empty():
