@@ -56,10 +56,10 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			var target_cell_pos = global.tilemap_destr.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - self.cell_pos
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
-			if (raycast.collider == global.tilemap_destr):
-				self.destruct_cells.append(target_cell_pos)
-			else:
-				self.indestruct_cells.append(target_cell_pos)
+			if (raycast.collider == global.tilemap_destr and not target_cell_pos in trigger_bomb.destruct_cells):
+				trigger_bomb.destruct_cells.append(target_cell_pos)
+			elif (raycast.collider == global.tilemap_indestr and not target_cell_pos in trigger_bomb.indestruct_cells):
+				trigger_bomb.indestruct_cells.append(target_cell_pos)
 		else:
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	
@@ -89,9 +89,9 @@ func start_animation():
 						bomb.flame_cells.append({'pos': pos, 'tile': tile_index, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
 						global.tilemap_destr.set_cell(pos.x, pos.y, tile_index, xflip, yflip, transpose)
 	
-		for pos in bomb.destruct_cells:
-			# "Exploding" tile ID should be normal tile ID + 1
-			global.tilemap_destr.set_cell(pos.x, pos.y, global.tilemap_destr.get_cell(pos.x, pos.y) + 1)
+	for pos in self.destruct_cells:
+		# "Exploding" tile ID should be normal tile ID + 1
+		global.tilemap_destr.set_cell(pos.x, pos.y, global.tilemap_destr.get_cell(pos.x, pos.y) + 1)
 	
 	# Display "source" flame tile where the bomb is, and hide bomb
 	# This is done in a separate loop to make sure source flames override branches
