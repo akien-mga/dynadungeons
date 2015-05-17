@@ -2,7 +2,6 @@ extends Control
 
 # Nodes
 var global
-var settings
 
 func new_game():
 	var level = global.level_scene.instance()
@@ -36,12 +35,11 @@ func goto_controls():
 
 func settings_set_players(value):
 	global.nb_players = value
-	settings.get_node("NbPlayersLabel").set_text("Players: " + str(global.nb_players))
+	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
 
 func _ready():
 	global = get_node("/root/global")
-	settings = get_node("Settings")
 	
 	# Initialisations
-	settings.get_node("NbPlayersSlider").set_value(global.nb_players)
-	settings.get_node("NbPlayersLabel").set_text("Players: " + str(global.nb_players))
+	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
+	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
