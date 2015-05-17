@@ -12,7 +12,7 @@ func _on_body_enter(body):
 			body.max_bombs += 1
 		elif (effect == "flame_increase" and body.bomb_range < global.MAX_FLAMERANGE):
 			body.bomb_range += 1
-		elif (effect == "speed_increase" and body.bomb_range < global.MAX_SPEED):
+		elif (effect == "speed_increase" and body.speed < global.MAX_SPEED):
 			body.speed += 1
 		get_node("AnimationPlayer").play("pickup")
 
