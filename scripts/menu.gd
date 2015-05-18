@@ -33,12 +33,14 @@ func goto_controls():
 	goto_screen("Controls")
 
 func settings_set_players(value):
-	global.nb_players = value
+	global.nb_players = int(value)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(value))
+	global.save_to_config("gameplay", "nb_players", int(value))
 
 func settings_set_lives(value):
-	global.nb_lives = value
+	global.nb_lives = int(value)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(value))
+	global.save_to_config("gameplay", "nb_lives", int(value))
 
 func _ready():
 	global = get_node("/root/global")
