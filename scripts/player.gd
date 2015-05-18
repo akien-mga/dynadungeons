@@ -114,13 +114,6 @@ func process_explosions():
 					self.die()
 
 func _fixed_process(delta):
-	if (Input.is_action_pressed("ui_cancel")):
-		# Quit to main menu
-		var menu = global.menu_scene.instance()
-		level.queue_free()
-		get_node("/root").add_child(menu)
-		OS.set_window_size(Vector2(480,416))
-	
 	process_movement(delta)
 	process_actions()
 	if (not invincible):
