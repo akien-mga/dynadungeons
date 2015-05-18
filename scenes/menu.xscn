@@ -267,12 +267,13 @@
 							<string> "current" </string>
 							<int> 0 </int>
 							<string> "sources" </string>
-							<array  len="5" shared="false">
+							<array  len="6" shared="false">
 								<string> "res://scripts/global.gd" </string>
 								<string> "res://scripts/menu.gd" </string>
 								<string> "res://scripts/controls.gd" </string>
 								<string> "res://scripts/level.gd" </string>
 								<string> "res://scripts/player.gd" </string>
+								<string> "res://scripts/bomb.gd" </string>
 							</array>
 						</dictionary>
 					</dictionary>

@@ -108,10 +108,15 @@ func process_actions():
 func process_explosions():
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
+			# Kill player if he's standing on the bomb
+			if (level.world_to_map(self.get_pos()) == bomb.cell_pos):
+				self.die()
+				return
 			# FIXME: This flame_cells stuff is really getting messy
 			for cell_dict in bomb.flame_cells:
 				if (level.world_to_map(self.get_pos()) == cell_dict.pos):
 					self.die()
+					return
 
 func _fixed_process(delta):
 	process_movement(delta)
