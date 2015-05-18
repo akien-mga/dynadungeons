@@ -43,6 +43,16 @@ func die():
 		for bomb in level.bomb_manager.get_children():
 			bomb.player = null
 		dead = true
+		# If there are only two players when self dies, the other player wins
+		var players = level.player_manager.get_children()
+		if (players.size() == 2):
+			var winner
+			if (self != players[0]):
+				winner = 0
+			else:
+				winner = 1
+			level.get_node("Gameover").get_node("Label").set_text("Player " + str(players[winner].id) + " wins!")
+			level.get_node("Gameover").show()
 	else:
 		get_node("TimerRespawn").start()
 
@@ -104,6 +114,13 @@ func process_explosions():
 					self.die()
 
 func _fixed_process(delta):
+	if (Input.is_action_pressed("ui_cancel")):
+		# Quit to main menu
+		var menu = global.menu_scene.instance()
+		level.queue_free()
+		get_node("/root").add_child(menu)
+		OS.set_window_size(Vector2(480,416))
+	
 	process_movement(delta)
 	process_actions()
 	if (not invincible):

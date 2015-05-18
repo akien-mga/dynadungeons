@@ -13,6 +13,7 @@ const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
                       {'char': "human-orange", 'tile_pos': Vector2(13,1) } ]
 
 # Scenes
+const menu_scene = preload("res://scenes/menu.xscn")
 const level_scene = preload("res://scenes/level.xscn")
 const player_scene = preload("res://scenes/player.xscn")
 const bomb_scene = preload("res://scenes/bomb.xscn")
