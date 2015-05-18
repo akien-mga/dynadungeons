@@ -148,7 +148,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -149.177, -89.477 </vector2>
+							<vector2> -106.047, -99.457 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -290,7 +290,7 @@
 				<vector2> 1, 1 </vector2>
 				<int> 0 </int>
 				<resource  resource_type="Texture" path="res://background.png">  </resource>
-				<color> 0.501961, 0.501961, 0.501961, 0.793651 </color>
+				<color> 1, 1, 0.746254, 0.492285 </color>
 				<rect2> 0, 0, 0, 0 </rect2>
 				<real> 96 </real>
 				<real> 64 </real>
