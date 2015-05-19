@@ -21,12 +21,10 @@ func world_to_map(var world_pos):
 func _input(event):
 	if (Input.is_action_pressed("ui_cancel")):
 		# Quit to main menu
-		var menu = global.menu_scene.instance()
-		get_node("/root").add_child(menu)
-		OS.set_window_size(Vector2(480,416))
-		self.queue_free()
+		get_tree().change_scene_to(global.menu_scene)
 
 func _ready():
+	# Definitions
 	global = get_node("/root/global")
 	map_manager = self.get_node("MapManager")
 	player_manager = self.get_node("PlayerManager")
@@ -34,5 +32,17 @@ func _ready():
 	collectible_manager = self.get_node("CollectibleManager")
 	tilemap_destr = map_manager.get_node("Destructible")
 	tilemap_indestr = map_manager.get_node("Indestructible")
-
+	
+	# Handle display
+	OS.set_window_size(Vector2(960,832))
+	
+	# Instance players
+	var player
+	for i in range(global.nb_players):
+		player = global.player_scene.instance()
+		player.id = i+1
+		player.char = global.PLAYER_DATA[i].char
+		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
+		player_manager.add_child(player)
+	
 	set_process_input(true)

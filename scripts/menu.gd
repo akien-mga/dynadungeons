@@ -4,18 +4,7 @@ extends Control
 var global
 
 func new_game():
-	var level = global.level_scene.instance()
-	get_node("/root").get_node("Menu").queue_free()
-	get_node("/root").add_child(level)
-	OS.set_window_size(Vector2(960,832))
-	
-	var player
-	for i in range(global.nb_players):
-		player = global.player_scene.instance()
-		player.id = i+1
-		player.char = global.PLAYER_DATA[i].char
-		player.set_pos(level.map_to_world(global.PLAYER_DATA[i].tile_pos))
-		level.player_manager.add_child(player)
+	get_tree().change_scene_to(global.level_scene)
 
 func quit():
 	get_tree().quit()
@@ -45,7 +34,9 @@ func settings_set_lives(value):
 func _ready():
 	global = get_node("/root/global")
 	
-	# Initialisations
+	OS.set_window_size(Vector2(480,416))
+	
+	# Initialise settings widgets
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
 	
