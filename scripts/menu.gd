@@ -21,6 +21,15 @@ func goto_settings():
 func goto_controls():
 	goto_screen("Controls")
 
+# Display settings
+
+func settings_set_fullscreen(value):
+	global.fullscreen = value
+	OS.set_window_fullscreen(global.fullscreen)
+	global.save_to_config("display", "fullscreen", value)
+
+# Gameplay settings
+
 func settings_set_players(value):
 	global.nb_players = int(value)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(value))
@@ -35,6 +44,8 @@ func _ready():
 	global = get_node("/root/global")
 	
 	# Initialise settings widgets
+	get_node("Settings/Fullscreen/CheckBox").set_pressed(global.fullscreen)
+	
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
 	
