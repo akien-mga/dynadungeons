@@ -27,6 +27,7 @@ const settings_filename = "user://settings.cfg"
 const inputmap_actions = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
 # Parameters
+var display_size = Vector2(960,832)
 var nb_players = 2
 var nb_lives = 1
 var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "life_increase" ],
@@ -38,7 +39,10 @@ func load_config():
 	if (err):
 		# TODO: Better error handling
 		# Config file does not exist, dump default settings in it
+		
 		# Parameters
+		config.set_value("display", "width", int(display_size.x))
+		config.set_value("display", "height", int(display_size.y))
 		config.set_value("gameplay", "nb_players", nb_players)
 		config.set_value("gameplay", "nb_lives", nb_lives)
 		
@@ -52,7 +56,10 @@ func load_config():
 		
 		config.save(settings_filename)
 	else:
+		# FIXME: If config file is incomplete or broken, bad stuff will happen
+		
 		# Parameters
+		display_size = Vector2(config.get_value("display", "width"), config.get_value("display", "height"))
 		nb_players = config.get_value("gameplay", "nb_players")
 		nb_lives = config.get_value("gameplay", "nb_lives")
 		
@@ -83,6 +90,9 @@ func _ready():
 	randomize()
 	
 	load_config()
+	
+	# Handle display
+	OS.set_window_size(display_size)
 	
 	collectibles.sum_freq = 0
 	for freq in collectibles.freq:
