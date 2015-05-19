@@ -42,4 +42,8 @@ func _ready():
 		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
 		player_manager.add_child(player)
 	
+	# Start music if enabled
+	if (global.music):
+		get_node("MusicManager").play()
+	
 	set_process_input(true)

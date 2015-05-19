@@ -23,10 +23,20 @@ func goto_controls():
 
 # Display settings
 
-func settings_set_fullscreen(value):
-	global.fullscreen = value
+func settings_toggle_fullscreen(pressed):
+	global.fullscreen = pressed
 	OS.set_window_fullscreen(global.fullscreen)
-	global.save_to_config("display", "fullscreen", value)
+	global.save_to_config("display", "fullscreen", pressed)
+
+# Audio settings
+
+func settings_toggle_music(pressed):
+	global.music = pressed
+	global.save_to_config("audio", "music", pressed)
+
+func settings_toggle_sfx(pressed):
+	global.sfx = pressed
+	global.save_to_config("audio", "sfx", pressed)
 
 # Gameplay settings
 
@@ -44,7 +54,9 @@ func _ready():
 	global = get_node("/root/global")
 	
 	# Initialise settings widgets
-	get_node("Settings/Fullscreen/CheckBox").set_pressed(global.fullscreen)
+	get_node("Settings/Fullscreen").set_pressed(global.fullscreen)
+	get_node("Settings/Music").set_pressed(global.music)
+	get_node("Settings/SoundEffects").set_pressed(global.sfx)
 	
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))

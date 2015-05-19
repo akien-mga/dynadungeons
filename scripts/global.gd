@@ -30,6 +30,10 @@ const inputmap_actions = [ "move_up", "move_down", "move_left", "move_right", "d
 var display_size = Vector2(960,832)
 var fullscreen = false
 
+# Audio parameters
+var music = true
+var sfx = false
+
 # Gameplay parameters
 var nb_players = 2
 var nb_lives = 1
@@ -48,6 +52,10 @@ func load_config():
 		config.set_value("display", "height", int(display_size.y))
 		config.set_value("display", "fullscreen", fullscreen)
 		
+		# Audio parameters
+		config.set_value("audio", "music", music)
+		config.set_value("audio", "sfx", sfx)
+		
 		# Gameplay parameters
 		config.set_value("gameplay", "nb_players", nb_players)
 		config.set_value("gameplay", "nb_lives", nb_lives)
@@ -65,6 +73,10 @@ func load_config():
 		set_from_cfg(display_size.x, config, "display", "width")
 		set_from_cfg(display_size.y, config, "display", "height")
 		set_from_cfg(fullscreen, config, "display", "fullscreen")
+		
+		# Audio parameters
+		set_from_cfg(music, config, "audio", "music")
+		set_from_cfg(sfx, config, "audio", "sfx")
 		
 		# Gameplay parameters
 		set_from_cfg(nb_players, config, "gameplay", "nb_players")
