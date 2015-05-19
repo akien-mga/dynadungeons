@@ -34,7 +34,8 @@ func settings_set_lives(value):
 func _ready():
 	global = get_node("/root/global")
 	
-	OS.set_window_size(Vector2(480,416))
+	# Handle display
+	OS.set_window_size(Vector2(960,832))
 	
 	# Initialise settings widgets
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)

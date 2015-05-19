@@ -33,9 +33,6 @@ func _ready():
 	tilemap_destr = map_manager.get_node("Destructible")
 	tilemap_indestr = map_manager.get_node("Indestructible")
 	
-	# Handle display
-	OS.set_window_size(Vector2(960,832))
-	
 	# Instance players
 	var player
 	for i in range(global.nb_players):
