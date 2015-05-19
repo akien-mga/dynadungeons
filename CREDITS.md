@@ -28,7 +28,13 @@ Matt Hackett, Cem Kalyoncu, /usr/share, Akien and Obani
 Obani
 ./sprites/death-anim/*.png
 
+#### Sounds
+
+Obani
+./music/dynadingo.ogg
+
 #### Fonts
 
 The Mozilla Foundation and Telefonica S.A.
 ./fonts/firasans*.fnt
+
