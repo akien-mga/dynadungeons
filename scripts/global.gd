@@ -61,15 +61,14 @@ func load_config():
 		
 		config.save(settings_filename)
 	else:
-		# FIXME: If config file is incomplete or broken, bad stuff will happen
-		
 		# Display parameters
-		display_size = Vector2(config.get_value("display", "width"), config.get_value("display", "height"))
-		fullscreen = config.get_value("display", "fullscreen")
+		set_from_cfg(display_size.x, config, "display", "width")
+		set_from_cfg(display_size.y, config, "display", "height")
+		set_from_cfg(fullscreen, config, "display", "fullscreen")
 		
 		# Gameplay parameters
-		nb_players = config.get_value("gameplay", "nb_players")
-		nb_lives = config.get_value("gameplay", "nb_lives")
+		set_from_cfg(nb_players, config, "gameplay", "nb_players")
+		set_from_cfg(nb_lives, config, "gameplay", "nb_lives")
 		
 		# User-defined input overrides
 		var scancode
@@ -83,6 +82,13 @@ func load_config():
 			InputMap.erase_action(action)
 			InputMap.add_action(action)
 			InputMap.action_add_event(action, event)
+
+func set_from_cfg(target, config, section, key):
+	if (config.has_section_key(section, key)):
+		target = config.get_value(section, key)
+	else:
+		print("Warning: '" + key + "' missing from '" + section + "'section in the config file, default value has been added.")
+		save_to_config(section, key, target)
 
 func save_to_config(section, key, value):
 	var config = ConfigFile.new()
