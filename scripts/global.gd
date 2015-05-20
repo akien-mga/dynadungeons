@@ -70,17 +70,17 @@ func load_config():
 		config.save(settings_filename)
 	else:
 		# Display parameters
-		set_from_cfg(display_size.x, config, "display", "width")
-		set_from_cfg(display_size.y, config, "display", "height")
-		set_from_cfg(fullscreen, config, "display", "fullscreen")
+		display_size.x = set_from_cfg(config, "display", "width", display_size.x)
+		display_size.y = set_from_cfg(config, "display", "height", display_size.y)
+		fullscreen = set_from_cfg(config, "display", "fullscreen", fullscreen)
 		
 		# Audio parameters
-		set_from_cfg(music, config, "audio", "music")
-		set_from_cfg(sfx, config, "audio", "sfx")
+		music = set_from_cfg(config, "audio", "music", music)
+		sfx = set_from_cfg(config, "audio", "sfx", sfx)
 		
 		# Gameplay parameters
-		set_from_cfg(nb_players, config, "gameplay", "nb_players")
-		set_from_cfg(nb_lives, config, "gameplay", "nb_lives")
+		nb_players = set_from_cfg(config, "gameplay", "nb_players", nb_players)
+		nb_lives = set_from_cfg(config, "gameplay", "nb_lives", nb_lives)
 		
 		# User-defined input overrides
 		var scancode
@@ -95,12 +95,13 @@ func load_config():
 			InputMap.add_action(action)
 			InputMap.action_add_event(action, event)
 
-func set_from_cfg(target, config, section, key):
+func set_from_cfg(config, section, key, fallback):
 	if (config.has_section_key(section, key)):
-		target = config.get_value(section, key)
+		return config.get_value(section, key)
 	else:
 		print("Warning: '" + key + "' missing from '" + section + "'section in the config file, default value has been added.")
-		save_to_config(section, key, target)
+		save_to_config(section, key, fallback)
+		return fallback
 
 func save_to_config(section, key, value):
 	var config = ConfigFile.new()
