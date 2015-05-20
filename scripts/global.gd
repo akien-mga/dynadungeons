@@ -27,7 +27,8 @@ const settings_filename = "user://settings.cfg"
 const inputmap_actions = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
 # Display parameters
-var display_size = Vector2(960,832)
+var width = 960
+var height = 832
 var fullscreen = false
 
 # Audio parameters
@@ -48,8 +49,8 @@ func load_config():
 		# Config file does not exist, dump default settings in it
 		
 		# Display parameters
-		config.set_value("display", "width", int(display_size.x))
-		config.set_value("display", "height", int(display_size.y))
+		config.set_value("display", "width", width)
+		config.set_value("display", "height", height)
 		config.set_value("display", "fullscreen", fullscreen)
 		
 		# Audio parameters
@@ -70,8 +71,8 @@ func load_config():
 		config.save(settings_filename)
 	else:
 		# Display parameters
-		display_size.x = set_from_cfg(config, "display", "width", display_size.x)
-		display_size.y = set_from_cfg(config, "display", "height", display_size.y)
+		width = set_from_cfg(config, "display", "width", width)
+		height = set_from_cfg(config, "display", "height", height)
 		fullscreen = set_from_cfg(config, "display", "fullscreen", fullscreen)
 		
 		# Audio parameters
@@ -119,7 +120,7 @@ func _ready():
 	load_config()
 	
 	# Handle display
-	OS.set_window_size(display_size)
+	OS.set_window_size(Vector2(width, height))
 	OS.set_window_fullscreen(fullscreen)
 	
 	collectibles.sum_freq = 0
