@@ -2,7 +2,7 @@
 
 Bomberman clone using the awesome open source [Godot](https://github.com/okamstudio/godot) game engine (MIT-licensed), and using the nice [Bomb Party tileset](http://opengameart.org/content/bomb-party-the-complete-set) from OpenGameArt (CC BY 3.0).
 
-![In-game screenshot](https://cdn.pbrd.co/images/pJhctCP.jpg)
+![In-game screenshot](background.png)
 
 The project is at an early stage of development; the first objective is to reimplement the well-known gameplay of games of the Bomberman series. A further objective might be to extend the gameplay by adding RPG elements and maybe different multiplayer modes such as Capture the Flag.
 

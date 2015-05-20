@@ -6,7 +6,7 @@ const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE
 const MAX_BOMBS = 8
 const MAX_FLAMERANGE = 8
 const MAX_SPEED = 20
-const COLLECTIBLE_RATE = 15
+const COLLECTIBLE_RATE = 25
 const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
                       {'char': "goblin-violet", 'tile_pos': Vector2(13,11) },
                       {'char': "goblin-brown", 'tile_pos': Vector2(1,11) },
