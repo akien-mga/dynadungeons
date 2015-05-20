@@ -7,7 +7,6 @@ var global
 var player_id
 var action
 var button
-var key_pressed
 
 func wait_for_input(local_player_id, local_action):
 	player_id = local_player_id
@@ -16,21 +15,20 @@ func wait_for_input(local_player_id, local_action):
 	get_node("ContextHelp").set_text("Press a key to assign to the '" + action + "' action.")
 	set_process_input(true)
 
-func change_key(player_id, action, key_pressed):
+func change_key(player_id, action, event):
 	var id_action = str(player_id) + "_" + str(action)
-	InputMap.erase_action(id_action)
-	InputMap.add_action(id_action)
-	InputMap.action_add_event(id_action, key_pressed)
-	global.save_to_config("input", id_action, OS.get_scancode_string(key_pressed.scancode))
+	for old_event in InputMap.get_action_list(id_action):
+		InputMap.action_erase_event(id_action, old_event)
+	InputMap.action_add_event(id_action, event)
+	global.save_to_config("input", id_action, OS.get_scancode_string(event.scancode))
 
 func _input(event):
 	if (event.type == InputEvent.KEY):
 		set_process_input(false)
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
 		if (not event.is_action("ui_cancel")):
-			key_pressed = event
 			button.set_text(OS.get_scancode_string(event.scancode))
-			change_key(player_id, action, key_pressed)
+			change_key(player_id, action, event)
 
 func _ready():
 	global = get_node("/root/global")
