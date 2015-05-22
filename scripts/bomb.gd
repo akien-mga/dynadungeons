@@ -141,11 +141,14 @@ func _on_AnimationPlayer_finished():
 	# Find collisions and act accordingly
 	find_chain_and_collisions(self)
 	# Free bomb spots for the players as soon as they are triggered
-	for bomb in self.chained_bombs:
+	for bomb in self.chained_bombs + [ self ]:
 		if (bomb.player != null):
 			bomb.player.active_bombs.erase(bomb)
-	if (self.player != null):
-		self.player.active_bombs.erase(self)
+		# Make sure the bomb is no longer in the collision_exceptions of a player
+		for any_player in level.player_manager.get_children():
+			if bomb in any_player.collision_exceptions:
+				any_player.collision_exceptions.erase(bomb)
+
 	# Register as exploding bomb
 	level.exploding_bombs.append(self)
 	# Play animation corresponding to the explosion of self and its chain reaction
