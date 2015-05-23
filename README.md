@@ -8,6 +8,12 @@ The project is at an early stage of development; the first objective is to reimp
 
 Those are mostly ideas so far, and this is a learning project to get familiar with Godot and game development, so don't put your hopes too high. ;-)
 
+### Compilation
+
+This repository contains the scenes, scripts and assets that compose the game when used in the Godot game engine. You need at least Godot 1.1stable to play the current development branch. You can either download precompiled binaries for the engine (see [Godot's website](http://godotengine.org/)) or build the engine [from source](https://github.com/okamstudio/godot).
+
+To play the game, simply start Godot engine from DynaDungeons' repository, or import the project in the editor and click "Play". If you compiled or downloaded Godot's export templates, you can also export the game to the platform of your choice (Linux, Windows, Mac OSX, Android, etc.).
+
 ### Licensing
 
 All non-binary files in this repo are licensed under the GNU General Public License version 3 or later (GPL 3.0+). The full text of the license is given in the [LICENSE.txt](LICENSE.txt) file.
