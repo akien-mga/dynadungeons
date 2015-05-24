@@ -29,8 +29,10 @@ func place_bomb():
 	bomb.set_pos(level.map_to_world(bomb.cell_pos))
 	bomb.player = self
 	bomb.bomb_range = self.bomb_range
-	bomb.get_node("StaticBody2D").add_collision_exception_with(self)
-	self.collision_exceptions.append(bomb)
+	for player in level.player_manager.get_children():
+		if (level.world_to_map(player.get_pos()) == bomb.cell_pos):
+			bomb.get_node("StaticBody2D").add_collision_exception_with(player)
+			player.collision_exceptions.append(bomb)
 	level.bomb_manager.add_child(bomb)
 	active_bombs.append(bomb)
 
