@@ -1,7 +1,9 @@
 extends Control
 
-# Nodes
+### Nodes
 var global
+
+### Windows and scenes
 
 func new_game():
 	get_tree().change_scene_to(global.level_scene)
@@ -21,14 +23,16 @@ func goto_settings():
 func goto_controls():
 	goto_screen("Controls")
 
-# Display settings
+### Settings
+
+## Display
 
 func settings_toggle_fullscreen(pressed):
 	global.fullscreen = pressed
 	OS.set_window_fullscreen(global.fullscreen)
 	global.save_to_config("display", "fullscreen", pressed)
 
-# Audio settings
+## Audio
 
 func settings_toggle_music(pressed):
 	global.music = pressed
@@ -38,7 +42,7 @@ func settings_toggle_sfx(pressed):
 	global.sfx = pressed
 	global.save_to_config("audio", "sfx", pressed)
 
-# Gameplay settings
+## Gameplay
 
 func settings_set_players(value):
 	global.nb_players = int(value)
@@ -49,6 +53,8 @@ func settings_set_lives(value):
 	global.nb_lives = int(value)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(value))
 	global.save_to_config("gameplay", "nb_lives", int(value))
+
+### Initialisation
 
 func _ready():
 	global = get_node("/root/global")

@@ -1,6 +1,6 @@
 extends Node
 
-# Constants
+### Constants
 const TILE_SIZE = 32
 const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE
 const MAX_BOMBS = 8
@@ -11,35 +11,37 @@ const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
                       {'char': "goblin-violet", 'tile_pos': Vector2(13,11) },
                       {'char': "goblin-brown", 'tile_pos': Vector2(1,11) },
                       {'char': "human-orange", 'tile_pos': Vector2(13,1) } ]
+const INPUT_ACTIONS = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
-# Scenes
+### Resources
 const menu_scene = preload("res://scenes/menu.xscn")
 const level_scene = preload("res://scenes/level.xscn")
 const player_scene = preload("res://scenes/player.xscn")
 const bomb_scene = preload("res://scenes/bomb.xscn")
 const collectible_scene = preload("res://scenes/collectible.xscn")
 
-# Scripts
 const player_script = preload("res://scripts/player.gd")
 
-# Files
 const settings_filename = "user://settings.cfg"
-const inputmap_actions = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
-# Display parameters
+### Parameters
+
+## Display
 var width = 960
 var height = 832
 var fullscreen = false
 
-# Audio parameters
+## Audio
 var music = true
 var sfx = false
 
-# Gameplay parameters
+## Gameplay
 var nb_players = 2
 var nb_lives = 1
 var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "life_increase" ],
                      'freq': [ 100, 100, 70, 5*nb_lives ] }
+
+### Config management
 
 func load_config():
 	var config = ConfigFile.new()
@@ -64,7 +66,7 @@ func load_config():
 		# Default inputs
 		var action_name
 		for i in range(1,5):
-			for action in inputmap_actions:
+			for action in INPUT_ACTIONS:
 				action_name = str(i) + "_" + action
 				config.set_value("input", action_name, OS.get_scancode_string(InputMap.get_action_list(action_name)[0].scancode))
 		
@@ -113,6 +115,8 @@ func save_to_config(section, key, value):
 	else:
 		config.set_value(section, key, value)
 		config.save(settings_filename)
+
+### Initialisation
 
 func _ready():
 	randomize()

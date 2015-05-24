@@ -1,11 +1,11 @@
 extends Node2D
 
-# Nodes
+### Nodes
 var global
 var level
 var player
 
-# Constants
+### Constants
 const dir = { "up": Vector2(0,-1),
               "down": Vector2(0,1),
               "left": Vector2(-1,0),
@@ -15,7 +15,7 @@ const FLAME_SMALL = 9
 const FLAME_LONG_MIDDLE = 10
 const FLAME_LONG_END = 11
 
-# Member variables
+### Member variables
 var cell_pos				# Bomb tilemap coordinates
 var bomb_range				# Range of the bomb explosion
 var counter = 1
@@ -26,6 +26,7 @@ var flame_cells = []		# Coordinates and orientation of the cells with flame anim
 var destruct_cells = []		# Coordinates of the destructible cells in range
 var indestruct_cells = []	# Coordinates of the destructible cells in range
 
+### Main logic
 
 func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	# Cast rays to determine collisions with other bombs, and do that recursively to find the complete chain reaction
@@ -66,6 +67,8 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	
 	for bomb in new_bombs:
 		bomb.find_chain_and_collisions(trigger_bomb, exceptions)
+
+### Explosion animation
 
 func start_animation():
 	for bomb in [self] + self.chained_bombs:
@@ -134,6 +137,8 @@ func stop_animation():
 				level.collectible_manager.add_child(collectible)
 			level.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
+### Process
+
 func _on_TimerIdle_timeout():
 	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
 
@@ -171,7 +176,8 @@ func _on_TimerAnim_timeout():
 		level.exploding_bombs.erase(self)
 		self.queue_free()
 
+### Initialisation
+
 func _ready():
-	# Initialisations
 	global = get_node("/root/global")
 	level = get_node("/root").get_node("Level")

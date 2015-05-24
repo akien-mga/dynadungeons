@@ -1,10 +1,10 @@
 extends KinematicBody2D
 
-# Nodes and scenes
+### Nodes
 var global
 var level
 
-# Member variables
+### Member variables
 export var id = 1
 export var char = "goblin-brown"
 var dead = false
@@ -17,11 +17,13 @@ var old_motion = Vector2()
 var anim = "down_idle"
 var new_anim = ""
 
-# Characteristics
+### Characteristics
 var lives
 var speed = 10
 var bomb_quota = 3
 var bomb_range = 2
+
+### Actions
 
 func place_bomb():
 	var bomb = global.bomb_scene.instance()
@@ -57,6 +59,8 @@ func die():
 			level.get_node("Gameover").show()
 	else:
 		get_node("TimerRespawn").start()
+
+### Process
 
 func process_movement(delta):
 	var motion = Vector2(0,0)
@@ -134,6 +138,8 @@ func _fixed_process(delta):
 			bomb.get_node("StaticBody2D").remove_collision_exception_with(self)
 			collision_exceptions.erase(bomb)
 
+### Signals
+
 func _on_TimerRespawn_timeout():
 	if (not invincible):
 		# Resurrect the player in its original spot as it still has lives
@@ -159,8 +165,9 @@ func _on_AnimationPlayer_finished():
 		# Completely remove this player from the game
 		self.queue_free()
 
+### Initialisation
+
 func _ready():
-	# Initialisations
 	global = get_node("/root/global")
 	level = get_node("/root").get_node("Level")
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))

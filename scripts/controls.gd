@@ -1,12 +1,14 @@
 extends Control
 
-# Nodes
+### Nodes
 var global
 
-# Member variables
+### Member variables
 var player_id
 var action
 var button
+
+### Keybindings management
 
 func wait_for_input(local_player_id, local_action):
 	player_id = local_player_id
@@ -30,11 +32,13 @@ func _input(event):
 			button.set_text(OS.get_scancode_string(event.scancode))
 			change_key(player_id, action, event)
 
+### Initialisation
+
 func _ready():
 	global = get_node("/root/global")
 	
 	for id in range(1,5):
-		for action in global.inputmap_actions:
+		for action in global.INPUT_ACTIONS:
 			var button = get_node("Player" + str(id)).get_node(action)
 			button.connect("pressed", self, "wait_for_input", [ id, action ])
 			button.set_text(OS.get_scancode_string(InputMap.get_action_list(str(id) + "_" + action)[0].scancode))
