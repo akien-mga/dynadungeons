@@ -65,10 +65,10 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			else:
 				# Remove the dummy collider
 				level.tilemap_dummy.set_cell(target_cell_pos.x, target_cell_pos.y, -1)
-				# Remove the corresponding collectible
+				# Remove the corresponding collectible(s)
 				for collectible in level.collectible_manager.get_children():
 					if (level.world_to_map(collectible.get_pos()) == target_cell_pos):
-						collectible.queue_free()
+						collectible.destroy()
 		else:
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	

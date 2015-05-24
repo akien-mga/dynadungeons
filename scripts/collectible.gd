@@ -6,9 +6,14 @@ var level
 
 # Member variables
 var effect = "bomb_increase"
+var pickable = true
+
+func destroy():
+	pickable = false
+	get_node("AnimationPlayer").play("destroy")
 
 func _on_body_enter(body):
-	if (body extends global.player_script):
+	if (pickable and body extends global.player_script):
 		# Remove dummy collider
 		level.tilemap_dummy.set_cell(level.world_to_map(get_pos()).x, level.world_to_map(get_pos()).y, -1)
 		# Apply effect
