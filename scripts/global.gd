@@ -94,8 +94,8 @@ func load_config():
 			event.type = InputEvent.KEY
 			event.scancode = scancode
 			# TODO: Handle multiple events per action in a better way
-			InputMap.erase_action(action)
-			InputMap.add_action(action)
+			for old_event in InputMap.get_action_list(action):
+				InputMap.action_erase_event(action, old_event)
 			InputMap.action_add_event(action, event)
 
 func set_from_cfg(config, section, key, fallback):

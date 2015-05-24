@@ -53,8 +53,8 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 		if (raycast.empty()):
 			# No collision in range, so full range for the animation
 			self.anim_ranges[key] = self.bomb_range
-		elif (raycast.collider == level.tilemap_destr or raycast.collider == level.tilemap_indestr):
-			# Destructible or indestructible in range, they limit the animation and should be handled differently
+		elif (raycast.collider.get_parent() == level.map_manager):
+			# Destructible, indestructible or cellectible (dummy collider) in range, they limit the animation
 			var target_cell_pos = level.tilemap_destr.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - self.cell_pos
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
@@ -62,13 +62,20 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 				trigger_bomb.destruct_cells.append(target_cell_pos)
 			elif (raycast.collider == level.tilemap_indestr and not target_cell_pos in trigger_bomb.indestruct_cells):
 				trigger_bomb.indestruct_cells.append(target_cell_pos)
+			else:
+				# Remove the dummy collider
+				level.tilemap_dummy.set_cell(target_cell_pos.x, target_cell_pos.y, -1)
+				# Remove the corresponding collectible
+				for collectible in level.collectible_manager.get_children():
+					if (level.world_to_map(collectible.get_pos()) == target_cell_pos):
+						collectible.queue_free()
 		else:
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	
 	for bomb in new_bombs:
 		bomb.find_chain_and_collisions(trigger_bomb, exceptions)
 
-### Explosion animation
+### Explosion animation and logic
 
 func start_animation():
 	for bomb in [self] + self.chained_bombs:
@@ -135,6 +142,8 @@ func stop_animation():
 				collectible.effect = global.collectibles.types[index]
 				collectible.set_pos(level.map_to_world(pos))
 				level.collectible_manager.add_child(collectible)
+				# Add a dummy collider under the collectible
+				level.tilemap_dummy.set_cell(pos.x, pos.y, 0)
 			level.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
 ### Process
