@@ -41,7 +41,7 @@ func place_bomb():
 func die():
 	set_fixed_process(false)
 	get_node("CharSprite").hide()
-	get_node("AnimationPlayer").play("death")
+	get_node("ActionAnimations").play("death")
 	lives -= 1
 	if (lives == 0):
 		for bomb in level.bomb_manager.get_children():
@@ -101,7 +101,7 @@ func process_movement(delta):
 	
 	if (new_anim != anim):
 		anim = new_anim
-		get_node("AnimationPlayer").play(anim)
+		get_node("ActionAnimations").play(anim)
 
 func process_actions():
 	# Drop a bomb on the player's tile
@@ -156,11 +156,14 @@ func _on_TimerRespawn_timeout():
 		# The timer is then reused to remove this protection after a while
 		invincible = true
 		get_node("TimerRespawn").start()
+		get_node("StatusAnimations").get_animation("blink").set_loop(true)
+		get_node("StatusAnimations").play("blink")
 	else:
 		# Remove post-respawn protection
 		invincible = false
+		get_node("StatusAnimations").get_animation("blink").set_loop(false)
 
-func _on_AnimationPlayer_finished():
+func _on_ActionAnimations_finished():
 	if (dead):
 		# Completely remove this player from the game
 		self.queue_free()
