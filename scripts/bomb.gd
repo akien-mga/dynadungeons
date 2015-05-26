@@ -161,6 +161,7 @@ func _on_AnimationPlayer_finished():
 		# Make sure the bomb is no longer in the collision_exceptions of a player
 		for any_player in level.player_manager.get_children():
 			if bomb in any_player.collision_exceptions:
+				any_player.remove_collision_exception_with(self.get_node("StaticBody2D"))
 				any_player.collision_exceptions.erase(bomb)
 
 	# Register as exploding bomb

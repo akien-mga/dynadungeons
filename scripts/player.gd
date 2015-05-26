@@ -33,7 +33,7 @@ func place_bomb():
 	bomb.bomb_range = self.bomb_range
 	for player in level.player_manager.get_children():
 		if (level.world_to_map(player.get_pos()) == bomb.cell_pos):
-			bomb.get_node("StaticBody2D").add_collision_exception_with(player)
+			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
 			player.collision_exceptions.append(bomb)
 	level.bomb_manager.add_child(bomb)
 	active_bombs.append(bomb)
@@ -135,7 +135,7 @@ func _fixed_process(delta):
 			or self.get_pos().x > (bomb.cell_pos.x + 1.5)*global.TILE_SIZE \
 			or self.get_pos().y < (bomb.cell_pos.y - 0.5)*global.TILE_SIZE \
 			or self.get_pos().y > (bomb.cell_pos.y + 1.5)*global.TILE_SIZE):
-			bomb.get_node("StaticBody2D").remove_collision_exception_with(self)
+			remove_collision_exception_with(bomb.get_node("StaticBody2D"))
 			collision_exceptions.erase(bomb)
 
 ### Signals
@@ -146,12 +146,9 @@ func _on_TimerRespawn_timeout():
 		set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
 		get_node("CharSprite").show()
 		set_fixed_process(true)
-		# If there's a bomb on the spawn tile, add it to the collision exceptions
+		# Add collision exceptions with all bombs
 		for bomb in level.bomb_manager.get_children():
-			if (bomb.cell_pos == level.world_to_map(self.get_pos())):
-				bomb.get_node("StaticBody2D").add_collision_exception_with(self)
-				collision_exceptions.append(bomb)
-				break
+			add_collision_exception_with(bomb.get_node("StaticBody2D"))
 		# This variable makes the player invicible after respawning to prevent spawnkilling
 		# The timer is then reused to remove this protection after a while
 		invincible = true
