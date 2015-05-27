@@ -116,6 +116,13 @@ func save_to_config(section, key, value):
 		config.set_value(section, key, value)
 		config.save(settings_filename)
 
+func save_screen_size():
+	var screen_size = OS.get_window_size()
+	width = int(screen_size.x)
+	height = int(screen_size.y)
+	save_to_config("display", "width", width)
+	save_to_config("display", "height", height)
+
 ### Initialisation
 
 func _ready():
@@ -126,6 +133,9 @@ func _ready():
 	# Handle display
 	OS.set_window_size(Vector2(width, height))
 	OS.set_window_fullscreen(fullscreen)
+	
+	# Save window size if changed by the user
+	get_tree().connect("screen_resized", self, "save_screen_size")
 	
 	collectibles.sum_freq = 0
 	for freq in collectibles.freq:
