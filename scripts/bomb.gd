@@ -14,6 +14,7 @@ const FLAME_SOURCE = 8
 const FLAME_SMALL = 9
 const FLAME_LONG_MIDDLE = 10
 const FLAME_LONG_END = 11
+const SLIDE_SPEED = 8
 
 ### Member variables
 var cell_pos				# Bomb tilemap coordinates
@@ -25,6 +26,9 @@ var anim_ranges = {}		# Explosion range for each direction
 var flame_cells = []		# Coordinates and orientation of the cells with flame animation
 var destruct_cells = []		# Coordinates of the destructible cells in range
 var indestruct_cells = []	# Coordinates of the destructible cells in range
+
+var slide_dir = Vector2()	# Direction in which to slide upon kick
+var target_cell = Vector2()	# The tilemap coordinates of the target
 
 ### Main logic
 
@@ -74,6 +78,15 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	
 	for bomb in new_bombs:
 		bomb.find_chain_and_collisions(trigger_bomb, exceptions)
+
+func push_dir(direction):
+	var space_state = level.get_world_2d().get_direct_space_state()
+	var raycast = space_state.intersect_ray(level.map_to_world(cell_pos), level.map_to_world(cell_pos + direction), [ get_node("StaticBody2D") ])
+	
+	if (raycast.empty()):
+		slide_dir = direction
+		target_cell = cell_pos + slide_dir
+		set_fixed_process(true)
 
 ### Explosion animation and logic
 
@@ -152,6 +165,8 @@ func _on_TimerIdle_timeout():
 	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
 
 func _on_AnimationPlayer_finished():
+	# Stop potential sliding movement
+	set_fixed_process(false)
 	# Find collisions and act accordingly
 	find_chain_and_collisions(self)
 	# Free bomb spots for the players as soon as they are triggered
@@ -185,6 +200,27 @@ func _on_TimerAnim_timeout():
 			self.player.collision_exceptions.erase(self)
 		level.exploding_bombs.erase(self)
 		self.queue_free()
+
+func _fixed_process(delta):
+	# FIXME: Why the 0.5 btw?
+	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta
+	# Check if we are past the target cell
+	if (slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0):
+		set_pos(level.map_to_world(target_cell))
+		cell_pos = target_cell
+		
+		var space_state = level.get_world_2d().get_direct_space_state()
+		var raycast = space_state.intersect_ray(level.map_to_world(cell_pos), level.map_to_world(cell_pos + slide_dir), [ get_node("StaticBody2D") ])
+		
+		if (raycast.empty()):
+			target_cell = cell_pos + slide_dir
+		else:
+			set_fixed_process(false)
+			return
+	else:
+		set_pos(new_pos)
+		# FIXME: cell_pos should be a function like get_tile
+		cell_pos = level.world_to_map(get_pos())
 
 ### Initialisation
 

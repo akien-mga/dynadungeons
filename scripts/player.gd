@@ -22,6 +22,7 @@ var lives
 var speed = 10
 var bomb_quota = 3
 var bomb_range = 2
+var kick = true
 
 ### Actions
 
@@ -77,8 +78,14 @@ func process_movement(delta):
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	move(motion)
 	
+	# Handle kicking of bombs
+	if (kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children()):
+		var bomb = get_collider().get_parent()
+		var direction = bomb.cell_pos - level.world_to_map(self.get_pos())
+		bomb.push_dir(direction)
+	
 	# Too many slide attempts provide "jumping" through tiles
-	# TODO: Needs investigating as even with one attempt some unused effects
+	# TODO: Needs investigating as even with one attempt some unusual effects
 	# can be seen when going diagonally against walls
 	var slide_attempts = 1
 	while(is_colliding() and slide_attempts > 0):
