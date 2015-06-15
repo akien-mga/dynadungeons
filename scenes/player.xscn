@@ -5,7 +5,7 @@
 	<ext_resource path="res://sprites/death-anim.xml" type="SpriteFrames"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
-		<vector2_array name="points" len="8"> 			-15, -7.5, -7.5, -15, 7.5, -15, 15, -7.5, 15, 7.5, 7.5, 15, -7.5, 15, -15, 7.5 </vector2_array>
+		<vector2_array name="points" len="8"> 			-7.75, -15.75, 7.75, -15.75, 15.75, -7.75, 15.75, 7.75, 7.75, 15.75, -7.75, 15.75, -15.75, 7.75, -15.75, -7.75 </vector2_array>
 
 	</resource>
 	<resource type="Animation" path="local://2">
@@ -54,22 +54,39 @@
 
 	</resource>
 	<resource type="Animation" path="local://4">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
+		<real name="length"> 0.5 </real>
+		<bool name="loop"> False </bool>
 		<real name="step"> 0.1 </real>
 		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<node_path name="tracks/0/path"> "DeathSprite:frame" </node_path>
 		<int name="tracks/0/interp"> 1 </int>
 		<dictionary name="tracks/0/keys" shared="false">
 			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 0.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<int> 0 </int>
+				<int> 7 </int>
+			</array>
+		</dictionary>
+		<string name="tracks/1/type"> "value" </string>
+		<node_path name="tracks/1/path"> "DeathSprite:visibility/visible" </node_path>
+		<int name="tracks/1/interp"> 1 </int>
+		<dictionary name="tracks/1/keys" shared="false">
+			<string> "cont" </string>
 			<bool> False </bool>
 			<string> "times" </string>
-			<real_array  len="1"> 				0 </real_array>
+			<real_array  len="2"> 				0, 0.5 </real_array>
 			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
+			<real_array  len="2"> 				1, 1 </real_array>
 			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 1 </int>
+			<array  len="2" shared="false">
+				<bool> True </bool>
+				<bool> False </bool>
 			</array>
 		</dictionary>
 
@@ -133,45 +150,28 @@
 			<real_array  len="1"> 				1 </real_array>
 			<string> "values" </string>
 			<array  len="1" shared="false">
-				<int> 0 </int>
+				<int> 1 </int>
 			</array>
 		</dictionary>
 
 	</resource>
 	<resource type="Animation" path="local://8">
-		<real name="length"> 0.5 </real>
-		<bool name="loop"> False </bool>
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
 		<real name="step"> 0.1 </real>
 		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "DeathSprite:frame" </node_path>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
 		<int name="tracks/0/interp"> 1 </int>
 		<dictionary name="tracks/0/keys" shared="false">
 			<string> "cont" </string>
-			<bool> True </bool>
-			<string> "times" </string>
-			<real_array  len="2"> 				0, 0.5 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
-			<string> "values" </string>
-			<array  len="2" shared="false">
-				<int> 0 </int>
-				<int> 7 </int>
-			</array>
-		</dictionary>
-		<string name="tracks/1/type"> "value" </string>
-		<node_path name="tracks/1/path"> "DeathSprite:visibility/visible" </node_path>
-		<int name="tracks/1/interp"> 1 </int>
-		<dictionary name="tracks/1/keys" shared="false">
-			<string> "cont" </string>
 			<bool> False </bool>
 			<string> "times" </string>
-			<real_array  len="2"> 				0, 0.5 </real_array>
+			<real_array  len="1"> 				0 </real_array>
 			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
+			<real_array  len="1"> 				1 </real_array>
 			<string> "values" </string>
-			<array  len="2" shared="false">
-				<bool> True </bool>
-				<bool> False </bool>
+			<array  len="1" shared="false">
+				<int> 0 </int>
 			</array>
 		</dictionary>
 
@@ -252,11 +252,11 @@
 				<string> "root/root" </string>
 				<string> "anims/up" </string>
 				<string> "anims/side" </string>
-				<string> "anims/up_idle" </string>
+				<string> "anims/death" </string>
 				<string> "anims/side_idle" </string>
 				<string> "anims/down" </string>
+				<string> "anims/up_idle" </string>
 				<string> "anims/down_idle" </string>
-				<string> "anims/death" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
@@ -290,7 +290,7 @@
 				<int> 0 </int>
 				<bool> False </bool>
 				<resource  resource_type="Shape2D" path="local://1">  </resource>
-				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
+				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
 				<int> 2 </int>
 				<real> 0.08 </real>
 				<resource  resource_type="Script" path="res://scripts/player.gd">  </resource>
@@ -302,7 +302,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -125.806, -59.8136 </vector2>
+							<vector2> -92.3983, -47.9765 </vector2>
 							<string> "snap_grid" </string>
 							<bool> False </bool>
 							<string> "snap_offset" </string>
@@ -322,7 +322,7 @@
 							<string> "snap_step" </string>
 							<vector2> 32, 32 </vector2>
 							<string> "zoom" </string>
-							<real> 6.33797 </real>
+							<real> 7.781364 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -433,13 +433,15 @@
 						<string> "run_mode" </string>
 						<int> 0 </int>
 					</dictionary>
+					<string> "_edit_group_" </string>
+					<bool> True </bool>
 				</dictionary>
 				<string> "goblin-brown" </string>
 				<resource  resource_type="SpriteFrames" path="res://sprites/goblin-brown.xml">  </resource>
 				<color> 1, 1, 1, 1 </color>
 				<resource  resource_type="SpriteFrames" path="res://sprites/death-anim.xml">  </resource>
 				<int> 7 </int>
-				<vector2_array  len="8"> 					-15, -7.5, -15, 7.5, -7.5, 15, 7.5, 15, 15, 7.5, 15, -7.5, 7.5, -15, -7.5, -15 </vector2_array>
+				<vector2_array  len="8"> 					-15.75, -7.75, -15.75, 7.75, -7.75, 15.75, 7.75, 15.75, 15.75, 7.75, 15.75, -7.75, 7.75, -15.75, -7.75, -15.75 </vector2_array>
 				<node_path> ".." </node_path>
 				<resource  resource_type="Animation" path="local://2">  </resource>
 				<resource  resource_type="Animation" path="local://3">  </resource>
