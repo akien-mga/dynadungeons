@@ -17,9 +17,9 @@ const FLAME_LONG_END = 11
 const SLIDE_SPEED = 8
 
 ### Member variables
-var cell_pos				# Bomb tilemap coordinates
+var cell_pos = Vector2()	# Bomb tilemap coordinates
 var bomb_range				# Range of the bomb explosion
-var counter = 1
+var counter = 1				# Counter for flame animation
 
 var chained_bombs = []		# Bombs triggered by the chain reaction
 var anim_ranges = {}		# Explosion range for each direction
@@ -29,6 +29,18 @@ var indestruct_cells = []	# Coordinates of the destructible cells in range
 
 var slide_dir = Vector2()	# Direction in which to slide upon kick
 var target_cell = Vector2()	# The tilemap coordinates of the target
+
+### Helper functions
+
+func get_cell_pos():
+	return cell_pos
+
+func update_cell_pos():
+	cell_pos = level.world_to_map(self.get_pos())
+
+func set_pos_and_update(abs_pos):
+	set_pos(abs_pos)
+	update_cell_pos()
 
 ### Main logic
 
@@ -59,8 +71,8 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			self.anim_ranges[key] = self.bomb_range
 		elif (raycast.collider.get_parent() == level.map_manager):
 			# Destructible, indestructible or cellectible (dummy collider) in range, they limit the animation
-			var target_cell_pos = level.tilemap_destr.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
-			var distance_rel = target_cell_pos - self.cell_pos
+			var target_cell_pos = level.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
+			var distance_rel = target_cell_pos - get_cell_pos()
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
 			if (raycast.collider == level.tilemap_destr and not target_cell_pos in trigger_bomb.destruct_cells):
 				trigger_bomb.destruct_cells.append(target_cell_pos)
@@ -81,11 +93,11 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 
 func push_dir(direction):
 	var space_state = level.get_world_2d().get_direct_space_state()
-	var raycast = space_state.intersect_ray(level.map_to_world(cell_pos), level.map_to_world(cell_pos + direction), [ get_node("StaticBody2D") ])
+	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
 	
 	if (raycast.empty()):
 		slide_dir = direction
-		target_cell = cell_pos + slide_dir
+		target_cell = get_cell_pos() + slide_dir
 		set_fixed_process(true)
 
 ### Explosion animation and logic
@@ -99,12 +111,12 @@ func start_animation():
 				var yflip = dir[key].x + dir[key].y > 0
 				var transpose = dir[key].y != 0
 				if (bomb.anim_ranges[key] == 1):
-					var pos = bomb.cell_pos + dir[key]
+					var pos = bomb.get_cell_pos() + dir[key]
 					bomb.flame_cells.append({'pos': pos, 'tile': FLAME_SMALL, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
 					level.tilemap_destr.set_cell(pos.x, pos.y, FLAME_SMALL, xflip, yflip, transpose)
 				else:
 					for i in range(1, bomb.anim_ranges[key] + 1):
-						var pos = bomb.cell_pos + i*dir[key]
+						var pos = bomb.get_cell_pos() + i*dir[key]
 						var tile_index
 						if (i == bomb.anim_ranges[key]):
 							tile_index = FLAME_LONG_END
@@ -121,7 +133,7 @@ func start_animation():
 	# This is done in a separate loop to make sure source flames override branches
 	for bomb in [self] + self.chained_bombs:
 		bomb.get_node("AnimatedSprite").hide()
-		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE)
+		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE)
 	
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()
@@ -134,13 +146,13 @@ func update_animation():
 	
 	# Update "source" tiles afterwards to ensure a nice overlap
 	for bomb in [self] + self.chained_bombs:
-		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, FLAME_SOURCE + 4*(self.counter % 3))
+		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE + 4*(self.counter % 3))
 
 func stop_animation():
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
 			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
-		level.tilemap_destr.set_cell(bomb.cell_pos.x, bomb.cell_pos.y, -1)
+		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, -1)
 		for pos in bomb.destruct_cells:
 			# Random chance to add a random pickup
 			if (randi() % 100 < global.COLLECTIBLE_RATE):
@@ -206,21 +218,19 @@ func _fixed_process(delta):
 	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta
 	# Check if we are past the target cell
 	if (slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0):
-		set_pos(level.map_to_world(target_cell))
-		cell_pos = target_cell
+		set_pos_and_update(level.map_to_world(target_cell))
 		
 		var space_state = level.get_world_2d().get_direct_space_state()
-		var raycast = space_state.intersect_ray(level.map_to_world(cell_pos), level.map_to_world(cell_pos + slide_dir), [ get_node("StaticBody2D") ])
+		var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + slide_dir), [ get_node("StaticBody2D") ])
 		
 		if (raycast.empty()):
-			target_cell = cell_pos + slide_dir
+			target_cell = get_cell_pos() + slide_dir
 		else:
 			set_fixed_process(false)
 			return
 	else:
-		set_pos(new_pos)
-		# FIXME: cell_pos should be a function like get_tile
-		cell_pos = level.world_to_map(get_pos())
+		set_pos_and_update(new_pos)
+		update_cell_pos()
 
 ### Initialisation
 

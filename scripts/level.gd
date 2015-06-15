@@ -21,6 +21,9 @@ func map_to_world(var map_pos):
 func world_to_map(var world_pos):
 	return tilemap_destr.world_to_map(world_pos)
 
+func tile_center_pos(absolute_pos):
+	return map_to_world(world_to_map(absolute_pos))
+
 ### Input processing
 
 func _input(event):

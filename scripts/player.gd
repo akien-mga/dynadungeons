@@ -24,19 +24,23 @@ var bomb_quota = 3
 var bomb_range = 2
 var kick = true
 
+### Helper functions
+
+func get_cell_pos():
+	return level.world_to_map(self.get_pos())
+
 ### Actions
 
 func place_bomb():
 	var bomb = global.bomb_scene.instance()
-	bomb.cell_pos = level.world_to_map(self.get_pos())
-	bomb.set_pos(level.map_to_world(bomb.cell_pos))
+	level.bomb_manager.add_child(bomb)
+	bomb.set_pos_and_update(level.tile_center_pos(self.get_pos()))
 	bomb.player = self
 	bomb.bomb_range = self.bomb_range
 	for player in level.player_manager.get_children():
-		if (level.world_to_map(player.get_pos()) == bomb.cell_pos):
+		if (player.get_cell_pos() == bomb.get_cell_pos()):
 			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
 			player.collision_exceptions.append(bomb)
-	level.bomb_manager.add_child(bomb)
 	active_bombs.append(bomb)
 
 func die():
@@ -81,7 +85,7 @@ func process_movement(delta):
 	# Handle kicking of bombs
 	if (kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children()):
 		var bomb = get_collider().get_parent()
-		var direction = bomb.cell_pos - level.world_to_map(self.get_pos())
+		var direction = bomb.get_cell_pos() - self.get_cell_pos()
 		bomb.push_dir(direction)
 	
 	# Too many slide attempts provide "jumping" through tiles
@@ -114,7 +118,7 @@ func process_actions():
 	# Drop a bomb on the player's tile
 	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs.size() < bomb_quota):
 		for bomb in collision_exceptions:
-			if (bomb.cell_pos == level.world_to_map(self.get_pos())):
+			if (bomb.get_cell_pos() == self.get_cell_pos()):
 				return
 		place_bomb()
 
@@ -122,12 +126,12 @@ func process_explosions():
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
 			# Kill player if he's standing on the bomb
-			if (level.world_to_map(self.get_pos()) == bomb.cell_pos):
+			if (self.get_cell_pos() == bomb.get_cell_pos()):
 				self.die()
 				return
 			# FIXME: This flame_cells stuff is really getting messy
 			for cell_dict in bomb.flame_cells:
-				if (level.world_to_map(self.get_pos()) == cell_dict.pos):
+				if (self.get_cell_pos() == cell_dict.pos):
 					self.die()
 					return
 
@@ -138,10 +142,10 @@ func _fixed_process(delta):
 		process_explosions()
 	
 	for bomb in collision_exceptions:
-		if (self.get_pos().x < (bomb.cell_pos.x - 0.5)*global.TILE_SIZE \
-			or self.get_pos().x > (bomb.cell_pos.x + 1.5)*global.TILE_SIZE \
-			or self.get_pos().y < (bomb.cell_pos.y - 0.5)*global.TILE_SIZE \
-			or self.get_pos().y > (bomb.cell_pos.y + 1.5)*global.TILE_SIZE):
+		if (self.get_pos().x < (bomb.get_cell_pos().x - 0.5)*global.TILE_SIZE \
+			or self.get_pos().x > (bomb.get_cell_pos().x + 1.5)*global.TILE_SIZE \
+			or self.get_pos().y < (bomb.get_cell_pos().y - 0.5)*global.TILE_SIZE \
+			or self.get_pos().y > (bomb.get_cell_pos().y + 1.5)*global.TILE_SIZE):
 			remove_collision_exception_with(bomb.get_node("StaticBody2D"))
 			collision_exceptions.erase(bomb)
 
