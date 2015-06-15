@@ -21,6 +21,7 @@ var cell_pos = Vector2()	# Bomb tilemap coordinates
 var bomb_range				# Range of the bomb explosion
 var counter = 1				# Counter for flame animation
 
+var exploding = false		# Is the bomb exploding?
 var chained_bombs = []		# Bombs triggered by the chain reaction
 var anim_ranges = {}		# Explosion range for each direction
 var flame_cells = []		# Coordinates and orientation of the cells with flame animation
@@ -58,11 +59,12 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 		# Check first for other bombs that should be triggered
 		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
 			var bomb_found = raycast.collider.get_parent()
-			trigger_bomb.chained_bombs.append(bomb_found)
-			new_bombs.append(bomb_found)
-			# Stop animations and timer of secondary bomb to prevent loops
-			bomb_found.get_node("AnimatedSprite/TimerIdle").stop()
-			bomb_found.get_node("AnimatedSprite/AnimationPlayer").stop()
+			if (not bomb_found.exploding):
+				trigger_bomb.chained_bombs.append(bomb_found)
+				new_bombs.append(bomb_found)
+				# Stop animations and timer of secondary bomb to prevent loops
+				bomb_found.get_node("AnimatedSprite/TimerIdle").stop()
+				bomb_found.get_node("AnimatedSprite/AnimationPlayer").stop()
 			exceptions.append(raycast.collider)
 			raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions)
 		
@@ -133,6 +135,7 @@ func start_animation():
 	# This is done in a separate loop to make sure source flames override branches
 	for bomb in [self] + self.chained_bombs:
 		bomb.get_node("AnimatedSprite").hide()
+		bomb.exploding = true
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE)
 	
 	# Start timer that should trigger the cleanup of the animation
@@ -176,7 +179,7 @@ func stop_animation():
 func _on_TimerIdle_timeout():
 	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
 
-func _on_AnimationPlayer_finished():
+func trigger_explosion():
 	# Stop potential sliding movement
 	set_fixed_process(false)
 	# Find collisions and act accordingly
@@ -231,6 +234,17 @@ func _fixed_process(delta):
 	else:
 		set_pos_and_update(new_pos)
 		update_cell_pos()
+	
+	# Process explosions
+	for trigger_bomb in level.exploding_bombs:
+		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
+			for cell_dict in bomb.flame_cells:
+				if (self.get_cell_pos() == cell_dict.pos):
+					# Stop animations and timer
+					get_node("AnimatedSprite/TimerIdle").stop()
+					get_node("AnimatedSprite/AnimationPlayer").stop()
+					trigger_explosion()
+					return
 
 ### Initialisation
 
