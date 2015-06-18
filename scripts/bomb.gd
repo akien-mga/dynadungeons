@@ -205,15 +205,15 @@ func _on_TimerAnim_timeout():
 		counter += 1
 		get_node("AnimatedSprite/TimerAnim").start()
 	else:
-		stop_animation()
 		# Free chained bombs and trigger bomb
+		level.exploding_bombs.erase(self)
 		for bomb in self.chained_bombs:
 			if (bomb.player != null):
 				bomb.player.collision_exceptions.erase(bomb)
 			bomb.queue_free()
 		if (self.player != null):
 			self.player.collision_exceptions.erase(self)
-		level.exploding_bombs.erase(self)
+		stop_animation()
 		self.queue_free()
 
 func _fixed_process(delta):
