@@ -145,7 +145,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -322.622, -182.668 </vector2>
+							<vector2> -364.77, -215.09 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -258,15 +258,6 @@
 							<real> 500 </real>
 							<string> "znear" </string>
 							<real> 0.1 </real>
-						</dictionary>
-						<string> "Script" </string>
-						<dictionary  shared="false">
-							<string> "current" </string>
-							<int> 0 </int>
-							<string> "sources" </string>
-							<array  len="1" shared="false">
-								<string> "res://scripts/bomb.gd" </string>
-							</array>
 						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>

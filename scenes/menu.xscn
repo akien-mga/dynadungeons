@@ -270,21 +270,6 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
-						<string> "Script" </string>
-						<dictionary  shared="false">
-							<string> "current" </string>
-							<int> 0 </int>
-							<string> "sources" </string>
-							<array  len="7" shared="false">
-								<string> "res://scripts/global.gd" </string>
-								<string> "res://scripts/menu.gd" </string>
-								<string> "res://scripts/controls.gd" </string>
-								<string> "res://scripts/level.gd" </string>
-								<string> "res://scripts/player.gd" </string>
-								<string> "res://scripts/bomb.gd" </string>
-								<string> "res://scripts/collectible.gd" </string>
-							</array>
-						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">

@@ -80,9 +80,9 @@
 			<string> "conn_count" </string>
 			<int> 2 </int>
 			<string> "conns" </string>
-			<int_array  len="12"> 				0, 0, 55, 54, 2, 0, 3, 0, 57, 56, 2, 0 </int_array>
+			<int_array  len="12"> 				0, 0, 56, 55, 2, 0, 3, 0, 58, 57, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="58">
+			<string_array  len="59">
 				<string> "Collectible" </string>
 				<string> "Area2D" </string>
 				<string> "_import_path" </string>
@@ -101,6 +101,7 @@
 				<string> "shapes/0/transform" </string>
 				<string> "shapes/0/trigger" </string>
 				<string> "gravity_point" </string>
+				<string> "gravity_distance_scale" </string>
 				<string> "gravity_vec" </string>
 				<string> "gravity" </string>
 				<string> "linear_damp" </string>
@@ -145,7 +146,7 @@
 			<string> "node_count" </string>
 			<int> 5 </int>
 			<string> "nodes" </string>
-			<int_array  len="215"> 				-1, -1, 1, 0, -1, 26, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 1, 13, 3, 14, 8, 15, 9, 16, 10, 17, 10, 18, 11, 19, 12, 20, 13, 21, 2, 22, 1, 23, 1, 24, 14, 25, 15, 26, 16, 27, 17, 0, 0, 0, 28, 28, -1, 21, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 29, 18, 30, 1, 31, 4, 32, 10, 33, 10, 34, 3, 35, 19, 36, 7, 37, 20, 38, 10, 39, 21, 0, 0, 0, 28, 40, -1, 21, 2, 0, 3, 10, 4, 5, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 29, 22, 30, 1, 31, 4, 32, 10, 33, 10, 34, 3, 35, 3, 36, 7, 37, 20, 38, 10, 39, 21, 0, 0, 0, 41, 41, -1, 10, 2, 0, 42, 3, 43, 5, 44, 23, 45, 24, 46, 25, 47, 1, 48, 2, 49, 26, 50, 27, 0, 0, 0, 51, 51, -1, 12, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 52, 8, 53, 10, 0 </int_array>
+			<int_array  len="217"> 				-1, -1, 1, 0, -1, 27, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 1, 13, 3, 14, 8, 15, 9, 16, 10, 17, 10, 18, 5, 19, 11, 20, 12, 21, 13, 22, 2, 23, 1, 24, 1, 25, 14, 26, 15, 27, 16, 28, 17, 0, 0, 0, 29, 29, -1, 21, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 30, 18, 31, 1, 32, 4, 33, 10, 34, 10, 35, 3, 36, 19, 37, 7, 38, 20, 39, 10, 40, 21, 0, 0, 0, 29, 41, -1, 21, 2, 0, 3, 10, 4, 5, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 30, 22, 31, 1, 32, 4, 33, 10, 34, 10, 35, 3, 36, 3, 37, 7, 38, 20, 39, 10, 40, 21, 0, 0, 0, 42, 42, -1, 10, 2, 0, 43, 3, 44, 5, 45, 23, 46, 24, 47, 25, 48, 1, 49, 2, 50, 26, 51, 27, 0, 0, 0, 52, 52, -1, 12, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 53, 8, 54, 10, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="28" shared="false">
 				<node_path> "" </node_path>
@@ -173,7 +174,7 @@
 						<string> "2D" </string>
 						<dictionary  shared="false">
 							<string> "ofs" </string>
-							<vector2> -359.082, -125.746 </vector2>
+							<vector2> -272.647, -160.823 </vector2>
 							<string> "snap_grid" </string>
 							<bool> True </bool>
 							<string> "snap_offset" </string>
@@ -193,7 +194,7 @@
 							<string> "snap_step" </string>
 							<vector2> 32, 32 </vector2>
 							<string> "zoom" </string>
-							<real> 2.272075 </real>
+							<real> 2.517534 </real>
 						</dictionary>
 						<string> "3D" </string>
 						<dictionary  shared="false">
@@ -286,15 +287,6 @@
 							<real> 500 </real>
 							<string> "znear" </string>
 							<real> 0.1 </real>
-						</dictionary>
-						<string> "Script" </string>
-						<dictionary  shared="false">
-							<string> "current" </string>
-							<int> 0 </int>
-							<string> "sources" </string>
-							<array  len="1" shared="false">
-								<string> "res://scripts/collectible.gd" </string>
-							</array>
 						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
