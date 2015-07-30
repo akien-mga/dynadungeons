@@ -25,6 +25,8 @@ func _on_body_enter(body):
 			body.speed += 1
 		elif (effect == "life_increase"):
 			body.lives += 1
+		elif (effect == "kick_skill"):
+			body.kick = true
 		get_node("AnimationPlayer").play("pickup")
 
 func _on_AnimationPlayer_finished():

@@ -38,8 +38,8 @@ var sfx = false
 ## Gameplay
 var nb_players = 2
 var nb_lives = 1
-var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "life_increase" ],
-                     'freq': [ 100, 100, 70, 5*nb_lives ] }
+var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "life_increase", "kick_skill" ],
+                     'freq': [ 100, 100, 70, 5*nb_lives, 30 ] }
 
 ### Config management
 

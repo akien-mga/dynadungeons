@@ -22,7 +22,7 @@ var lives
 var speed = 10
 var bomb_quota = 3
 var bomb_range = 2
-var kick = true
+var kick = false
 
 ### Helper functions
 
