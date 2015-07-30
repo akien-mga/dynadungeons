@@ -13,19 +13,9 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="87">
+			<string_array  len="63">
 				<string> "Level" </string>
 				<string> "Node2D" </string>
-				<string> "_import_path" </string>
-				<string> "visibility/visible" </string>
-				<string> "visibility/opacity" </string>
-				<string> "visibility/self_opacity" </string>
-				<string> "visibility/light_mask" </string>
-				<string> "transform/pos" </string>
-				<string> "transform/rot" </string>
-				<string> "transform/scale" </string>
-				<string> "z/z" </string>
-				<string> "z/relative" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "MapManager" </string>
@@ -48,6 +38,7 @@
 				<string> "tile_data" </string>
 				<string> "Destructible" </string>
 				<string> "DummyCollider" </string>
+				<string> "visibility/visible" </string>
 				<string> "PlayerManager" </string>
 				<string> "BombManager" </string>
 				<string> "CollectibleManager" </string>
@@ -60,31 +51,18 @@
 				<string> "stream/autoplay" </string>
 				<string> "stream/paused" </string>
 				<string> "Gameover" </string>
+				<string> "z/z" </string>
 				<string> "Sprite" </string>
+				<string> "transform/pos" </string>
 				<string> "texture" </string>
-				<string> "centered" </string>
-				<string> "offset" </string>
-				<string> "flip_h" </string>
-				<string> "flip_v" </string>
-				<string> "vframes" </string>
-				<string> "hframes" </string>
-				<string> "frame" </string>
-				<string> "modulate" </string>
-				<string> "region" </string>
-				<string> "region_rect" </string>
 				<string> "Label" </string>
 				<string> "margin/left" </string>
 				<string> "margin/top" </string>
 				<string> "margin/right" </string>
 				<string> "margin/bottom" </string>
-				<string> "focus_neighbour/left" </string>
-				<string> "focus_neighbour/top" </string>
-				<string> "focus_neighbour/right" </string>
-				<string> "focus_neighbour/bottom" </string>
 				<string> "focus/ignore_mouse" </string>
 				<string> "focus/stop_mouse" </string>
 				<string> "size_flags/horizontal" </string>
-				<string> "size_flags/stretch_ratio" </string>
 				<string> "custom_fonts/font" </string>
 				<string> "custom_colors/font_color" </string>
 				<string> "custom_colors/font_color_shadow" </string>
@@ -97,25 +75,15 @@
 				<string> "rounded_values" </string>
 				<string> "text" </string>
 				<string> "align" </string>
-				<string> "valign" </string>
 				<string> "autowrap" </string>
-				<string> "uppercase" </string>
 				<string> "percent_visible" </string>
 			</string_array>
 			<string> "node_count" </string>
 			<int> 12 </int>
 			<string> "nodes" </string>
-			<int_array  len="408"> 				-1, -1, 1, 0, -1, 12, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 12, 8, 13, 9, 0, 0, 0, 15, 14, -1, 1, 2, 0, 0, 1, 0, 17, 16, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 18, 7, 19, 10, 20, 11, 21, 12, 22, 13, 23, 14, 24, 7, 25, 15, 26, 15, 27, 2, 28, 5, 29, 3, 30, 3, 31, 16, 13, 17, 0, 1, 0, 17, 32, -1, 25, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 18, 7, 19, 10, 20, 11, 21, 12, 22, 13, 23, 14, 24, 7, 25, 15, 26, 15, 27, 2, 28, 5, 29, 3, 30, 3, 31, 18, 13, 19, 0, 1, 0, 17, 33, -1, 24, 2, 0, 3, 15, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 1, 18, 7, 19, 20, 20, 11, 21, 12, 22, 13, 23, 14, 24, 7, 25, 15, 26, 15, 27, 2, 28, 5, 29, 14, 30, 3, 31, 21, 0, 0, 0, 15, 34, -1, 1, 2, 0, 0, 0, 0, 15, 35, -1, 1, 2, 0, 0, 0, 0, 15, 36, -1, 1, 2, 0, 0, 0, 0, 38, 37, -1, 7, 2, 0, 39, 22, 40, 15, 41, 1, 42, 5, 43, 15, 44, 15, 0, 0, 0, 1, 45, -1, 11, 2, 0, 3, 15, 4, 2, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 3, 11, 1, 13, 23, 0, 9, 0, 46, 46, -1, 21, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 7, 24, 8, 5, 9, 6, 10, 7, 11, 1, 47, 25, 48, 1, 49, 4, 50, 15, 51, 15, 52, 3, 53, 3, 54, 7, 55, 26, 56, 15, 57, 27, 0, 9, 0, 58, 58, -1, 33, 2, 0, 3, 1, 4, 2, 5, 2, 6, 3, 59, 28, 60, 28, 61, 29, 62, 30, 63, 0, 64, 0, 65, 0, 66, 0, 67, 1, 68, 1, 69, 14, 70, 2, 71, 31, 72, 32, 73, 33, 74, 5, 75, 34, 76, 2, 77, 5, 78, 5, 79, 15, 80, 15, 81, 35, 82, 3, 83, 7, 84, 1, 85, 15, 86, 2, 0 </int_array>
+			<int_array  len="242"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 12, 3, 13, 0, 1, 0, 7, 22, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 14, 3, 15, 0, 1, 0, 7, 23, -1, 15, 24, 8, 8, 2, 9, 16, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 7, 20, 11, 21, 17, 0, 0, 0, 5, 25, -1, 0, 0, 0, 0, 5, 26, -1, 0, 0, 0, 0, 5, 27, -1, 0, 0, 0, 0, 29, 28, -1, 6, 30, 18, 31, 8, 32, 19, 33, 10, 34, 8, 35, 8, 0, 0, 0, 1, 36, -1, 3, 24, 8, 37, 11, 3, 20, 0, 9, 0, 38, 38, -1, 2, 39, 21, 40, 22, 0, 9, 0, 41, 41, -1, 21, 42, 23, 43, 23, 44, 24, 45, 25, 46, 19, 47, 19, 48, 7, 49, 26, 50, 27, 51, 28, 52, 10, 53, 29, 54, 9, 55, 10, 56, 10, 57, 8, 58, 8, 59, 30, 60, 11, 61, 19, 62, 9, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="36" shared="false">
-				<node_path> "" </node_path>
-				<bool> True </bool>
-				<real> 1 </real>
-				<int> 1 </int>
-				<vector2> 0, 0 </vector2>
-				<real> 0 </real>
-				<vector2> 1, 1 </vector2>
-				<int> 0 </int>
+			<array  len="31" shared="false">
 				<resource  resource_type="Script" path="res://scripts/level.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
@@ -250,12 +218,16 @@
 					<string> "_edit_lock_" </string>
 					<bool> True </bool>
 				</dictionary>
+				<int> 0 </int>
 				<resource  resource_type="TileSet" path="res://sprites/tileset.xml">  </resource>
 				<vector2> 32, 32 </vector2>
 				<int> 16 </int>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
 				<int> 2 </int>
 				<bool> False </bool>
+				<real> 1 </real>
+				<real> 0 </real>
+				<int> 1 </int>
 				<int_array  len="390"> 					0, 1, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 1, 65536, 1, 65537, 7, 65538, 7, 65539, 7, 65540, 7, 65541, 7, 65542, 7, 65543, 7, 65544, 7, 65545, 7, 65546, 7, 65547, 7, 65548, 7, 65549, 7, 65550, 1, 131072, 1, 131073, 7, 131074, 0, 131075, 7, 131076, 0, 131077, 7, 131078, 0, 131079, 7, 131080, 0, 131081, 7, 131082, 0, 131083, 7, 131084, 0, 131085, 7, 131086, 1, 196608, 1, 196609, 7, 196610, 7, 196611, 7, 196612, 7, 196613, 7, 196614, 7, 196615, 7, 196616, 7, 196617, 7, 196618, 7, 196619, 7, 196620, 7, 196621, 7, 196622, 1, 262144, 1, 262145, 7, 262146, 0, 262147, 7, 262148, 0, 262149, 7, 262150, 0, 262151, 7, 262152, 0, 262153, 7, 262154, 0, 262155, 7, 262156, 0, 262157, 7, 262158, 1, 327680, 1, 327681, 7, 327682, 7, 327683, 7, 327684, 7, 327685, 7, 327686, 7, 327687, 7, 327688, 7, 327689, 7, 327690, 7, 327691, 7, 327692, 7, 327693, 7, 327694, 1, 393216, 1, 393217, 7, 393218, 0, 393219, 7, 393220, 0, 393221, 7, 393222, 0, 393223, 7, 393224, 0, 393225, 7, 393226, 0, 393227, 7, 393228, 0, 393229, 7, 393230, 1, 458752, 1, 458753, 7, 458754, 7, 458755, 7, 458756, 7, 458757, 7, 458758, 7, 458759, 7, 458760, 7, 458761, 7, 458762, 7, 458763, 7, 458764, 7, 458765, 7, 458766, 1, 524288, 1, 524289, 7, 524290, 0, 524291, 7, 524292, 0, 524293, 7, 524294, 0, 524295, 7, 524296, 0, 524297, 7, 524298, 0, 524299, 7, 524300, 0, 524301, 7, 524302, 1, 589824, 1, 589825, 7, 589826, 7, 589827, 7, 589828, 7, 589829, 7, 589830, 7, 589831, 7, 589832, 7, 589833, 7, 589834, 7, 589835, 7, 589836, 7, 589837, 7, 589838, 1, 655360, 1, 655361, 7, 655362, 0, 655363, 7, 655364, 0, 655365, 7, 655366, 0, 655367, 7, 655368, 0, 655369, 7, 655370, 0, 655371, 7, 655372, 0, 655373, 7, 655374, 1, 720896, 1, 720897, 7, 720898, 7, 720899, 7, 720900, 7, 720901, 7, 720902, 7, 720903, 7, 720904, 7, 720905, 7, 720906, 7, 720907, 7, 720908, 7, 720909, 7, 720910, 1, 786432, 0, 786433, 0, 786434, 0, 786435, 0, 786436, 0, 786437, 0, 786438, 0, 786439, 0, 786440, 0, 786441, 0, 786442, 0, 786443, 0, 786444, 0, 786445, 0, 786446, 0 </int_array>
 				<dictionary  shared="false">
 					<string> "_edit_lock_" </string>
@@ -269,6 +241,7 @@
 				<resource  resource_type="TileSet" path="res://sprites/dummy-collider.xml">  </resource>
 				<int_array  len="0"> 					 </int_array>
 				<resource  resource_type="AudioStream" path="res://music/dynadingo.ogg">  </resource>
+				<bool> True </bool>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
@@ -277,8 +250,6 @@
 				</dictionary>
 				<vector2> 240, 208 </vector2>
 				<resource  resource_type="Texture" path="res://sprites/box.png">  </resource>
-				<color> 1, 1, 1, 1 </color>
-				<rect2> 0, 0, 0, 0 </rect2>
 				<real> 176 </real>
 				<real> 304 </real>
 				<real> 210 </real>
