@@ -101,6 +101,7 @@ func push_dir(direction):
 		slide_dir = direction
 		target_cell = get_cell_pos() + slide_dir
 		set_fixed_process(true)
+		level.play_sound("push" + str(randi() % 2 + 1))
 
 ### Explosion animation and logic
 
@@ -137,6 +138,9 @@ func start_animation():
 		bomb.get_node("AnimatedSprite").hide()
 		bomb.exploding = true
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE)
+	
+	# Play explosion sound
+	level.play_sound("explosion")
 	
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()

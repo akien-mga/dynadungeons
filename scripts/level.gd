@@ -15,14 +15,18 @@ var exploding_bombs = []
 
 ### Helper functions
 
-func map_to_world(var map_pos):
+func map_to_world(map_pos):
 	return tilemap_destr.map_to_world(map_pos) + global.TILE_OFFSET
 
-func world_to_map(var world_pos):
+func world_to_map(world_pos):
 	return tilemap_destr.world_to_map(world_pos)
 
 func tile_center_pos(absolute_pos):
 	return map_to_world(world_to_map(absolute_pos))
+
+func play_sound(sound):
+	if (global.sfx):
+		get_node("SamplePlayer").play(sound)
 
 ### Input processing
 
@@ -55,6 +59,6 @@ func _ready():
 	
 	# Start music if enabled
 	if (global.music):
-		get_node("MusicManager").play()
+		get_node("StreamPlayer").play()
 	
 	set_process_input(true)

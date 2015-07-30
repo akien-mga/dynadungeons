@@ -33,7 +33,7 @@ var fullscreen = false
 
 ## Audio
 var music = true
-var sfx = false
+var sfx = true
 
 ## Gameplay
 var nb_players = 2

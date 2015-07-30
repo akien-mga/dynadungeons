@@ -60,6 +60,7 @@ func die():
 	set_fixed_process(false)
 	get_node("CharSprite").hide()
 	get_node("ActionAnimations").play("death")
+	level.play_sound("death")
 	lives -= 1
 	if (lives == 0):
 		for bomb in level.bomb_manager.get_children():
@@ -102,8 +103,10 @@ func process_movement(delta):
 	# Handle kicking of bombs
 	if (kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children()):
 		var bomb = get_collider().get_parent()
-		var direction = bomb.get_cell_pos() - self.get_cell_pos()
-		bomb.push_dir(direction)
+		# Check whether we are pushing a moving bomb in its current sliding direction
+		# FIXME: Use Vector2.angle_to() when it's fixed https://github.com/okamstudio/godot/pull/2260
+		if (motion.normalized() != bomb.slide_dir.normalized()):
+			bomb.push_dir(bomb.get_cell_pos() - self.get_cell_pos())
 	
 	# Too many slide attempts provide "jumping" through tiles
 	# TODO: Needs investigating as even with one attempt some unusual effects
@@ -182,6 +185,7 @@ func _on_TimerRespawn_timeout():
 		set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
 		get_node("CharSprite").show()
 		set_fixed_process(true)
+		level.play_sound("respawn" + str(randi() % 2 + 1))
 		# Add collision exceptions with all bombs
 		for bomb in level.bomb_manager.get_children():
 			add_collision_exception_with(bomb.get_node("StaticBody2D"))

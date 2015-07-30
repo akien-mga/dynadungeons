@@ -1,11 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="7" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="14" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://scripts/level.gd" type="Script"></ext_resource>
 	<ext_resource path="res://sprites/tileset.xml" type="TileSet"></ext_resource>
 	<ext_resource path="res://sprites/dummy-collider.xml" type="TileSet"></ext_resource>
 	<ext_resource path="res://music/dynadingo.ogg" type="AudioStream"></ext_resource>
+	<ext_resource path="res://sounds/hahaha.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/explosion.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/push1.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/push2.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/yoohoo.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/iamback.smp" type="Sample"></ext_resource>
 	<ext_resource path="res://sprites/box.png" type="Texture"></ext_resource>
 	<ext_resource path="res://fonts/firasans-book-32.fnt" type="Font"></ext_resource>
+	<resource type="SampleLibrary" path="local://1">
+		<dictionary name="samples/push1" shared="false">
+			<string> "db" </string>
+			<real> 10 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/push1.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/push2" shared="false">
+			<string> "db" </string>
+			<real> 10 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/push2.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/explosion" shared="false">
+			<string> "db" </string>
+			<real> -3 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/explosion.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/respawn2" shared="false">
+			<string> "db" </string>
+			<real> -5 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/iamback.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/death" shared="false">
+			<string> "db" </string>
+			<real> 5 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/hahaha.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/respawn1" shared="false">
+			<string> "db" </string>
+			<real> -3 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/yoohoo.smp">  </resource>
+		</dictionary>
+
+	</resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
@@ -13,7 +70,7 @@
 			<string> "conns" </string>
 			<int_array  len="0"> 				 </int_array>
 			<string> "names" </string>
-			<string_array  len="63">
+			<string_array  len="77">
 				<string> "Level" </string>
 				<string> "Node2D" </string>
 				<string> "script/script" </string>
@@ -42,7 +99,6 @@
 				<string> "PlayerManager" </string>
 				<string> "BombManager" </string>
 				<string> "CollectibleManager" </string>
-				<string> "MusicManager" </string>
 				<string> "StreamPlayer" </string>
 				<string> "stream/stream" </string>
 				<string> "stream/play" </string>
@@ -50,6 +106,21 @@
 				<string> "stream/volume_db" </string>
 				<string> "stream/autoplay" </string>
 				<string> "stream/paused" </string>
+				<string> "SamplePlayer" </string>
+				<string> "config/voices" </string>
+				<string> "config/samples" </string>
+				<string> "default/volume_db" </string>
+				<string> "default/pitch_scale" </string>
+				<string> "default/pan" </string>
+				<string> "default/depth" </string>
+				<string> "default/height" </string>
+				<string> "default/filter/type" </string>
+				<string> "default/filter/cutoff" </string>
+				<string> "default/filter/resonance" </string>
+				<string> "default/filter/gain" </string>
+				<string> "default/reverb_room" </string>
+				<string> "default/reverb_send" </string>
+				<string> "default/chorus_send" </string>
 				<string> "Gameover" </string>
 				<string> "z/z" </string>
 				<string> "Sprite" </string>
@@ -79,15 +150,15 @@
 				<string> "percent_visible" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 12 </int>
+			<int> 13 </int>
 			<string> "nodes" </string>
-			<int_array  len="242"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 12, 3, 13, 0, 1, 0, 7, 22, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 14, 3, 15, 0, 1, 0, 7, 23, -1, 15, 24, 8, 8, 2, 9, 16, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 7, 20, 11, 21, 17, 0, 0, 0, 5, 25, -1, 0, 0, 0, 0, 5, 26, -1, 0, 0, 0, 0, 5, 27, -1, 0, 0, 0, 0, 29, 28, -1, 6, 30, 18, 31, 8, 32, 19, 33, 10, 34, 8, 35, 8, 0, 0, 0, 1, 36, -1, 3, 24, 8, 37, 11, 3, 20, 0, 9, 0, 38, 38, -1, 2, 39, 21, 40, 22, 0, 9, 0, 41, 41, -1, 21, 42, 23, 43, 23, 44, 24, 45, 25, 46, 19, 47, 19, 48, 7, 49, 26, 50, 27, 51, 28, 52, 10, 53, 29, 54, 9, 55, 10, 56, 10, 57, 8, 58, 8, 59, 30, 60, 11, 61, 19, 62, 9, 0 </int_array>
+			<int_array  len="277"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 12, 3, 13, 0, 1, 0, 7, 22, -1, 15, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 11, 20, 11, 21, 14, 3, 15, 0, 1, 0, 7, 23, -1, 15, 24, 8, 8, 2, 9, 16, 10, 4, 11, 5, 12, 6, 13, 7, 14, 2, 15, 8, 16, 8, 17, 9, 18, 10, 19, 7, 20, 11, 21, 17, 0, 0, 0, 5, 25, -1, 0, 0, 0, 0, 5, 26, -1, 0, 0, 0, 0, 5, 27, -1, 0, 0, 0, 0, 28, 28, -1, 6, 29, 18, 30, 8, 31, 19, 32, 10, 33, 8, 34, 8, 0, 0, 0, 35, 35, -1, 14, 36, 11, 37, 20, 38, 10, 39, 9, 40, 10, 41, 10, 42, 10, 43, 21, 44, 21, 45, 21, 46, 21, 47, 7, 48, 10, 49, 10, 0, 0, 0, 1, 50, -1, 3, 24, 8, 51, 11, 3, 22, 0, 10, 0, 52, 52, -1, 2, 53, 23, 54, 24, 0, 10, 0, 55, 55, -1, 21, 56, 25, 57, 25, 58, 26, 59, 27, 60, 19, 61, 19, 62, 7, 63, 28, 64, 29, 65, 30, 66, 10, 67, 31, 68, 9, 69, 10, 70, 10, 71, 8, 72, 8, 73, 32, 74, 11, 75, 19, 76, 9, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="31" shared="false">
+			<array  len="33" shared="false">
 				<resource  resource_type="Script" path="res://scripts/level.gd">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -242,6 +313,8 @@
 				<int_array  len="0"> 					 </int_array>
 				<resource  resource_type="AudioStream" path="res://music/dynadingo.ogg">  </resource>
 				<bool> True </bool>
+				<resource  resource_type="SampleLibrary" path="local://1">  </resource>
+				<nil>  </nil>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
