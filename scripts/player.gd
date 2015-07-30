@@ -23,11 +23,24 @@ var speed = 10
 var bomb_quota = 3
 var bomb_range = 2
 var kick = false
+var confusion = false
+var tmp_powerup = null
 
 ### Helper functions
 
 func get_cell_pos():
 	return level.world_to_map(self.get_pos())
+
+func set_tmp_powerup(powerup_type):
+	# If another temporary powerup is active, disable it
+	if (tmp_powerup != null):
+		set(tmp_powerup, false)
+	# Save the type name for later reference
+	tmp_powerup = powerup_type
+	# Enable the corresponding variable (same var name as the string content)
+	set(tmp_powerup, true)
+	# Start the timer that should disable the temporary powerup
+	get_node("TimerPowerup").start()
 
 ### Actions
 
@@ -78,6 +91,10 @@ func process_movement(delta):
 		motion += Vector2(-1,0)
 	if (Input.is_action_pressed(str(id) + "_move_right")):
 		motion += Vector2(1,0)
+	
+	if (confusion):
+		# Go in the opposite direction since the player is confused
+		motion = -motion
 	
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	move(motion)
@@ -150,6 +167,14 @@ func _fixed_process(delta):
 			collision_exceptions.erase(bomb)
 
 ### Signals
+
+func _on_TimerPowerup_timeout():
+	if (tmp_powerup == null):
+		print("ERROR: empty tmp_powerup at end of timer")
+	
+	# Deactivate the current temporary powerup referenced by tmp_powerup
+	set(tmp_powerup, false)
+	tmp_powerup = null
 
 func _on_TimerRespawn_timeout():
 	if (not invincible):

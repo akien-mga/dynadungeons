@@ -23,6 +23,10 @@ func _on_body_enter(body):
 			body.bomb_range += 1
 		elif (effect == "speed_increase" and body.speed < global.MAX_SPEED):
 			body.speed += 1
+		elif (effect == "speed_decrease" and body.speed > 0):
+			body.speed -= 1
+		elif (effect == "confusion"):
+			body.set_tmp_powerup("confusion")
 		elif (effect == "life_increase"):
 			body.lives += 1
 		elif (effect == "kick_skill"):

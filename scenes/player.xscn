@@ -205,9 +205,9 @@
 			<string> "conn_count" </string>
 			<int> 2 </int>
 			<string> "conns" </string>
-			<int_array  len="12"> 				4, 0, 49, 48, 2, 0, 6, 0, 51, 50, 2, 0 </int_array>
+			<int_array  len="12"> 				4, 0, 50, 49, 2, 0, 7, 0, 52, 51, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="52">
+			<string_array  len="53">
 				<string> "Player" </string>
 				<string> "KinematicBody2D" </string>
 				<string> "input/pickable" </string>
@@ -250,21 +250,22 @@
 				<string> "autoplay" </string>
 				<string> "StatusAnimations" </string>
 				<string> "anims/blink" </string>
-				<string> "TimerRespawn" </string>
+				<string> "TimerPowerup" </string>
 				<string> "Timer" </string>
 				<string> "process_mode" </string>
 				<string> "wait_time" </string>
 				<string> "one_shot" </string>
 				<string> "autostart" </string>
+				<string> "TimerRespawn" </string>
 				<string> "_on_ActionAnimations_finished" </string>
 				<string> "finished" </string>
 				<string> "_on_TimerRespawn_timeout" </string>
 				<string> "timeout" </string>
 			</string_array>
 			<string> "node_count" </string>
-			<int> 7 </int>
+			<int> 8 </int>
 			<string> "nodes" </string>
-			<int_array  len="139"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 0, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 4, 12, 8, 0, 0, 0, 14, 13, -1, 1, 15, 9, 0, 0, 0, 14, 16, -1, 4, 17, 0, 18, 4, 15, 10, 19, 11, 0, 0, 0, 20, 20, -1, 3, 21, 12, 22, 13, 23, 0, 0, 0, 0, 25, 24, -1, 14, 26, 4, 27, 14, 28, 15, 29, 16, 30, 17, 31, 18, 32, 19, 33, 20, 34, 21, 35, 22, 36, 23, 37, 24, 38, 25, 39, 26, 0, 0, 0, 25, 40, -1, 8, 26, 4, 27, 14, 28, 15, 41, 27, 36, 23, 37, 24, 38, 25, 39, 28, 0, 0, 0, 43, 42, -1, 4, 44, 4, 45, 29, 46, 23, 47, 0, 0 </int_array>
+			<int_array  len="154"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 0, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 4, 12, 8, 0, 0, 0, 14, 13, -1, 1, 15, 9, 0, 0, 0, 14, 16, -1, 4, 17, 0, 18, 4, 15, 10, 19, 11, 0, 0, 0, 20, 20, -1, 3, 21, 12, 22, 13, 23, 0, 0, 0, 0, 25, 24, -1, 14, 26, 4, 27, 14, 28, 15, 29, 16, 30, 17, 31, 18, 32, 19, 33, 20, 34, 21, 35, 22, 36, 23, 37, 24, 38, 25, 39, 26, 0, 0, 0, 25, 40, -1, 8, 26, 4, 27, 14, 28, 15, 41, 27, 36, 23, 37, 24, 38, 25, 39, 28, 0, 0, 0, 43, 42, -1, 4, 44, 4, 45, 24, 46, 0, 47, 0, 0, 0, 0, 43, 48, -1, 4, 44, 4, 45, 29, 46, 23, 47, 0, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="30" shared="false">
 				<bool> False </bool>
