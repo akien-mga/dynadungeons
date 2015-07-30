@@ -38,9 +38,17 @@ func settings_toggle_music(pressed):
 	global.music = pressed
 	global.save_to_config("audio", "music", pressed)
 
+func settings_set_music_volume(value):
+	global.music_volume = value
+	global.save_to_config("audio", "music_volume", value)
+
 func settings_toggle_sfx(pressed):
 	global.sfx = pressed
 	global.save_to_config("audio", "sfx", pressed)
+
+func settings_set_sfx_volume(value):
+	global.sfx_volume = value
+	global.save_to_config("audio", "sfx_volume", value)
 
 ## Gameplay
 
@@ -62,7 +70,9 @@ func _ready():
 	# Initialise settings widgets
 	get_node("Settings/Fullscreen").set_pressed(global.fullscreen)
 	get_node("Settings/Music").set_pressed(global.music)
-	get_node("Settings/SoundEffects").set_pressed(global.sfx)
+	get_node("Settings/MusicVolume").set_value(global.music_volume)
+	get_node("Settings/SFX").set_pressed(global.sfx)
+	get_node("Settings/SFXVolume").set_value(global.sfx_volume)
 	
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))

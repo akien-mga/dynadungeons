@@ -60,5 +60,7 @@ func _ready():
 	# Start music if enabled
 	if (global.music):
 		get_node("StreamPlayer").play()
+	get_node("StreamPlayer").set_volume(global.music_volume)
+	get_node("SamplePlayer").set_default_volume(global.sfx_volume)
 	
 	set_process_input(true)

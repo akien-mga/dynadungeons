@@ -33,7 +33,9 @@ var fullscreen = false
 
 ## Audio
 var music = true
+var music_volume = 1
 var sfx = true
+var sfx_volume = 1
 
 ## Gameplay
 var nb_players = 2
@@ -57,7 +59,9 @@ func load_config():
 		
 		# Audio parameters
 		config.set_value("audio", "music", music)
+		config.set_value("audio", "music_volume", music_volume)
 		config.set_value("audio", "sfx", sfx)
+		config.set_value("audio", "sfx_volume", sfx_volume)
 		
 		# Gameplay parameters
 		config.set_value("gameplay", "nb_players", nb_players)
@@ -79,7 +83,9 @@ func load_config():
 		
 		# Audio parameters
 		music = set_from_cfg(config, "audio", "music", music)
+		music_volume = set_from_cfg(config, "audio", "music_volume", music_volume)
 		sfx = set_from_cfg(config, "audio", "sfx", sfx)
+		sfx_volume = set_from_cfg(config, "audio", "sfx_volume", sfx_volume)
 		
 		# Gameplay parameters
 		nb_players = set_from_cfg(config, "gameplay", "nb_players", nb_players)
@@ -102,7 +108,7 @@ func set_from_cfg(config, section, key, fallback):
 	if (config.has_section_key(section, key)):
 		return config.get_value(section, key)
 	else:
-		print("Warning: '" + key + "' missing from '" + section + "'section in the config file, default value has been added.")
+		print("Warning: '" + key + "' missing from '" + section + "' section in the config file, default value has been added.")
 		save_to_config(section, key, fallback)
 		return fallback
 
