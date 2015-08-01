@@ -140,7 +140,7 @@ func start_animation():
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE)
 	
 	# Play explosion sound
-	level.play_sound("explosion")
+	level.play_sound("explosion" + str(randi() % 2 + 1))
 	
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()

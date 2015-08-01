@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="14" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
+<resource_file type="PackedScene" subresource_count="15" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
 	<ext_resource path="res://scripts/level.gd" type="Script"></ext_resource>
 	<ext_resource path="res://sprites/tileset.xml" type="TileSet"></ext_resource>
 	<ext_resource path="res://sprites/dummy-collider.xml" type="TileSet"></ext_resource>
 	<ext_resource path="res://music/dynadingo.ogg" type="AudioStream"></ext_resource>
 	<ext_resource path="res://sounds/hahaha.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/explosion.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/explosion1.smp" type="Sample"></ext_resource>
+	<ext_resource path="res://sounds/explosion2.smp" type="Sample"></ext_resource>
 	<ext_resource path="res://sounds/push1.smp" type="Sample"></ext_resource>
 	<ext_resource path="res://sounds/push2.smp" type="Sample"></ext_resource>
 	<ext_resource path="res://sounds/yoohoo.smp" type="Sample"></ext_resource>
@@ -28,14 +29,6 @@
 			<real> 1 </real>
 			<string> "sample" </string>
 			<resource  resource_type="Sample" path="res://sounds/push2.smp">  </resource>
-		</dictionary>
-		<dictionary name="samples/explosion" shared="false">
-			<string> "db" </string>
-			<real> -3 </real>
-			<string> "pitch" </string>
-			<real> 1 </real>
-			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/explosion.smp">  </resource>
 		</dictionary>
 		<dictionary name="samples/respawn2" shared="false">
 			<string> "db" </string>
@@ -60,6 +53,22 @@
 			<real> 1 </real>
 			<string> "sample" </string>
 			<resource  resource_type="Sample" path="res://sounds/yoohoo.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/explosion1" shared="false">
+			<string> "db" </string>
+			<real> 0 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/explosion1.smp">  </resource>
+		</dictionary>
+		<dictionary name="samples/explosion2" shared="false">
+			<string> "db" </string>
+			<real> 0 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  resource_type="Sample" path="res://sounds/explosion2.smp">  </resource>
 		</dictionary>
 
 	</resource>
