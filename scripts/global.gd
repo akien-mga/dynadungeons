@@ -15,6 +15,7 @@ const INPUT_ACTIONS = [ "move_up", "move_down", "move_left", "move_right", "drop
 
 ### Resources
 const menu_scene = preload("res://scenes/menu.xscn")
+const world_scene = preload("res://scenes/world.xscn")
 const level_scene = preload("res://scenes/level.xscn")
 const player_scene = preload("res://scenes/player.xscn")
 const bomb_scene = preload("res://scenes/bomb.xscn")
@@ -23,6 +24,7 @@ const collectible_scene = preload("res://scenes/collectible.xscn")
 const player_script = preload("res://scripts/player.gd")
 
 const settings_filename = "user://settings.cfg"
+
 
 ### Parameters
 

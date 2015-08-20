@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 ### Nodes
 var global
+var gameover
 var level
 
 ### Member variables
@@ -74,8 +75,8 @@ func die():
 				winner = 0
 			else:
 				winner = 1
-			level.get_node("Gameover").get_node("Label").set_text("Player " + str(players[winner].id) + " wins!")
-			level.get_node("Gameover").show()
+			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " wins!")
+			gameover.show()
 	else:
 		get_node("TimerRespawn").start()
 
@@ -209,7 +210,8 @@ func _on_ActionAnimations_finished():
 
 func _ready():
 	global = get_node("/root/global")
-	level = get_node("/root").get_node("Level")
+	gameover = get_tree().get_root().get_node("World/Gameover")
+	level = get_tree().get_root().get_node("World/Level")
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))
 	lives = global.nb_lives
 	

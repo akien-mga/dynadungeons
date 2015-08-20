@@ -254,4 +254,4 @@ func _fixed_process(delta):
 
 func _ready():
 	global = get_node("/root/global")
-	level = get_node("/root").get_node("Level")
+	level = get_tree().get_root().get_node("World/Level")

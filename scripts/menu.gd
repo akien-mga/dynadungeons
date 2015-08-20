@@ -6,7 +6,7 @@ var global
 ### Windows and scenes
 
 func new_game():
-	get_tree().change_scene_to(global.level_scene)
+	get_tree().change_scene_to(global.world_scene)
 
 func quit():
 	get_tree().quit()
