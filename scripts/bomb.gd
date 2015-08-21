@@ -88,21 +88,27 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			var target_cell_pos = level.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - get_cell_pos()
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
-			if (raycast.collider == level.tilemap_destr and not target_cell_pos in trigger_bomb.destruct_cells):
+			
+			if (target_cell_pos in trigger_bomb.destruct_cells or target_cell_pos in trigger_bomb.indestruct_cells):
+				# This cell was already taken into account in another bomb of the chain reaction, bail out
+				continue
+			
+			if (raycast.collider == level.tilemap_destr):
 				# Register target cell to be destroyed
 				trigger_bomb.destruct_cells.append(target_cell_pos)
-			elif (raycast.collider == level.tilemap_indestr and not target_cell_pos in trigger_bomb.indestruct_cells):
+			elif (raycast.collider == level.tilemap_indestr):
 				# Register indestructible target cell
 				# TODO: Currently useless, but the idea would be to animate the tile with flames on the edge
 				trigger_bomb.indestruct_cells.append(target_cell_pos)
-			else:
-				# Should be a dummy collider under a collectible
+			elif (raycast.collider == level.tilemap_dummy):
 				# Remove the dummy collider
 				level.tilemap_dummy.set_cell(target_cell_pos.x, target_cell_pos.y, -1)
 				# Remove the corresponding collectible(s)
 				for collectible in level.collectible_manager.get_children():
 					if (level.world_to_map(collectible.get_pos()) == target_cell_pos):
 						collectible.destroy()
+			else:
+				print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 		else:
 			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	
@@ -152,6 +158,7 @@ func start_animation():
 						var pos = bomb.get_cell_pos() + i*dir[key]
 						var tile_index
 						if (i == bomb.anim_ranges[key]):
+							# Could be split out of the for loop, but then the display is not synced
 							tile_index = FLAME_LONG_END
 						else:
 							tile_index = FLAME_LONG_MIDDLE
@@ -177,15 +184,16 @@ func start_animation():
 
 func update_animation():
 	"""Make the explosion animation loop over a set of sprites for a livelier animation"""
+	var index = 4*(self.counter % 3)
 	
 	# Update "branch" tiles first
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
-			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + 4*(self.counter % 3), cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
+			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + index, cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
 	
 	# Update "source" tiles afterwards to ensure a nice overlap
 	for bomb in [self] + self.chained_bombs:
-		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE + 4*(self.counter % 3))
+		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE + index)
 
 func stop_animation():
 	"""Stop the explosion animation (therefore removing the flame tiles from tilemap_destr)
