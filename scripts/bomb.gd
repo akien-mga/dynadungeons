@@ -253,6 +253,8 @@ func _on_TimerAnim_timeout():
 		counter += 1
 		get_node("AnimatedSprite/TimerAnim").start()
 	else:
+		# Stop the animation before freeing the chained and trigger bombs
+		stop_animation()
 		# Free chained bombs and trigger bomb after removing their owner's collision exception
 		level.exploding_bombs.erase(self)
 		for bomb in self.chained_bombs:
@@ -261,8 +263,6 @@ func _on_TimerAnim_timeout():
 			bomb.queue_free()
 		if (self.player != null):
 			self.player.collision_exceptions.erase(self)
-		# Stop the animation before freeing the trigger bomb
-		stop_animation()
 		self.queue_free()
 
 func _fixed_process(delta):
@@ -285,8 +285,7 @@ func _fixed_process(delta):
 			set_fixed_process(false)
 			return
 	else:
-		set_pos_and_update(new_pos)
-		update_cell_pos()
+		set_pos(new_pos)
 	
 	# Check currently exploding bombs that might trigger this one
 	for trigger_bomb in level.exploding_bombs:
