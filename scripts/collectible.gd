@@ -5,16 +5,18 @@ var global
 var level
 
 # Member variables
-var effect = "bomb_increase"
-var pickable = true
+var effect = "bomb_increase"		# Effect of this collectible object
+var pickable = true					# Can it be picked? Prevents picking multiple times
 
 func destroy():
+	# Make sure the effect won't be applied several times and play destroy animation
 	pickable = false
 	get_node("AnimationPlayer").play("destroy")
 
 func _on_body_enter(body):
 	if (pickable and body extends global.player_script):
 		# Remove dummy collider
+		# TODO: Find a why to get rid of this dummy collider hack
 		level.tilemap_dummy.set_cell(level.world_to_map(get_pos()).x, level.world_to_map(get_pos()).y, -1)
 		# Apply effect
 		if (effect == "bomb_increase" and body.bomb_quota < global.MAX_BOMBS):
@@ -39,4 +41,5 @@ func _on_AnimationPlayer_finished():
 func _ready():
 	global = get_node("/root/global")
 	level = get_tree().get_root().get_node("World/Level")
+	# Initalise texture based on the effect
 	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))

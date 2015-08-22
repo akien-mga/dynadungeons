@@ -12,6 +12,8 @@ func quit():
 	get_tree().quit()
 
 func goto_screen(screen):
+	# The sign is negative because the whole root is translated in the opposite direction
+	# to the actual position that we want to have on focus (i.e. at 0,0)
 	set_pos(-get_node(screen).get_pos())
 
 func goto_mainmenu():

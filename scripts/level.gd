@@ -11,20 +11,24 @@ var tilemap_indestr
 var tilemap_dummy
 
 ### Member variables
-var exploding_bombs = []
+var exploding_bombs = []			# Array of bombs that are currently exploding
 
 ### Helper functions
 
 func map_to_world(map_pos):
+	"""Return absolute position of the center of the tile"""
 	return tilemap_destr.map_to_world(map_pos) + global.TILE_OFFSET
 
 func world_to_map(world_pos):
+	"""Return tilemap position"""
 	return tilemap_destr.world_to_map(world_pos)
 
 func tile_center_pos(absolute_pos):
+	"""Give the absolute coordinates of the center of the nearest tile"""
 	return map_to_world(world_to_map(absolute_pos))
 
 func play_sound(sound):
+	"""Play the requested sound if sound effects are enabled"""
 	if (global.sfx):
 		get_node("SamplePlayer").play(sound)
 
@@ -38,7 +42,8 @@ func _input(event):
 ### Initialisation
 
 func _ready():
-	# Definitions
+	# Definitions of references to useful nodes
+	# These are provided for easy access to various components of the level from other scripts
 	global = get_node("/root/global")
 	map_manager = self.get_node("MapManager")
 	player_manager = self.get_node("PlayerManager")
@@ -53,6 +58,7 @@ func _ready():
 	for i in range(global.nb_players):
 		player = global.player_scene.instance()
 		player.id = i+1
+		# Set sprite and position based on player number
 		player.char = global.PLAYER_DATA[i].char
 		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
 		player_manager.add_child(player)
@@ -60,7 +66,9 @@ func _ready():
 	# Start music if enabled
 	if (global.music):
 		get_node("StreamPlayer").play()
+	# Initialise volume levels as loaded from the config
 	get_node("StreamPlayer").set_volume(global.music_volume)
 	get_node("SamplePlayer").set_default_volume(global.sfx_volume)
 	
+	# Process input for the "cancel" quit that returns to the main menu
 	set_process_input(true)
