@@ -110,10 +110,11 @@ func load_config():
 			event = InputEvent()
 			event.type = InputEvent.KEY
 			event.scancode = scancode
-			# Replace old actions by the new one
+			# Replace old actions by the new one - apparently erasing the old action
+			# works better to get the control buttons properly initialised in the UI
 			# TODO: Handle multiple events per action in a better way
-			for old_event in InputMap.get_action_list(action):
-				InputMap.action_erase_event(action, old_event)
+			InputMap.erase_action(action)
+			InputMap.add_action(action)
 			InputMap.action_add_event(action, event)
 
 func set_from_cfg(config, section, key):
