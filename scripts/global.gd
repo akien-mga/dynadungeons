@@ -86,19 +86,19 @@ func load_config():
 		config.save(settings_filename)
 	else:
 		# Display parameters
-		width = set_from_cfg(config, "display", "width", width)
-		height = set_from_cfg(config, "display", "height", height)
-		fullscreen = set_from_cfg(config, "display", "fullscreen", fullscreen)
+		set_from_cfg(config, "display", "width")
+		set_from_cfg(config, "display", "height")
+		set_from_cfg(config, "display", "fullscreen")
 		
 		# Audio parameters
-		music = set_from_cfg(config, "audio", "music", music)
-		music_volume = set_from_cfg(config, "audio", "music_volume", music_volume)
-		sfx = set_from_cfg(config, "audio", "sfx", sfx)
-		sfx_volume = set_from_cfg(config, "audio", "sfx_volume", sfx_volume)
+		set_from_cfg(config, "audio", "music")
+		set_from_cfg(config, "audio", "music_volume")
+		set_from_cfg(config, "audio", "sfx")
+		set_from_cfg(config, "audio", "sfx_volume")
 		
 		# Gameplay parameters
-		nb_players = set_from_cfg(config, "gameplay", "nb_players", nb_players)
-		nb_lives = set_from_cfg(config, "gameplay", "nb_lives", nb_lives)
+		set_from_cfg(config, "gameplay", "nb_players")
+		set_from_cfg(config, "gameplay", "nb_lives")
 		
 		# User-defined input overrides
 		var scancode
@@ -116,16 +116,15 @@ func load_config():
 				InputMap.action_erase_event(action, old_event)
 			InputMap.action_add_event(action, event)
 
-func set_from_cfg(config, section, key, fallback):
+func set_from_cfg(config, section, key):
 	"""Retrieve the parameter from the config file, or restore it
 	if it is missing from the config file.
 	"""
 	if (config.has_section_key(section, key)):
-		return config.get_value(section, key)
+		set(key, config.get_value(section, key))
 	else:
 		print("Warning: '" + key + "' missing from '" + section + "' section in the config file, default value has been added.")
-		save_to_config(section, key, fallback)
-		return fallback
+		save_to_config(section, key, get(key))
 
 func save_to_config(section, key, value):
 	"""Helper function to redefine a parameter in the settings file"""
