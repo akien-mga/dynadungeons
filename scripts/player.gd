@@ -210,9 +210,10 @@ func _on_ActionAnimations_finished():
 
 func _ready():
 	global = get_node("/root/global")
-	gameover = get_tree().get_root().get_node("World/Gameover")
-	level = get_tree().get_root().get_node("World/Level")
+	gameover = get_node("/root/World/Gameover")
+	level = get_node("/root/World/Level")
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))
 	lives = global.nb_lives
 	
 	set_fixed_process(true)
+

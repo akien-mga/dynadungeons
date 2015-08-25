@@ -40,6 +40,6 @@ func _on_AnimationPlayer_finished():
 
 func _ready():
 	global = get_node("/root/global")
-	level = get_tree().get_root().get_node("World/Level")
+	level = get_node("/root/World/Level")
 	# Initalise texture based on the effect
 	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))
