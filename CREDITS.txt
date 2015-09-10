@@ -1,0 +1,40 @@
+#### Code
+
+Rémi Verschelde (Akien - http://github.com/akien-mga) - GPL 3.0+
+
+#### Graphics
+
+**Original tileset:**
+
+Matt Hackett, Cem Kalyoncu and /usr/share - CC BY 3.0
+"Bomb Party - the complete set" on OpenGameArt - http://opengameart.org/content/bomb-party-the-complete-set
+
+**Details per file:**
+
+Matt Hackett, Cem Kalyoncu and /usr/share - CC BY 3.0
+./icon.png
+./sprites/bomb/*.png
+./sprites/goblin-blue/*.png
+./sprites/goblin-brown/*.png
+./sprites/goblin-violet/*.png
+./sprites/human-orange/*.png
+
+Matt Hackett, Cem Kalyoncu, /usr/share and Akien - CC BY 3.0
+./sprites/pickups/*.png
+
+Matt Hackett, Cem Kalyoncu, /usr/share, Akien and Obani - CC BY 3.0
+./sprites/tileset.png
+
+Obani - CC BY 3.0
+./sprites/death-anim/*.png
+
+#### Sounds
+
+Obani - CC BY-SA 4.0
+./music/dynadingo.ogg
+
+#### Fonts
+
+The Mozilla Foundation and Telefonica S.A. - OFL 1.1
+./fonts/firasans*.fnt
+
