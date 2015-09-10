@@ -45,6 +45,7 @@ func _on_body_enter(body):
 		elif (effect == "kick_skill"):
 			body.kick = true
 		get_node("AnimationPlayer").play("pickup")
+		level.get_node("SamplePlayer").play("pickup")
 
 func _on_AnimationPlayer_finished():
 	self.queue_free()

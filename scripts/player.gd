@@ -67,6 +67,7 @@ func place_bomb():
 			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
 			player.collision_exceptions.append(bomb)
 	active_bombs.append(bomb)
+	level.get_node("SamplePlayer").play("bombdrop")
 
 func die():
 	set_fixed_process(false)

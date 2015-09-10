@@ -30,6 +30,21 @@ Obani - CC BY 3.0
 
 #### Sounds
 
+Obani - CC BY 3.0
+./sounds/explosion{1,2}.smp
+./sounds/hahaha.smp
+./sounds/iamback.smp
+./sounds/push{1,2}.smp
+./sounds/yoohoo.smp
+
+Mark DiAngelo - CC BY 3.0
+./sounds/pickup.smp
+
+Mike Koenig - CC BY 3.0
+./sounds/bombdrop.smp
+
+#### Music
+
 Obani - CC BY-SA 4.0
 ./music/dynadingo.ogg
 
@@ -37,4 +52,3 @@ Obani - CC BY-SA 4.0
 
 The Mozilla Foundation and Telefonica S.A. - OFL 1.1
 ./fonts/firasans*.fnt
-

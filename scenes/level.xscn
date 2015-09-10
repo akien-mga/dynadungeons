@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="13" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/level.gd" type="Script"></ext_resource>
-	<ext_resource path="res://sprites/tileset.xml" type="TileSet"></ext_resource>
-	<ext_resource path="res://sprites/dummy-collider.xml" type="TileSet"></ext_resource>
-	<ext_resource path="res://music/dynadingo.ogg" type="AudioStream"></ext_resource>
-	<ext_resource path="res://sounds/hahaha.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/explosion1.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/explosion2.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/push1.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/push2.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/yoohoo.smp" type="Sample"></ext_resource>
-	<ext_resource path="res://sounds/iamback.smp" type="Sample"></ext_resource>
+<resource_file type="PackedScene" subresource_count="15" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://scripts/level.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://sounds/hahaha.smp" type="Sample" index="5"></ext_resource>
+	<ext_resource path="res://sprites/tileset.xml" type="TileSet" index="1"></ext_resource>
+	<ext_resource path="res://music/dynadingo.ogg" type="AudioStream" index="3"></ext_resource>
+	<ext_resource path="res://sprites/dummy-collider.xml" type="TileSet" index="2"></ext_resource>
+	<ext_resource path="res://sounds/explosion1.smp" type="Sample" index="6"></ext_resource>
+	<ext_resource path="res://sounds/explosion2.smp" type="Sample" index="7"></ext_resource>
+	<ext_resource path="res://sounds/push1.smp" type="Sample" index="9"></ext_resource>
+	<ext_resource path="res://sounds/push2.smp" type="Sample" index="10"></ext_resource>
+	<ext_resource path="res://sounds/yoohoo.smp" type="Sample" index="11"></ext_resource>
+	<ext_resource path="res://sounds/iamback.smp" type="Sample" index="12"></ext_resource>
+	<ext_resource path="res://sounds/pickup.smp" type="Sample" index="8"></ext_resource>
+	<ext_resource path="res://sounds/bombdrop.smp" type="Sample" index="4"></ext_resource>
 	<resource type="SampleLibrary" path="local://1">
 		<dictionary name="samples/push1" shared="false">
 			<string> "db" </string>
@@ -18,7 +20,7 @@
 			<string> "pitch" </string>
 			<real> 1 </real>
 			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/push1.smp">  </resource>
+			<resource  external="9">  </resource>
 		</dictionary>
 		<dictionary name="samples/respawn1" shared="false">
 			<string> "db" </string>
@@ -26,31 +28,7 @@
 			<string> "pitch" </string>
 			<real> 1 </real>
 			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/yoohoo.smp">  </resource>
-		</dictionary>
-		<dictionary name="samples/explosion1" shared="false">
-			<string> "db" </string>
-			<real> 0 </real>
-			<string> "pitch" </string>
-			<real> 1 </real>
-			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/explosion1.smp">  </resource>
-		</dictionary>
-		<dictionary name="samples/respawn2" shared="false">
-			<string> "db" </string>
-			<real> -5 </real>
-			<string> "pitch" </string>
-			<real> 1 </real>
-			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/iamback.smp">  </resource>
-		</dictionary>
-		<dictionary name="samples/push2" shared="false">
-			<string> "db" </string>
-			<real> 10 </real>
-			<string> "pitch" </string>
-			<real> 1 </real>
-			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/push2.smp">  </resource>
+			<resource  external="11">  </resource>
 		</dictionary>
 		<dictionary name="samples/death" shared="false">
 			<string> "db" </string>
@@ -58,7 +36,39 @@
 			<string> "pitch" </string>
 			<real> 1 </real>
 			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/hahaha.smp">  </resource>
+			<resource  external="5">  </resource>
+		</dictionary>
+		<dictionary name="samples/push2" shared="false">
+			<string> "db" </string>
+			<real> 10 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  external="10">  </resource>
+		</dictionary>
+		<dictionary name="samples/respawn2" shared="false">
+			<string> "db" </string>
+			<real> -5 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  external="12">  </resource>
+		</dictionary>
+		<dictionary name="samples/pickup" shared="false">
+			<string> "db" </string>
+			<real> 0 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  external="8">  </resource>
+		</dictionary>
+		<dictionary name="samples/explosion1" shared="false">
+			<string> "db" </string>
+			<real> 0 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  external="6">  </resource>
 		</dictionary>
 		<dictionary name="samples/explosion2" shared="false">
 			<string> "db" </string>
@@ -66,7 +76,15 @@
 			<string> "pitch" </string>
 			<real> 1 </real>
 			<string> "sample" </string>
-			<resource  resource_type="Sample" path="res://sounds/explosion2.smp">  </resource>
+			<resource  external="7">  </resource>
+		</dictionary>
+		<dictionary name="samples/bombdrop" shared="false">
+			<string> "db" </string>
+			<real> 0 </real>
+			<string> "pitch" </string>
+			<real> 1 </real>
+			<string> "sample" </string>
+			<resource  external="4">  </resource>
 		</dictionary>
 
 	</resource>
@@ -136,10 +154,10 @@
 			<int_array  len="208"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 0, 0, 0, 5, 4, -1, 0, 0, 1, 0, 7, 6, -1, 16, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 15, 3, 16, 9, 17, 9, 18, 10, 19, 11, 20, 12, 21, 12, 22, 13, 3, 14, 0, 1, 0, 7, 23, -1, 16, 8, 2, 9, 3, 10, 4, 11, 5, 12, 6, 13, 7, 14, 8, 15, 3, 16, 9, 17, 9, 18, 10, 19, 11, 20, 12, 21, 12, 22, 15, 3, 16, 0, 1, 0, 7, 24, -1, 15, 25, 9, 9, 3, 10, 17, 11, 5, 12, 6, 13, 7, 14, 8, 15, 3, 16, 9, 17, 9, 18, 10, 19, 11, 20, 8, 21, 12, 22, 18, 0, 0, 0, 5, 26, -1, 0, 0, 0, 0, 5, 27, -1, 0, 0, 0, 0, 5, 28, -1, 0, 0, 0, 0, 29, 29, -1, 6, 30, 19, 31, 9, 32, 20, 33, 11, 34, 9, 35, 9, 0, 0, 0, 36, 36, -1, 14, 37, 21, 38, 22, 39, 11, 40, 10, 41, 11, 42, 11, 43, 11, 44, 23, 45, 23, 46, 23, 47, 23, 48, 8, 49, 11, 50, 11, 0 </int_array>
 			<string> "variants" </string>
 			<array  len="24" shared="false">
-				<resource  resource_type="Script" path="res://scripts/level.gd">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "2D" </string>
+					<string> "Script" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -272,7 +290,7 @@
 				</dictionary>
 				<int> -1 </int>
 				<int> 0 </int>
-				<resource  resource_type="TileSet" path="res://sprites/tileset.xml">  </resource>
+				<resource  external="1">  </resource>
 				<vector2> 32, 32 </vector2>
 				<int> 16 </int>
 				<matrix32> 1, 0, 0, 1, 0, 0 </matrix32>
@@ -291,9 +309,9 @@
 					<string> "_edit_lock_" </string>
 					<bool> True </bool>
 				</dictionary>
-				<resource  resource_type="TileSet" path="res://sprites/dummy-collider.xml">  </resource>
+				<resource  external="2">  </resource>
 				<int_array  len="0"> 					 </int_array>
-				<resource  resource_type="AudioStream" path="res://music/dynadingo.ogg">  </resource>
+				<resource  external="3">  </resource>
 				<bool> True </bool>
 				<int> 6 </int>
 				<resource  resource_type="SampleLibrary" path="local://1">  </resource>
