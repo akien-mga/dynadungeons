@@ -27,7 +27,6 @@ var collision_exceptions = []		# List of collision exceptions (typically bomb ju
 
 var old_motion = Vector2()			# Previous motion, to check anim changes
 var anim = "down_idle"				# Current movement animation
-var new_anim = ""					# New animation to be played
 
 ### Characteristics
 var lives							# Current number of lives
@@ -152,23 +151,22 @@ func process_movement(delta):
 		move(motion)
 		slide_attempts -= 1
 	
-	# If the motion change, find the new animation that should be played
-	if (old_motion != motion):
-		if (motion == Vector2(0,0)):
-			new_anim += "_idle"
-		elif abs(motion.x) > 0:
-			get_node("CharSprite").set_flip_h(motion.x < 0)
-			new_anim = "side"
-		elif motion.y > 0:
-			new_anim = "down"
-		elif motion.y < 0:
-			new_anim = "up"
-	old_motion = motion
+	# If the motion doesn't change, don't try to change the animation
+	if (old_motion == motion):
+		return
 	
-	# Update the animation if it should change
-	if (new_anim != anim):
-		anim = new_anim
-		get_node("ActionAnimations").play(anim)
+	old_motion = motion
+	if (motion == Vector2(0,0)):
+		anim += "_idle"
+	elif abs(motion.x) > 0:
+		get_node("CharSprite").set_flip_h(motion.x < 0)
+		anim = "side"
+	elif motion.y > 0:
+		anim = "down"
+	elif motion.y < 0:
+		anim = "up"
+	
+	get_node("ActionAnimations").play(anim)
 
 func process_actions():
 	"""Process actions input and act accordingly.
