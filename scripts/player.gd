@@ -20,7 +20,6 @@ var level
 export var id = 1					# Player ID, used to reference the scene
 export var char = "goblin-brown"	# Name of the char sprite
 var dead = false					# Is the player dead for good?
-var invincible = false				# Is the player invincible (typically at respawn)?
 
 var active_bombs = []				# List of active bombs dropped by this player
 var collision_exceptions = []		# List of collision exceptions (typically bomb just dropped)
@@ -34,6 +33,7 @@ var speed = 10						# Current movement speed
 var bomb_quota = 3					# Current max number of bombs
 var bomb_range = 2					# Current range of bomb explosiosn
 var kick = false					# Can the play kick bomb away?
+var invincible = false				# Is the player invincible (typically at respawn)?
 var confusion = false				# Is the player confused (movement inverted)?
 var tmp_powerup = null				# Current temporary powerup affecting the player
 var tmp_anim = null					# Current temporary animation playing, linked to tmp_powerup
@@ -240,34 +240,22 @@ func _on_TimerPowerup_timeout():
 	tmp_powerup = null
 
 func _on_TimerRespawn_timeout():
-	"""Handle timeout of the respawn timer. The same timer is used both
-	to resurrect the player, and then restarted to remove his respawn invincibility.
+	"""Handle timeout of the respawn timer to resurrect player in its original
+	spot and make it temporarily invincible.
 	"""
-	if (not invincible):
-		# Resurrect the player in its original spot as it still has lives
-		set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
-		get_node("CharSprite").show()
-		# Start processing input again
-		set_fixed_process(true)
-		# Play one of two respawn sound effects
-		level.play_sound("respawn" + str(randi() % 2 + 1))
-		# Add collision exceptions with all bombs to avoid blocking the player
-		# if an enemy lined up a range of bombs at the spawn point
-		for bomb in level.bomb_manager.get_children():
-			add_collision_exception_with(bomb.get_node("StaticBody2D"))
-		# This variable makes the player invicible after respawning to prevent spawnkilling
-		# The timer is then reused to remove this protection after a while
-		invincible = true
-		# Restart this timer for its second use case
-		get_node("TimerRespawn").start()
-		# Make the player blink to show invincibility
-		get_node("StatusAnimations").get_animation("blink").set_loop(true)
-		get_node("StatusAnimations").play("blink")
-	else:
-		# Remove post-respawn protection
-		invincible = false
-		# Remove loop instead of stopping animation to let it end smoothly
-		get_node("StatusAnimations").get_animation("blink").set_loop(false)
+	# Resurrect the player in its original spot as it still has lives
+	set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
+	get_node("CharSprite").show()
+	# Start processing input again
+	set_fixed_process(true)
+	# Play one of two respawn sound effects
+	level.play_sound("respawn" + str(randi() % 2 + 1))
+	# Add collision exceptions with all bombs to avoid blocking the player
+	# if an enemy lined up a range of bombs at the spawn point
+	for bomb in level.bomb_manager.get_children():
+		add_collision_exception_with(bomb.get_node("StaticBody2D"))
+	# Make the player invicible after respawning to prevent spawnkilling
+	set_tmp_powerup("invincible", 3, "blink")
 
 func _on_ActionAnimations_finished():
 	if (dead):
