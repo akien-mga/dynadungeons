@@ -36,6 +36,7 @@ var bomb_range = 2					# Current range of bomb explosiosn
 var kick = false					# Can the play kick bomb away?
 var confusion = false				# Is the player confused (movement inverted)?
 var tmp_powerup = null				# Current temporary powerup affecting the player
+var tmp_anim = null					# Current temporary animation playing, linked to tmp_powerup
 
 ### Helper functions
 
@@ -43,9 +44,10 @@ func get_cell_pos():
 	"""Return tilemap position"""
 	return level.world_to_map(self.get_pos())
 
-func set_tmp_powerup(powerup_type):
-	"""Define a temporary powerup that affects the player and start corresponding timer"""
-	
+func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
+	"""Define a temporary powerup that affects the player, start corresponding timer
+	with the specified duration and specified animation if any.
+	"""
 	# If another temporary powerup is active, disable it
 	if (tmp_powerup != null):
 		set(tmp_powerup, false)
@@ -54,7 +56,16 @@ func set_tmp_powerup(powerup_type):
 	# Enable the corresponding variable (same var name as the string content)
 	set(tmp_powerup, true)
 	# Start the timer that should disable the temporary powerup
+	get_node("TimerPowerup").set_wait_time(duration)
 	get_node("TimerPowerup").start()
+	
+	# If a status animation is given, stop previous animation and start playing new one
+	if (status_anim != null and status_anim != tmp_anim):
+		if (tmp_anim != null):
+			get_node("StatusAnimations").get_animation(tmp_anim).set_loop(false)
+		get_node("StatusAnimations").get_animation(status_anim).set_loop(true)
+		get_node("StatusAnimations").play(status_anim)
+		tmp_anim = status_anim
 
 ### Actions
 
@@ -218,7 +229,12 @@ func _fixed_process(delta):
 func _on_TimerPowerup_timeout():
 	if (tmp_powerup == null):
 		print("ERROR: empty tmp_powerup at end of timer")
+		return
 	
+	# Deactivate the current temprary powerup animation if any
+	if (tmp_anim != null):
+		get_node("StatusAnimations").get_animation(tmp_anim).set_loop(false)
+		tmp_anim = null
 	# Deactivate the current temporary powerup referenced by tmp_powerup
 	set(tmp_powerup, false)
 	tmp_powerup = null

@@ -39,7 +39,7 @@ func _on_body_enter(body):
 		elif (effect == "speed_decrease" and body.speed > 0):
 			body.speed -= 1
 		elif (effect == "confusion"):
-			body.set_tmp_powerup("confusion")
+			body.set_tmp_powerup("confusion", 10)
 		elif (effect == "life_increase"):
 			body.lives += 1
 		elif (effect == "kick_skill"):
