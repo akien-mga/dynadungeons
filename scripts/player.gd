@@ -62,7 +62,8 @@ func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
 	# If a status animation is given, stop previous animation and start playing new one
 	if (status_anim != null and status_anim != tmp_anim):
 		if (tmp_anim != null):
-			get_node("StatusAnimations").get_animation(tmp_anim).set_loop(false)
+			# Force stopping previous animation and reset it (to e.g. remove modulation)
+			get_node("StatusAnimations").stop(true)
 		get_node("StatusAnimations").get_animation(status_anim).set_loop(true)
 		get_node("StatusAnimations").play(status_anim)
 		tmp_anim = status_anim

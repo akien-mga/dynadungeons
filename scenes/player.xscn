@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="13" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/player.gd" type="Script"></ext_resource>
-	<ext_resource path="res://sprites/goblin-brown.xml" type="SpriteFrames"></ext_resource>
-	<ext_resource path="res://sprites/death-anim.xml" type="SpriteFrames"></ext_resource>
+<resource_file type="PackedScene" subresource_count="14" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://scripts/player.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://sprites/goblin-brown.xml" type="SpriteFrames" index="1"></ext_resource>
+	<ext_resource path="res://sprites/death-anim.xml" type="SpriteFrames" index="2"></ext_resource>
 	<resource type="ConvexPolygonShape2D" path="local://1">
 		<real name="custom_solver_bias"> 0 </real>
 		<vector2_array name="points" len="8"> 			-7.75, -15.75, 7.75, -15.75, 15.75, -7.75, 15.75, 7.75, 7.75, 15.75, -7.75, 15.75, -15.75, 7.75, -15.75, -7.75 </vector2_array>
@@ -26,6 +26,27 @@
 			<array  len="2" shared="false">
 				<int> 5 </int>
 				<int> 6 </int>
+			</array>
+		</dictionary>
+
+	</resource>
+	<resource type="Animation" path="local://8">
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> False </bool>
+			<string> "times" </string>
+			<real_array  len="1"> 				0 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="1"> 				1 </real_array>
+			<string> "values" </string>
+			<array  len="1" shared="false">
+				<int> 0 </int>
 			</array>
 		</dictionary>
 
@@ -112,6 +133,28 @@
 		</dictionary>
 
 	</resource>
+	<resource type="Animation" path="local://6">
+		<real name="length"> 1 </real>
+		<bool name="loop"> True </bool>
+		<real name="step"> 0.1 </real>
+		<string name="tracks/0/type"> "value" </string>
+		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<int name="tracks/0/interp"> 1 </int>
+		<dictionary name="tracks/0/keys" shared="false">
+			<string> "cont" </string>
+			<bool> True </bool>
+			<string> "times" </string>
+			<real_array  len="2"> 				0, 0.5 </real_array>
+			<string> "transitions" </string>
+			<real_array  len="2"> 				1, 1 </real_array>
+			<string> "values" </string>
+			<array  len="2" shared="false">
+				<int> 3 </int>
+				<int> 4 </int>
+			</array>
+		</dictionary>
+
+	</resource>
 	<resource type="Animation" path="local://5">
 		<real name="length"> 1 </real>
 		<bool name="loop"> True </bool>
@@ -133,45 +176,28 @@
 		</dictionary>
 
 	</resource>
-	<resource type="Animation" path="local://8">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
+	<resource type="Animation" path="local://10">
+		<string name="resource/name"> "modulate" </string>
+		<real name="length"> 1.6 </real>
+		<bool name="loop"> False </bool>
 		<real name="step"> 0.1 </real>
 		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
-		<int name="tracks/0/interp"> 1 </int>
-		<dictionary name="tracks/0/keys" shared="false">
-			<string> "cont" </string>
-			<bool> False </bool>
-			<string> "times" </string>
-			<real_array  len="1"> 				0 </real_array>
-			<string> "transitions" </string>
-			<real_array  len="1"> 				1 </real_array>
-			<string> "values" </string>
-			<array  len="1" shared="false">
-				<int> 0 </int>
-			</array>
-		</dictionary>
-
-	</resource>
-	<resource type="Animation" path="local://6">
-		<real name="length"> 1 </real>
-		<bool name="loop"> True </bool>
-		<real name="step"> 0.1 </real>
-		<string name="tracks/0/type"> "value" </string>
-		<node_path name="tracks/0/path"> "CharSprite:frame" </node_path>
+		<node_path name="tracks/0/path"> "CharSprite:modulate" </node_path>
 		<int name="tracks/0/interp"> 1 </int>
 		<dictionary name="tracks/0/keys" shared="false">
 			<string> "cont" </string>
 			<bool> True </bool>
 			<string> "times" </string>
-			<real_array  len="2"> 				0, 0.5 </real_array>
+			<real_array  len="5"> 				0, 0.4, 0.8, 1.2, 1.6 </real_array>
 			<string> "transitions" </string>
-			<real_array  len="2"> 				1, 1 </real_array>
+			<real_array  len="5"> 				1, 1, 1, 1, 1 </real_array>
 			<string> "values" </string>
-			<array  len="2" shared="false">
-				<int> 3 </int>
-				<int> 4 </int>
+			<array  len="5" shared="false">
+				<color> 1, 1, 1, 1 </color>
+				<color> 0.501961, 1, 1, 1 </color>
+				<color> 1, 0.501961, 1, 1 </color>
+				<color> 1, 1, 0.501961, 1 </color>
+				<color> 1, 1, 1, 1 </color>
 			</array>
 		</dictionary>
 
@@ -205,9 +231,9 @@
 			<string> "conn_count" </string>
 			<int> 3 </int>
 			<string> "conns" </string>
-			<int_array  len="18"> 				4, 0, 50, 49, 2, 0, 6, 0, 52, 51, 2, 0, 7, 0, 52, 53, 2, 0 </int_array>
+			<int_array  len="18"> 				4, 0, 52, 51, 2, 0, 6, 0, 54, 53, 2, 0, 7, 0, 54, 55, 2, 0 </int_array>
 			<string> "names" </string>
-			<string_array  len="54">
+			<string_array  len="56">
 				<string> "Player" </string>
 				<string> "KinematicBody2D" </string>
 				<string> "input/pickable" </string>
@@ -231,6 +257,7 @@
 				<string> "CollisionPolygon2D" </string>
 				<string> "build_mode" </string>
 				<string> "polygon" </string>
+				<string> "shape_range" </string>
 				<string> "trigger" </string>
 				<string> "ActionAnimations" </string>
 				<string> "AnimationPlayer" </string>
@@ -238,17 +265,18 @@
 				<string> "playback/default_blend_time" </string>
 				<string> "root/root" </string>
 				<string> "anims/up" </string>
+				<string> "anims/down_idle" </string>
 				<string> "anims/side" </string>
 				<string> "anims/death" </string>
 				<string> "anims/up_idle" </string>
-				<string> "anims/side_idle" </string>
-				<string> "anims/down_idle" </string>
 				<string> "anims/down" </string>
+				<string> "anims/side_idle" </string>
 				<string> "playback/active" </string>
 				<string> "playback/speed" </string>
 				<string> "blend_times" </string>
 				<string> "autoplay" </string>
 				<string> "StatusAnimations" </string>
+				<string> "anims/modulate" </string>
 				<string> "anims/blink" </string>
 				<string> "TimerPowerup" </string>
 				<string> "Timer" </string>
@@ -266,19 +294,19 @@
 			<string> "node_count" </string>
 			<int> 8 </int>
 			<string> "nodes" </string>
-			<int_array  len="154"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 0, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 4, 12, 8, 0, 0, 0, 14, 13, -1, 1, 15, 9, 0, 0, 0, 14, 16, -1, 4, 17, 0, 18, 4, 15, 10, 19, 11, 0, 0, 0, 20, 20, -1, 3, 21, 12, 22, 13, 23, 0, 0, 0, 0, 25, 24, -1, 14, 26, 4, 27, 14, 28, 15, 29, 16, 30, 17, 31, 18, 32, 19, 33, 20, 34, 21, 35, 22, 36, 23, 37, 24, 38, 25, 39, 26, 0, 0, 0, 25, 40, -1, 8, 26, 4, 27, 14, 28, 15, 41, 27, 36, 23, 37, 24, 38, 25, 39, 28, 0, 0, 0, 43, 42, -1, 4, 44, 4, 45, 29, 46, 23, 47, 0, 0, 0, 0, 43, 48, -1, 4, 44, 4, 45, 30, 46, 23, 47, 0, 0 </int_array>
+			<int_array  len="160"> 				-1, -1, 1, 0, -1, 11, 2, 0, 3, 1, 4, 2, 5, 0, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 11, 4, 12, 8, 0, 0, 0, 14, 13, -1, 1, 15, 9, 0, 0, 0, 14, 16, -1, 4, 17, 0, 18, 4, 15, 10, 19, 11, 0, 0, 0, 20, 20, -1, 5, 17, 0, 21, 12, 22, 13, 23, 14, 24, 0, 0, 0, 0, 26, 25, -1, 14, 27, 4, 28, 15, 29, 16, 30, 17, 31, 18, 32, 19, 33, 20, 34, 21, 35, 22, 36, 23, 37, 24, 38, 25, 39, 26, 40, 27, 0, 0, 0, 26, 41, -1, 9, 27, 4, 28, 15, 29, 16, 42, 28, 43, 29, 37, 24, 38, 25, 39, 26, 40, 30, 0, 0, 0, 45, 44, -1, 4, 46, 4, 47, 31, 48, 24, 49, 0, 0, 0, 0, 45, 50, -1, 4, 46, 4, 47, 32, 48, 24, 49, 0, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="31" shared="false">
+			<array  len="33" shared="false">
 				<bool> False </bool>
 				<resource  resource_type="Shape2D" path="local://1">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
 				<int> 2 </int>
 				<int> 1 </int>
 				<real> 0.08 </real>
-				<resource  resource_type="Script" path="res://scripts/player.gd">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -398,6 +426,17 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "animation" </string>
+							<string> "modulate" </string>
+							<string> "editing" </string>
+							<bool> True </bool>
+							<string> "player" </string>
+							<node_path> "StatusAnimations" </node_path>
+							<string> "visible" </string>
+							<bool> True </bool>
+						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -410,25 +449,27 @@
 					<bool> True </bool>
 				</dictionary>
 				<string> "goblin-brown" </string>
-				<resource  resource_type="SpriteFrames" path="res://sprites/goblin-brown.xml">  </resource>
-				<resource  resource_type="SpriteFrames" path="res://sprites/death-anim.xml">  </resource>
+				<resource  external="1">  </resource>
+				<resource  external="2">  </resource>
 				<int> 7 </int>
 				<int> 0 </int>
 				<vector2_array  len="8"> 					-15.75, -7.75, -15.75, 7.75, -7.75, 15.75, 7.75, 15.75, 15.75, 7.75, 15.75, -7.75, 7.75, -15.75, -7.75, -15.75 </vector2_array>
+				<vector2> -1, -1 </vector2>
 				<real> 0 </real>
 				<node_path> ".." </node_path>
 				<resource  resource_type="Animation" path="local://2">  </resource>
+				<resource  resource_type="Animation" path="local://8">  </resource>
 				<resource  resource_type="Animation" path="local://3">  </resource>
 				<resource  resource_type="Animation" path="local://4">  </resource>
 				<resource  resource_type="Animation" path="local://7">  </resource>
-				<resource  resource_type="Animation" path="local://5">  </resource>
-				<resource  resource_type="Animation" path="local://8">  </resource>
 				<resource  resource_type="Animation" path="local://6">  </resource>
+				<resource  resource_type="Animation" path="local://5">  </resource>
 				<bool> True </bool>
 				<real> 1 </real>
 				<array  len="0" shared="false">
 				</array>
 				<string> "down_idle" </string>
+				<resource  resource_type="Animation" path="local://10">  </resource>
 				<resource  resource_type="Animation" path="local://9">  </resource>
 				<string> "" </string>
 				<real> 15 </real>
