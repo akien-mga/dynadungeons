@@ -17,33 +17,36 @@ var gameover
 var level
 
 ### Member variables
-export var id = 1
-export var char = "goblin-brown"
-var dead = false
-var invincible = false
+export var id = 1					# Player ID, used to reference the scene
+export var char = "goblin-brown"	# Name of the char sprite
+var dead = false					# Is the player dead for good?
+var invincible = false				# Is the player invincible (typically at respawn)?
 
-var active_bombs = []
-var collision_exceptions = []
+var active_bombs = []				# List of active bombs dropped by this player
+var collision_exceptions = []		# List of collision exceptions (typically bomb just dropped)
 
-var old_motion = Vector2()
-var anim = "down_idle"
-var new_anim = ""
+var old_motion = Vector2()			# Previous motion, to check anim changes
+var anim = "down_idle"				# Current movement animation
+var new_anim = ""					# New animation to be played
 
 ### Characteristics
-var lives
-var speed = 10
-var bomb_quota = 3
-var bomb_range = 2
-var kick = false
-var confusion = false
-var tmp_powerup = null
+var lives							# Current number of lives
+var speed = 10						# Current movement speed
+var bomb_quota = 3					# Current max number of bombs
+var bomb_range = 2					# Current range of bomb explosiosn
+var kick = false					# Can the play kick bomb away?
+var confusion = false				# Is the player confused (movement inverted)?
+var tmp_powerup = null				# Current temporary powerup affecting the player
 
 ### Helper functions
 
 func get_cell_pos():
+	"""Return tilemap position"""
 	return level.world_to_map(self.get_pos())
 
 func set_tmp_powerup(powerup_type):
+	"""Define a temporary powerup that affects the player and start corresponding timer"""
+	
 	# If another temporary powerup is active, disable it
 	if (tmp_powerup != null):
 		set(tmp_powerup, false)
@@ -57,25 +60,38 @@ func set_tmp_powerup(powerup_type):
 ### Actions
 
 func place_bomb():
+	"""Instance a bomb and place it on the tile where the player stands.
+	Bombs are added as children to the bomb manager.
+	"""
 	var bomb = global.bomb_scene.instance()
 	level.bomb_manager.add_child(bomb)
+	# Define position and update the bomb's discrete tilemap pos member var
 	bomb.set_pos_and_update(level.tile_center_pos(self.get_pos()))
 	bomb.player = self
 	bomb.bomb_range = self.bomb_range
+	# Add a collision exception for any player currently standing on the tile
 	for player in level.player_manager.get_children():
 		if (player.get_cell_pos() == bomb.get_cell_pos()):
 			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
 			player.collision_exceptions.append(bomb)
+	# List bomb as an active bomb of its dropper
 	active_bombs.append(bomb)
+	# Play bomb drop sound effect
 	level.get_node("SamplePlayer").play("bombdrop")
 
 func die():
+	"""Handle the death of the player. If the player has more than one lives,
+	a timer is started for respawn. Else, the player is marked as "dead" for good.
+	"""
+	# Stop processing input and possible explosions, the player is dead
 	set_fixed_process(false)
+	# Play death animation and remove a life
 	get_node("CharSprite").hide()
 	get_node("ActionAnimations").play("death")
 	level.play_sound("death")
 	lives -= 1
 	if (lives == 0):
+		# The player is dead for good, make its bombs orphans since the scene will be freed
 		for bomb in level.bomb_manager.get_children():
 			bomb.player = null
 		dead = true
@@ -87,14 +103,17 @@ func die():
 				winner = 0
 			else:
 				winner = 1
+			# Show gameover screen
 			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " wins!")
 			gameover.show()
 	else:
+		# The player still has lives, start timer for respawn
 		get_node("TimerRespawn").start()
 
 ### Process
 
 func process_movement(delta):
+	"""Process movement input and act accordingly"""
 	var motion = Vector2(0,0)
 	
 	if (Input.is_action_pressed(str(id) + "_move_up")):
@@ -110,7 +129,9 @@ func process_movement(delta):
 		# Go in the opposite direction since the player is confused
 		motion = -motion
 	
+	# Normalise motion vector and apply speed modifiers to get motion in px
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
+	# Actually move the player
 	move(motion)
 	
 	# Handle kicking of bombs
@@ -121,6 +142,7 @@ func process_movement(delta):
 		if (motion.normalized() != bomb.slide_dir.normalized()):
 			bomb.push_dir(bomb.get_cell_pos() - self.get_cell_pos())
 	
+	# If the previous movement generated a collision, try to slide (e.g. along an edge)
 	# Too many slide attempts provide "jumping" through tiles
 	# TODO: Needs investigating as even with one attempt some unusual effects
 	# can be seen when going diagonally against walls
@@ -130,6 +152,7 @@ func process_movement(delta):
 		move(motion)
 		slide_attempts -= 1
 	
+	# If the motion change, find the new animation that should be played
 	if (old_motion != motion):
 		if (motion == Vector2(0,0)):
 			new_anim += "_idle"
@@ -140,29 +163,37 @@ func process_movement(delta):
 			new_anim = "down"
 		elif motion.y < 0:
 			new_anim = "up"
-	
 	old_motion = motion
 	
+	# Update the animation if it should change
 	if (new_anim != anim):
 		anim = new_anim
 		get_node("ActionAnimations").play(anim)
 
 func process_actions():
+	"""Process actions input and act accordingly.
+	Currently the only non-movement related action is dropping a bomb.
+	"""
 	# Drop a bomb on the player's tile
 	if (Input.is_action_pressed(str(id) + "_drop_bomb") and active_bombs.size() < bomb_quota):
+		# Check for potential bombs already being on the same tile.
+		# It should only happen if the player or an enemy already dropped a bomb on the tile,
+		# so it would be in the player's collision_exceptions.
 		for bomb in collision_exceptions:
 			if (bomb.get_cell_pos() == self.get_cell_pos()):
 				return
 		place_bomb()
 
 func process_explosions():
+	"""Process all current bomb explosions to check if one of them is killing the player"""
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
-			# Kill player if he's standing on the bomb
+			# Kill player if he's standing on an exploding bomb
 			if (self.get_cell_pos() == bomb.get_cell_pos()):
 				self.die()
 				return
 			# FIXME: This flame_cells stuff is really getting messy
+			# Check all cells currently "in flames" due to the bomb's explosion
 			for cell_dict in bomb.flame_cells:
 				if (self.get_cell_pos() == cell_dict.pos):
 					self.die()
@@ -174,6 +205,8 @@ func _fixed_process(delta):
 	if (not invincible):
 		process_explosions()
 	
+	# Check if the player is leaving the tile of a bomb in his collision exceptions
+	# If so, remove the bomb from the exceptions
 	for bomb in collision_exceptions:
 		if (self.get_pos().x < (bomb.get_cell_pos().x - 0.5)*global.TILE_SIZE \
 			or self.get_pos().x > (bomb.get_cell_pos().x + 1.5)*global.TILE_SIZE \
@@ -193,24 +226,33 @@ func _on_TimerPowerup_timeout():
 	tmp_powerup = null
 
 func _on_TimerRespawn_timeout():
+	"""Handle timeout of the respawn timer. The same timer is used both
+	to resurrect the player, and then restarted to remove his respawn invincibility.
+	"""
 	if (not invincible):
 		# Resurrect the player in its original spot as it still has lives
 		set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
 		get_node("CharSprite").show()
+		# Start processing input again
 		set_fixed_process(true)
+		# Play one of two respawn sound effects
 		level.play_sound("respawn" + str(randi() % 2 + 1))
-		# Add collision exceptions with all bombs
+		# Add collision exceptions with all bombs to avoid blocking the player
+		# if an enemy lined up a range of bombs at the spawn point
 		for bomb in level.bomb_manager.get_children():
 			add_collision_exception_with(bomb.get_node("StaticBody2D"))
 		# This variable makes the player invicible after respawning to prevent spawnkilling
 		# The timer is then reused to remove this protection after a while
 		invincible = true
+		# Restart this timer for its second use case
 		get_node("TimerRespawn").start()
+		# Make the player blink to show invincibility
 		get_node("StatusAnimations").get_animation("blink").set_loop(true)
 		get_node("StatusAnimations").play("blink")
 	else:
 		# Remove post-respawn protection
 		invincible = false
+		# Remove loop instead of stopping animation to let it end smoothly
 		get_node("StatusAnimations").get_animation("blink").set_loop(false)
 
 func _on_ActionAnimations_finished():
@@ -224,8 +266,8 @@ func _ready():
 	global = get_node("/root/global")
 	gameover = get_node("/root/World/Gameover")
 	level = get_node("/root/World/Level")
+	# Initialise character sprite
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))
 	lives = global.nb_lives
 	
 	set_fixed_process(true)
-
