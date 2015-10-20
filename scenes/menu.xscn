@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="11" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/menu.gd" type="Script"></ext_resource>
-	<ext_resource path="res://background.png" type="Texture"></ext_resource>
-	<ext_resource path="res://fonts/firasans-book-32.fnt" type="Font"></ext_resource>
-	<ext_resource path="res://fonts/firasans-book-16.fnt" type="Font"></ext_resource>
-	<ext_resource path="res://scripts/controls.gd" type="Script"></ext_resource>
-	<ext_resource path="res://sprites/icons/arrow-up.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/icons/arrow-down.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/icons/arrow-left.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/icons/arrow-right.png" type="Texture"></ext_resource>
-	<ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture"></ext_resource>
+<resource_file type="PackedScene" subresource_count="11" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://scripts/menu.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://fonts/firasans-book-16.fnt" type="Font" index="3"></ext_resource>
+	<ext_resource path="res://background.png" type="Texture" index="1"></ext_resource>
+	<ext_resource path="res://fonts/firasans-book-32.fnt" type="Font" index="2"></ext_resource>
+	<ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" index="6"></ext_resource>
+	<ext_resource path="res://sprites/icons/arrow-right.png" type="Texture" index="8"></ext_resource>
+	<ext_resource path="res://scripts/controls.gd" type="Script" index="4"></ext_resource>
+	<ext_resource path="res://sprites/icons/arrow-left.png" type="Texture" index="7"></ext_resource>
+	<ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" index="5"></ext_resource>
+	<ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" index="9"></ext_resource>
 	<main_resource>
 		<dictionary name="_bundled" shared="false">
 			<string> "conn_count" </string>
 			<int> 13 </int>
 			<string> "conns" </string>
-			<int_array  len="78"> 				5, 0, 77, 76, 2, 0, 6, 0, 77, 78, 2, 0, 7, 0, 77, 79, 2, 0, 11, 0, 81, 80, 2, 0, 14, 0, 81, 82, 2, 0, 15, 0, 84, 83, 2, 0, 16, 0, 84, 85, 2, 0, 17, 0, 81, 86, 2, 0, 18, 0, 84, 87, 2, 0, 19, 0, 81, 88, 2, 0, 20, 0, 77, 89, 2, 0, 21, 0, 77, 90, 2, 0, 52, 0, 77, 78, 2, 0 </int_array>
+			<int_array  len="78"> 				5, 0, 79, 78, 2, 0, 6, 0, 79, 80, 2, 0, 7, 0, 79, 81, 2, 0, 11, 0, 83, 82, 2, 0, 14, 0, 83, 84, 2, 0, 15, 0, 86, 85, 2, 0, 16, 0, 86, 87, 2, 0, 17, 0, 83, 88, 2, 0, 18, 0, 86, 89, 2, 0, 19, 0, 83, 90, 2, 0, 20, 0, 79, 91, 2, 0, 21, 0, 79, 92, 2, 0, 52, 0, 79, 80, 2, 0 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "names" </string>
-			<string_array  len="91">
+			<string_array  len="93">
 				<string> "Menu" </string>
-				<string> "Control" </string>
 				<string> "margin/right" </string>
 				<string> "margin/bottom" </string>
 				<string> "focus/ignore_mouse" </string>
@@ -28,12 +30,13 @@
 				<string> "size_flags/vertical" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
+				<string> "Control" </string>
 				<string> "Background" </string>
-				<string> "CanvasLayer" </string>
 				<string> "layer" </string>
 				<string> "offset" </string>
 				<string> "rotation" </string>
 				<string> "scale" </string>
+				<string> "CanvasLayer" </string>
 				<string> "Sprite" </string>
 				<string> "texture" </string>
 				<string> "centered" </string>
@@ -45,6 +48,20 @@
 				<string> "custom_fonts/font" </string>
 				<string> "custom_colors/font_color" </string>
 				<string> "custom_colors/font_color_shadow" </string>
+				<string> "text" </string>
+				<string> "align" </string>
+				<string> "percent_visible" </string>
+				<string> "lines_skipped" </string>
+				<string> "max_lines_visible" </string>
+				<string> "NewGame" </string>
+				<string> "toggle_mode" </string>
+				<string> "flat" </string>
+				<string> "Button" </string>
+				<string> "GoSettings" </string>
+				<string> "Quit" </string>
+				<string> "Settings" </string>
+				<string> "NbPlayers" </string>
+				<string> "Slider" </string>
 				<string> "range/min" </string>
 				<string> "range/max" </string>
 				<string> "range/step" </string>
@@ -52,21 +69,9 @@
 				<string> "range/value" </string>
 				<string> "range/exp_edit" </string>
 				<string> "rounded_values" </string>
-				<string> "text" </string>
-				<string> "align" </string>
-				<string> "percent_visible" </string>
-				<string> "NewGame" </string>
-				<string> "Button" </string>
-				<string> "toggle_mode" </string>
-				<string> "flat" </string>
-				<string> "GoSettings" </string>
-				<string> "Quit" </string>
-				<string> "Settings" </string>
-				<string> "NbPlayers" </string>
-				<string> "Slider" </string>
-				<string> "HSlider" </string>
 				<string> "tick_count" </string>
 				<string> "ticks_on_borders" </string>
+				<string> "HSlider" </string>
 				<string> "NbLives" </string>
 				<string> "Fullscreen" </string>
 				<string> "CheckBox" </string>
@@ -112,18 +117,21 @@
 			</string_array>
 			<string> "node_count" </string>
 			<int> 58 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "nodes" </string>
-			<int_array  len="1630"> 				-1, -1, 1, 0, -1, 8, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 4, 9, 5, 0, 0, 0, 11, 10, -1, 4, 12, 6, 13, 7, 14, 8, 15, 9, 0, 1, 0, 16, 16, -1, 3, 17, 10, 18, 1, 19, 11, 0, 0, 0, 1, 20, -1, 6, 2, 0, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 0, 3, 0, 21, 21, -1, 20, 22, 12, 23, 13, 2, 14, 3, 15, 4, 2, 5, 2, 6, 3, 24, 16, 25, 17, 26, 18, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 20, 35, 21, 36, 22, 0, 3, 0, 38, 37, -1, 12, 22, 23, 23, 24, 2, 25, 3, 26, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 28, 40, 1, 0, 3, 0, 38, 41, -1, 12, 22, 23, 23, 29, 2, 25, 3, 30, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 31, 40, 1, 0, 3, 0, 38, 42, -1, 12, 22, 23, 23, 32, 2, 25, 3, 33, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 34, 40, 1, 0, 0, 0, 1, 43, -1, 7, 22, 35, 2, 36, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 0, 8, 0, 1, 44, -1, 9, 22, 13, 23, 37, 2, 38, 3, 39, 4, 1, 5, 2, 6, 3, 7, 3, 9, 40, 0, 9, 0, 21, 21, -1, 16, 2, 41, 3, 37, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 42, 35, 3, 36, 22, 0, 9, 0, 46, 45, -1, 15, 22, 12, 2, 26, 3, 43, 4, 1, 5, 2, 6, 3, 27, 19, 28, 44, 29, 19, 30, 8, 31, 19, 32, 1, 33, 2, 47, 45, 48, 1, 0, 8, 0, 1, 49, -1, 9, 22, 13, 23, 13, 2, 38, 3, 38, 4, 1, 5, 2, 6, 3, 7, 3, 9, 46, 0, 12, 0, 21, 21, -1, 16, 2, 41, 3, 37, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 47, 35, 3, 36, 22, 0, 12, 0, 46, 45, -1, 15, 22, 12, 2, 26, 3, 43, 4, 1, 5, 2, 6, 3, 27, 19, 28, 48, 29, 19, 30, 8, 31, 19, 32, 1, 33, 2, 47, 45, 48, 1, 0, 8, 0, 51, 50, -1, 13, 22, 12, 23, 12, 2, 49, 3, 50, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 2, 34, 51, 40, 1, 35, 45, 0, 8, 0, 51, 52, -1, 13, 22, 12, 23, 24, 2, 49, 3, 52, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 2, 34, 53, 40, 1, 35, 45, 0, 8, 0, 46, 53, -1, 16, 22, 23, 23, 54, 2, 32, 3, 55, 4, 1, 5, 2, 6, 3, 27, 8, 28, 56, 29, 57, 30, 8, 31, 19, 32, 1, 33, 1, 47, 45, 48, 1, 0, 8, 0, 51, 54, -1, 13, 22, 12, 23, 26, 2, 58, 3, 59, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 2, 34, 60, 40, 1, 35, 45, 0, 8, 0, 46, 55, -1, 16, 22, 23, 23, 61, 2, 32, 3, 62, 4, 1, 5, 2, 6, 3, 27, 8, 28, 63, 29, 57, 30, 8, 31, 19, 32, 1, 33, 1, 47, 45, 48, 1, 0, 8, 0, 38, 56, -1, 12, 22, 23, 23, 30, 2, 25, 3, 23, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 64, 40, 1, 0, 8, 0, 38, 57, -1, 12, 22, 23, 23, 32, 2, 25, 3, 33, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 65, 40, 1, 0, 0, 0, 1, 58, -1, 8, 22, 66, 2, 67, 3, 0, 4, 1, 5, 2, 6, 3, 7, 3, 8, 68, 0, 22, 0, 21, 59, -1, 18, 22, 13, 23, 37, 2, 25, 3, 13, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 69, 35, 21, 36, 22, 0, 22, 0, 1, 60, -1, 9, 22, 70, 23, 71, 2, 72, 3, 70, 4, 1, 5, 2, 6, 3, 7, 3, 9, 73, 0, 24, 0, 21, 21, -1, 17, 22, 74, 23, 13, 2, 75, 3, 76, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 77, 36, 22, 0, 24, 0, 38, 61, -1, 10, 22, 13, 23, 12, 2, 78, 3, 79, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 24, 0, 38, 62, -1, 10, 22, 13, 23, 54, 2, 78, 3, 80, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 24, 0, 38, 63, -1, 10, 22, 13, 23, 81, 2, 78, 3, 49, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 24, 0, 38, 64, -1, 10, 22, 13, 23, 82, 2, 78, 3, 83, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 24, 0, 38, 65, -1, 10, 22, 13, 23, 23, 2, 78, 3, 84, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 22, 0, 1, 66, -1, 9, 22, 24, 23, 71, 2, 61, 3, 70, 4, 1, 5, 2, 6, 3, 7, 3, 9, 85, 0, 31, 0, 21, 21, -1, 17, 22, 74, 23, 13, 2, 86, 3, 76, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 87, 36, 22, 0, 31, 0, 38, 61, -1, 10, 22, 13, 23, 12, 2, 78, 3, 79, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 31, 0, 38, 62, -1, 10, 22, 13, 23, 54, 2, 78, 3, 80, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 31, 0, 38, 63, -1, 10, 22, 13, 23, 81, 2, 78, 3, 49, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 31, 0, 38, 64, -1, 10, 22, 13, 23, 82, 2, 78, 3, 83, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 31, 0, 38, 65, -1, 10, 22, 13, 23, 23, 2, 78, 3, 84, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 22, 0, 1, 67, -1, 9, 22, 88, 23, 71, 2, 89, 3, 70, 4, 1, 5, 2, 6, 3, 7, 3, 9, 90, 0, 38, 0, 21, 21, -1, 17, 22, 74, 23, 13, 2, 86, 3, 76, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 91, 36, 22, 0, 38, 0, 38, 61, -1, 10, 22, 13, 23, 12, 2, 78, 3, 79, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 38, 0, 38, 62, -1, 10, 22, 13, 23, 54, 2, 78, 3, 80, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 38, 0, 38, 63, -1, 10, 22, 13, 23, 81, 2, 78, 3, 49, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 38, 0, 38, 64, -1, 10, 22, 13, 23, 82, 2, 78, 3, 83, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 38, 0, 38, 65, -1, 10, 22, 13, 23, 23, 2, 78, 3, 84, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 22, 0, 1, 68, -1, 9, 22, 92, 23, 71, 2, 93, 3, 70, 4, 1, 5, 2, 6, 3, 7, 3, 9, 94, 0, 45, 0, 21, 21, -1, 17, 22, 74, 23, 13, 2, 86, 3, 76, 4, 2, 5, 2, 6, 3, 24, 27, 27, 8, 28, 19, 29, 19, 30, 19, 31, 8, 32, 1, 33, 1, 34, 95, 36, 22, 0, 45, 0, 38, 61, -1, 10, 22, 13, 23, 12, 2, 78, 3, 79, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 45, 0, 38, 62, -1, 10, 22, 13, 23, 54, 2, 78, 3, 80, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 45, 0, 38, 63, -1, 10, 22, 13, 23, 81, 2, 78, 3, 49, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 45, 0, 38, 64, -1, 10, 22, 13, 23, 82, 2, 78, 3, 83, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 45, 0, 38, 65, -1, 10, 22, 13, 23, 23, 2, 78, 3, 84, 4, 1, 5, 2, 6, 3, 7, 3, 39, 1, 40, 1, 0, 22, 0, 38, 57, -1, 12, 22, 23, 23, 32, 2, 25, 3, 33, 4, 1, 5, 2, 6, 3, 7, 3, 24, 27, 39, 1, 34, 65, 40, 1, 0, 22, 0, 16, 69, -1, 2, 70, 96, 17, 97, 0, 22, 0, 16, 71, -1, 2, 70, 98, 17, 99, 0, 22, 0, 16, 72, -1, 2, 70, 100, 17, 101, 0, 22, 0, 16, 73, -1, 2, 70, 102, 17, 103, 0, 22, 0, 16, 74, -1, 3, 70, 104, 17, 105, 75, 106, 0 </int_array>
+			<int_array  len="1550"> 				-1, -1, 9, 0, -1, 8, 1, 0, 2, 0, 3, 1, 4, 2, 5, 3, 6, 3, 7, 4, 8, 5, 0, 0, 0, 15, 10, -1, 4, 11, 6, 12, 7, 13, 8, 14, 9, 0, 1, 0, 16, 16, -1, 3, 17, 10, 18, 1, 19, 11, 0, 0, 0, 9, 20, -1, 6, 1, 0, 2, 0, 3, 1, 4, 2, 5, 3, 6, 3, 0, 3, 0, 21, 21, -1, 15, 22, 12, 23, 13, 1, 14, 2, 15, 3, 2, 4, 2, 5, 3, 24, 16, 25, 17, 26, 18, 27, 19, 28, 20, 29, 21, 30, 22, 31, 6, 0, 3, 0, 35, 32, -1, 12, 22, 23, 23, 24, 1, 25, 2, 26, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 28, 34, 1, 0, 3, 0, 35, 36, -1, 12, 22, 23, 23, 29, 1, 25, 2, 30, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 31, 34, 1, 0, 3, 0, 35, 37, -1, 12, 22, 23, 23, 32, 1, 25, 2, 33, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 34, 34, 1, 0, 0, 0, 9, 38, -1, 7, 22, 35, 1, 36, 2, 0, 3, 1, 4, 2, 5, 3, 6, 3, 0, 8, 0, 9, 39, -1, 9, 22, 13, 23, 37, 1, 38, 2, 39, 3, 1, 4, 2, 5, 3, 6, 3, 8, 40, 0, 9, 0, 21, 21, -1, 11, 1, 41, 2, 37, 3, 2, 4, 2, 5, 3, 24, 27, 27, 42, 28, 3, 29, 21, 30, 22, 31, 6, 0, 9, 0, 50, 40, -1, 15, 22, 12, 1, 26, 2, 43, 3, 1, 4, 2, 5, 3, 41, 21, 42, 44, 43, 21, 44, 8, 45, 21, 46, 1, 47, 2, 48, 22, 49, 1, 0, 8, 0, 9, 51, -1, 9, 22, 13, 23, 13, 1, 38, 2, 38, 3, 1, 4, 2, 5, 3, 6, 3, 8, 45, 0, 12, 0, 21, 21, -1, 11, 1, 41, 2, 37, 3, 2, 4, 2, 5, 3, 24, 27, 27, 46, 28, 3, 29, 21, 30, 22, 31, 6, 0, 12, 0, 50, 40, -1, 15, 22, 12, 1, 26, 2, 43, 3, 1, 4, 2, 5, 3, 41, 21, 42, 47, 43, 21, 44, 8, 45, 21, 46, 1, 47, 2, 48, 22, 49, 1, 0, 8, 0, 53, 52, -1, 13, 22, 12, 23, 12, 1, 48, 2, 49, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 2, 27, 50, 34, 1, 28, 22, 0, 8, 0, 53, 54, -1, 13, 22, 12, 23, 24, 1, 48, 2, 51, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 2, 27, 52, 34, 1, 28, 22, 0, 8, 0, 50, 55, -1, 16, 22, 23, 23, 53, 1, 32, 2, 54, 3, 1, 4, 2, 5, 3, 41, 8, 42, 55, 43, 56, 44, 8, 45, 21, 46, 1, 47, 1, 48, 22, 49, 1, 0, 8, 0, 53, 56, -1, 13, 22, 12, 23, 26, 1, 57, 2, 58, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 2, 27, 59, 34, 1, 28, 22, 0, 8, 0, 50, 57, -1, 16, 22, 23, 23, 60, 1, 32, 2, 61, 3, 1, 4, 2, 5, 3, 41, 8, 42, 62, 43, 56, 44, 8, 45, 21, 46, 1, 47, 1, 48, 22, 49, 1, 0, 8, 0, 35, 58, -1, 12, 22, 23, 23, 30, 1, 25, 2, 23, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 63, 34, 1, 0, 8, 0, 35, 59, -1, 12, 22, 23, 23, 32, 1, 25, 2, 33, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 64, 34, 1, 0, 0, 0, 9, 60, -1, 8, 22, 65, 1, 66, 2, 0, 3, 1, 4, 2, 5, 3, 6, 3, 7, 67, 0, 22, 0, 21, 61, -1, 13, 22, 13, 23, 37, 1, 25, 2, 13, 3, 2, 4, 2, 5, 3, 24, 27, 27, 68, 28, 20, 29, 21, 30, 22, 31, 6, 0, 22, 0, 9, 62, -1, 9, 22, 69, 23, 70, 1, 71, 2, 69, 3, 1, 4, 2, 5, 3, 6, 3, 8, 72, 0, 24, 0, 21, 21, -1, 12, 22, 73, 23, 13, 1, 74, 2, 75, 3, 2, 4, 2, 5, 3, 24, 27, 27, 76, 29, 21, 30, 22, 31, 6, 0, 24, 0, 35, 63, -1, 10, 22, 13, 23, 12, 1, 77, 2, 78, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 24, 0, 35, 64, -1, 10, 22, 13, 23, 53, 1, 77, 2, 79, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 24, 0, 35, 65, -1, 10, 22, 13, 23, 80, 1, 77, 2, 48, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 24, 0, 35, 66, -1, 10, 22, 13, 23, 81, 1, 77, 2, 82, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 24, 0, 35, 67, -1, 10, 22, 13, 23, 23, 1, 77, 2, 83, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 22, 0, 9, 68, -1, 9, 22, 24, 23, 70, 1, 60, 2, 69, 3, 1, 4, 2, 5, 3, 6, 3, 8, 84, 0, 31, 0, 21, 21, -1, 12, 22, 73, 23, 13, 1, 85, 2, 75, 3, 2, 4, 2, 5, 3, 24, 27, 27, 86, 29, 21, 30, 22, 31, 6, 0, 31, 0, 35, 63, -1, 10, 22, 13, 23, 12, 1, 77, 2, 78, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 31, 0, 35, 64, -1, 10, 22, 13, 23, 53, 1, 77, 2, 79, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 31, 0, 35, 65, -1, 10, 22, 13, 23, 80, 1, 77, 2, 48, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 31, 0, 35, 66, -1, 10, 22, 13, 23, 81, 1, 77, 2, 82, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 31, 0, 35, 67, -1, 10, 22, 13, 23, 23, 1, 77, 2, 83, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 22, 0, 9, 69, -1, 9, 22, 87, 23, 70, 1, 88, 2, 69, 3, 1, 4, 2, 5, 3, 6, 3, 8, 89, 0, 38, 0, 21, 21, -1, 12, 22, 73, 23, 13, 1, 85, 2, 75, 3, 2, 4, 2, 5, 3, 24, 27, 27, 90, 29, 21, 30, 22, 31, 6, 0, 38, 0, 35, 63, -1, 10, 22, 13, 23, 12, 1, 77, 2, 78, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 38, 0, 35, 64, -1, 10, 22, 13, 23, 53, 1, 77, 2, 79, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 38, 0, 35, 65, -1, 10, 22, 13, 23, 80, 1, 77, 2, 48, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 38, 0, 35, 66, -1, 10, 22, 13, 23, 81, 1, 77, 2, 82, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 38, 0, 35, 67, -1, 10, 22, 13, 23, 23, 1, 77, 2, 83, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 22, 0, 9, 70, -1, 9, 22, 91, 23, 70, 1, 92, 2, 69, 3, 1, 4, 2, 5, 3, 6, 3, 8, 93, 0, 45, 0, 21, 21, -1, 12, 22, 73, 23, 13, 1, 85, 2, 75, 3, 2, 4, 2, 5, 3, 24, 27, 27, 94, 29, 21, 30, 22, 31, 6, 0, 45, 0, 35, 63, -1, 10, 22, 13, 23, 12, 1, 77, 2, 78, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 45, 0, 35, 64, -1, 10, 22, 13, 23, 53, 1, 77, 2, 79, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 45, 0, 35, 65, -1, 10, 22, 13, 23, 80, 1, 77, 2, 48, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 45, 0, 35, 66, -1, 10, 22, 13, 23, 81, 1, 77, 2, 82, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 45, 0, 35, 67, -1, 10, 22, 13, 23, 23, 1, 77, 2, 83, 3, 1, 4, 2, 5, 3, 6, 3, 33, 1, 34, 1, 0, 22, 0, 35, 59, -1, 12, 22, 23, 23, 32, 1, 25, 2, 33, 3, 1, 4, 2, 5, 3, 6, 3, 24, 27, 33, 1, 27, 64, 34, 1, 0, 22, 0, 16, 71, -1, 2, 72, 95, 17, 96, 0, 22, 0, 16, 73, -1, 2, 72, 97, 17, 98, 0, 22, 0, 16, 74, -1, 2, 72, 99, 17, 100, 0, 22, 0, 16, 75, -1, 2, 72, 101, 17, 102, 0, 22, 0, 16, 76, -1, 3, 72, 103, 17, 104, 77, 105, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="107" shared="false">
+			<array  len="106" shared="false">
 				<real> 40 </real>
 				<bool> False </bool>
 				<bool> True </bool>
 				<int> 2 </int>
-				<resource  resource_type="Script" path="res://scripts/menu.gd">  </resource>
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
-					<string> "Script" </string>
+					<string> "2D" </string>
 					<string> "__editor_plugin_states__" </string>
 					<dictionary  shared="false">
 						<string> "2D" </string>
@@ -243,6 +251,11 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -256,24 +269,24 @@
 				<vector2> 0, 0 </vector2>
 				<real> 0 </real>
 				<vector2> 1, 1 </vector2>
-				<resource  resource_type="Texture" path="res://background.png">  </resource>
+				<resource  external="1">  </resource>
 				<color> 1, 1, 0.746254, 0.492285 </color>
 				<real> 96 </real>
 				<real> 64 </real>
 				<real> 384 </real>
 				<real> 98 </real>
-				<resource  resource_type="Font" path="res://fonts/firasans-book-32.fnt">  </resource>
+				<resource  external="2">  </resource>
 				<color> 1, 1, 1, 1 </color>
 				<color> 0, 0, 0, 1 </color>
-				<real> 1 </real>
 				<string> "DynaDungeons" </string>
 				<int> 1 </int>
-				<real> -1 </real>
+				<real> 1 </real>
+				<int> 0 </int>
 				<real> 256 </real>
 				<real> 128 </real>
 				<real> 416 </real>
 				<real> 160 </real>
-				<resource  resource_type="Font" path="res://fonts/firasans-book-16.fnt">  </resource>
+				<resource  external="3">  </resource>
 				<string> "New Game" </string>
 				<real> 192 </real>
 				<real> 224 </real>
@@ -296,7 +309,6 @@
 				<string> "Players:" </string>
 				<real> 20 </real>
 				<real> 4 </real>
-				<int> 0 </int>
 				<dictionary  shared="false">
 					<string> "_edit_group_" </string>
 					<bool> True </bool>
@@ -322,7 +334,7 @@
 				<string> "Back" </string>
 				<real> 960 </real>
 				<real> 1000 </real>
-				<resource  resource_type="Script" path="res://scripts/controls.gd">  </resource>
+				<resource  external="4">  </resource>
 				<string> "Click a key binding to reassign it." </string>
 				<real> 48 </real>
 				<real> 8 </real>
@@ -363,19 +375,19 @@
 				</dictionary>
 				<string> "Player 4" </string>
 				<vector2> 64, 112 </vector2>
-				<resource  resource_type="Texture" path="res://sprites/icons/arrow-up.png">  </resource>
+				<resource  external="5">  </resource>
 				<vector2> 64, 152 </vector2>
-				<resource  resource_type="Texture" path="res://sprites/icons/arrow-down.png">  </resource>
+				<resource  external="6">  </resource>
 				<vector2> 64, 192 </vector2>
-				<resource  resource_type="Texture" path="res://sprites/icons/arrow-left.png">  </resource>
+				<resource  external="7">  </resource>
 				<vector2> 64, 232 </vector2>
-				<resource  resource_type="Texture" path="res://sprites/icons/arrow-right.png">  </resource>
+				<resource  external="8">  </resource>
 				<vector2> 64, 272 </vector2>
-				<resource  resource_type="Texture" path="res://sprites/pickups/bomb_increase.png">  </resource>
+				<resource  external="9">  </resource>
 				<int> 4 </int>
 			</array>
 			<string> "version" </string>
-			<int> 1 </int>
+			<int> 2 </int>
 		</dictionary>
 
 	</main_resource>

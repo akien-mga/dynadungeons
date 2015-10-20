@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<resource_file type="PackedScene" subresource_count="6" version="1.1" version_name="Godot Engine v1.1.stable.custom_build">
-	<ext_resource path="res://scripts/bomb.gd" type="Script"></ext_resource>
-	<ext_resource path="res://sprites/bomb.xml" type="SpriteFrames"></ext_resource>
+<resource_file type="PackedScene" subresource_count="6" version="2.0" version_name="Godot Engine v2.0.alpha.custom_build">
+	<ext_resource path="res://scripts/bomb.gd" type="Script" index="0"></ext_resource>
+	<ext_resource path="res://sprites/bomb.xml" type="SpriteFrames" index="1"></ext_resource>
 	<resource type="Animation" path="local://1">
 		<real name="length"> 1 </real>
 		<bool name="loop"> True </bool>
@@ -60,14 +60,17 @@
 			<string> "conn_count" </string>
 			<int> 3 </int>
 			<string> "conns" </string>
-			<int_array  len="18"> 				2, 0, 39, 38, 2, 0, 3, 0, 41, 40, 2, 0, 4, 0, 41, 42, 2, 0 </int_array>
+			<int_array  len="18"> 				2, 0, 40, 39, 2, 0, 3, 0, 42, 41, 2, 0, 4, 0, 42, 43, 2, 0 </int_array>
+			<string> "editable_instances" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "names" </string>
-			<string_array  len="43">
+			<string_array  len="44">
 				<string> "Bomb" </string>
-				<string> "Node2D" </string>
 				<string> "script/script" </string>
 				<string> "__meta__" </string>
 				<string> "bombs" </string>
+				<string> "Node2D" </string>
 				<string> "AnimatedSprite" </string>
 				<string> "frames" </string>
 				<string> "AnimationPlayer" </string>
@@ -81,11 +84,11 @@
 				<string> "blend_times" </string>
 				<string> "autoplay" </string>
 				<string> "TimerIdle" </string>
-				<string> "Timer" </string>
 				<string> "process_mode" </string>
 				<string> "wait_time" </string>
 				<string> "one_shot" </string>
 				<string> "autostart" </string>
+				<string> "Timer" </string>
 				<string> "TimerAnim" </string>
 				<string> "StaticBody2D" </string>
 				<string> "input/pickable" </string>
@@ -101,6 +104,7 @@
 				<string> "CollisionShape2D" </string>
 				<string> "shape" </string>
 				<string> "trigger" </string>
+				<string> "_update_shape_index" </string>
 				<string> "trigger_explosion" </string>
 				<string> "finished" </string>
 				<string> "_on_TimerIdle_timeout" </string>
@@ -109,11 +113,14 @@
 			</string_array>
 			<string> "node_count" </string>
 			<int> 7 </int>
+			<string> "node_paths" </string>
+			<array  len="0" shared="false">
+			</array>
 			<string> "nodes" </string>
-			<int_array  len="114"> 				-1, -1, 1, 0, -1, 2, 2, 0, 3, 1, 1, 4, 0, 0, 5, 5, -1, 1, 6, 2, 0, 1, 0, 7, 7, -1, 9, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 8, 14, 9, 15, 10, 16, 11, 0, 1, 0, 18, 17, -1, 4, 19, 3, 20, 12, 21, 8, 22, 8, 0, 1, 0, 18, 23, -1, 4, 19, 3, 20, 13, 21, 8, 22, 14, 0, 0, 0, 24, 24, -1, 10, 25, 14, 26, 15, 27, 16, 28, 14, 29, 3, 30, 3, 31, 17, 32, 4, 33, 9, 34, 4, 0, 5, 0, 35, 35, -1, 2, 36, 15, 37, 14, 0 </int_array>
+			<int_array  len="116"> 				-1, -1, 4, 0, -1, 2, 1, 0, 2, 1, 1, 3, 0, 0, 5, 5, -1, 1, 6, 2, 0, 1, 0, 7, 7, -1, 9, 8, 3, 9, 4, 10, 5, 11, 6, 12, 7, 13, 8, 14, 9, 15, 10, 16, 11, 0, 1, 0, 22, 17, -1, 4, 18, 3, 19, 12, 20, 8, 21, 8, 0, 1, 0, 22, 23, -1, 4, 18, 3, 19, 13, 20, 8, 21, 14, 0, 0, 0, 24, 24, -1, 10, 25, 14, 26, 15, 27, 16, 28, 14, 29, 3, 30, 3, 31, 17, 32, 4, 33, 9, 34, 4, 0, 5, 0, 35, 35, -1, 3, 36, 15, 37, 14, 38, 18, 0 </int_array>
 			<string> "variants" </string>
-			<array  len="18" shared="false">
-				<resource  resource_type="Script" path="res://scripts/bomb.gd">  </resource>
+			<array  len="19" shared="false">
+				<resource  external="0">  </resource>
 				<dictionary  shared="false">
 					<string> "__editor_plugin_screen__" </string>
 					<string> "2D" </string>
@@ -236,6 +243,11 @@
 							<string> "znear" </string>
 							<real> 0.1 </real>
 						</dictionary>
+						<string> "Anim" </string>
+						<dictionary  shared="false">
+							<string> "visible" </string>
+							<bool> False </bool>
+						</dictionary>
 					</dictionary>
 					<string> "__editor_run_settings__" </string>
 					<dictionary  shared="false">
@@ -245,7 +257,7 @@
 						<int> 0 </int>
 					</dictionary>
 				</dictionary>
-				<resource  resource_type="SpriteFrames" path="res://sprites/bomb.xml">  </resource>
+				<resource  external="1">  </resource>
 				<int> 1 </int>
 				<real> 0 </real>
 				<node_path> ".." </node_path>
@@ -262,9 +274,10 @@
 				<resource  resource_type="Shape2D" path="local://3">  </resource>
 				<matrix32> 1, -0, 0, 1, 0, 0 </matrix32>
 				<vector2> 0, 0 </vector2>
+				<int> -1 </int>
 			</array>
 			<string> "version" </string>
-			<int> 1 </int>
+			<int> 2 </int>
 		</dictionary>
 
 	</main_resource>
