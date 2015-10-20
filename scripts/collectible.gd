@@ -26,9 +26,6 @@ func destroy():
 
 func _on_body_enter(body):
 	if (pickable and body extends global.player_script):
-		# Remove dummy collider
-		# TODO: Find a why to get rid of this dummy collider hack
-		level.tilemap_dummy.set_cell(level.world_to_map(get_pos()).x, level.world_to_map(get_pos()).y, -1)
 		# Apply effect
 		if (effect == "bomb_increase" and body.bomb_quota < global.MAX_BOMBS):
 			body.bomb_quota += 1

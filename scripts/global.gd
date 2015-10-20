@@ -35,6 +35,7 @@ const bomb_scene = preload("res://scenes/bomb.xscn")
 const collectible_scene = preload("res://scenes/collectible.xscn")
 
 const player_script = preload("res://scripts/player.gd")
+const collectible_script = preload("res://scripts/collectible.gd")
 
 const settings_filename = "user://settings.cfg"
 

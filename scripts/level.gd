@@ -19,7 +19,6 @@ var bomb_manager
 var collectible_manager
 var tilemap_destr
 var tilemap_indestr
-var tilemap_dummy
 
 ### Member variables
 var exploding_bombs = []			# Array of bombs that are currently exploding
@@ -62,7 +61,6 @@ func _ready():
 	collectible_manager = self.get_node("CollectibleManager")
 	tilemap_destr = map_manager.get_node("Destructible")
 	tilemap_indestr = map_manager.get_node("Indestructible")
-	tilemap_dummy = map_manager.get_node("DummyCollider")
 	
 	# Instance players
 	var player

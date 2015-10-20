@@ -75,7 +75,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	
 	for key in dir:
 		# Cast a ray between the bomb and its maximal range
-		var raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions)
+		var raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 31)
 		
 		# Check first for other bombs in range that would be chain-triggered
 		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
@@ -89,13 +89,13 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 				bomb_found.get_node("AnimatedSprite/AnimationPlayer").stop()
 			# Add found bomb as an exception and cast a new ray to check for other targets in range of the triggered bomb
 			exceptions.append(raycast.collider)
-			raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions)
+			raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 15)
 		
 		if (raycast.empty()):
 			# No collision in range, so full range for the animation
 			self.anim_ranges[key] = self.bomb_range
-		elif (raycast.collider.get_parent() == level.map_manager):
-			# Destructible, indestructible or collectible (dummy collider) in range, they limit the animation
+		else:
+			# Destructible, indestructible or collectible in range, they limit the animation
 			var target_cell_pos = level.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - get_cell_pos()
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
@@ -111,17 +111,11 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 				# Register indestructible target cell
 				# TODO: Currently useless, but the idea would be to animate the tile with flames on the edge
 				trigger_bomb.indestruct_cells.append(target_cell_pos)
-			elif (raycast.collider == level.tilemap_dummy):
-				# Remove the dummy collider
-				level.tilemap_dummy.set_cell(target_cell_pos.x, target_cell_pos.y, -1)
-				# Remove the corresponding collectible(s)
-				for collectible in level.collectible_manager.get_children():
-					if (level.world_to_map(collectible.get_pos()) == target_cell_pos):
-						collectible.destroy()
+			elif (raycast.collider extends global.collectible_script):
+				# Destroy the collectible
+				raycast.collider.destroy()
 			else:
 				print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
-		else:
-			print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
 	
 	# Run this function on the newly triggered bombs to build the complete chained explosion
 	for bomb in new_bombs:
@@ -232,8 +226,6 @@ func stop_animation():
 				collectible.effect = global.collectibles.types[index]
 				collectible.set_pos(level.map_to_world(pos))
 				level.collectible_manager.add_child(collectible)
-				# Add a dummy collider under the collectible
-				level.tilemap_dummy.set_cell(pos.x, pos.y, 0)
 			level.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
 ### Process
