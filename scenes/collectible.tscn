@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=2]
+[ext_resource path="res://scripts/collectible.gd" type="Script" id=1]
+[ext_resource path="res://sprites/pickups/fire-overlay.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0
+extents = Vector2( 16, 16 )
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "pickup"
+length = 0.4
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.1, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3 ] }
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "destroy"
+length = 1.3
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("FireOverlay:visibility/visible")
+tracks/0/interp = 1
+tracks/0/keys = { "cont":false, "times":FloatArray( 0, 1.3 ), "transitions":FloatArray( 1, 1 ), "values":[ true, false ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("FireOverlay:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/keys = { "cont":true, "times":FloatArray( 0, 0.6, 0.8, 1, 1.3 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "values":[ 0, 1, 0.6, 1, 0 ] }
+
+[node name="Collectible" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98
+linear_damp = 0.1
+angular_damp = 1
+collision/layers = 2
+collision/mask = 3
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -272.647, -160.823 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 32, 32 ), "zoom":2.51753 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+
+[node name="Sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="FireOverlay" type="Sprite" parent="."]
+
+visibility/visible = false
+visibility/opacity = 0
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0
+root/root = NodePath("..")
+anims/pickup = SubResource( 2 )
+anims/destroy = SubResource( 3 )
+playback/active = true
+playback/speed = 1
+blend_times = [  ]
+autoplay = ""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = -1
+
+[connection signal="body_enter" from="." to="." method="_on_body_enter"]
+
+[connection signal="finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
+
+

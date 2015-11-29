@@ -27,12 +27,12 @@ const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
 const INPUT_ACTIONS = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
 ### Resources
-const menu_scene = preload("res://scenes/menu.xscn")
-const world_scene = preload("res://scenes/world.xscn")
-const level_scene = preload("res://scenes/level.xscn")
-const player_scene = preload("res://scenes/player.xscn")
-const bomb_scene = preload("res://scenes/bomb.xscn")
-const collectible_scene = preload("res://scenes/collectible.xscn")
+const menu_scene = preload("res://scenes/menu.tscn")
+const world_scene = preload("res://scenes/world.tscn")
+const level_scene = preload("res://scenes/level.tscn")
+const player_scene = preload("res://scenes/player.tscn")
+const bomb_scene = preload("res://scenes/bomb.tscn")
+const collectible_scene = preload("res://scenes/collectible.tscn")
 
 const player_script = preload("res://scripts/player.gd")
 const collectible_script = preload("res://scripts/collectible.gd")

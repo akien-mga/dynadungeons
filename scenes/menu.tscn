@@ -1,0 +1,786 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://scripts/menu.gd" type="Script" id=1]
+[ext_resource path="res://fonts/firasans-book-16.fnt" type="Font" id=4]
+[ext_resource path="res://background.png" type="Texture" id=2]
+[ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=7]
+[ext_resource path="res://fonts/firasans-book-32.fnt" type="Font" id=3]
+[ext_resource path="res://sprites/icons/arrow-right.png" type="Texture" id=9]
+[ext_resource path="res://scripts/controls.gd" type="Script" id=5]
+[ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" id=6]
+[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=10]
+[ext_resource path="res://sprites/icons/arrow-left.png" type="Texture" id=8]
+
+[node name="Menu" type="Control"]
+
+margin/right = 40
+margin/bottom = 40
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -170.589, -206.438 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 32, 32 ), "zoom":1 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+
+[node name="Background" type="CanvasLayer" parent="."]
+
+layer = -1
+offset = Vector2( 0, 0 )
+rotation = 0
+scale = Vector2( 1, 1 )
+
+[node name="Sprite" type="Sprite" parent="Background"]
+
+texture = ExtResource( 2 )
+centered = false
+modulate = Color( 1, 1, 0.746254, 0.492285 )
+
+[node name="MainMenu" type="Control" parent="."]
+
+margin/right = 40
+margin/bottom = 40
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="Label" type="Label" parent="MainMenu"]
+
+margin/left = 96
+margin/top = 64
+margin/right = 384
+margin/bottom = 98
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+text = "DynaDungeons"
+align = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="NewGame" type="Button" parent="MainMenu"]
+
+margin/left = 256
+margin/top = 128
+margin/right = 416
+margin/bottom = 160
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "New Game"
+flat = false
+
+[node name="GoSettings" type="Button" parent="MainMenu"]
+
+margin/left = 256
+margin/top = 192
+margin/right = 416
+margin/bottom = 224
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "Settings"
+flat = false
+
+[node name="Quit" type="Button" parent="MainMenu"]
+
+margin/left = 256
+margin/top = 320
+margin/right = 416
+margin/bottom = 352
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "Quit"
+flat = false
+
+[node name="Settings" type="Control" parent="."]
+
+margin/left = 480
+margin/right = 520
+margin/bottom = 40
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+
+[node name="NbPlayers" type="Control" parent="Settings"]
+
+margin/left = 64
+margin/top = 32
+margin/right = 104
+margin/bottom = 72
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+
+[node name="Label" type="Label" parent="Settings/NbPlayers"]
+
+margin/right = 80
+margin/bottom = 32
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Players:"
+align = 2
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Slider" type="HSlider" parent="Settings/NbPlayers"]
+
+margin/left = 96
+margin/right = 160
+margin/bottom = 20
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+range/min = 1
+range/max = 4
+range/step = 1
+range/page = 0
+range/value = 1
+range/exp_edit = false
+rounded_values = true
+tick_count = 0
+ticks_on_borders = false
+
+[node name="NbLives" type="Control" parent="Settings"]
+
+margin/left = 64
+margin/top = 64
+margin/right = 104
+margin/bottom = 104
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_edit_group_":true }
+
+[node name="Label" type="Label" parent="Settings/NbLives"]
+
+margin/right = 80
+margin/bottom = 32
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Lives:"
+align = 2
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Slider" type="HSlider" parent="Settings/NbLives"]
+
+margin/left = 96
+margin/right = 160
+margin/bottom = 20
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+range/min = 1
+range/max = 5
+range/step = 1
+range/page = 0
+range/value = 1
+range/exp_edit = false
+rounded_values = true
+tick_count = 0
+ticks_on_borders = false
+
+[node name="Fullscreen" type="CheckBox" parent="Settings"]
+
+margin/left = 96
+margin/top = 96
+margin/right = 197
+margin/bottom = 124
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+text = "Fullscreen"
+flat = false
+align = 0
+
+[node name="Music" type="CheckBox" parent="Settings"]
+
+margin/left = 96
+margin/top = 128
+margin/right = 197
+margin/bottom = 156
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+text = "Music"
+flat = false
+align = 0
+
+[node name="MusicVolume" type="HSlider" parent="Settings"]
+
+margin/left = 256
+margin/top = 136
+margin/right = 320
+margin/bottom = 152
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+range/min = 0
+range/max = 2
+range/step = 0.2
+range/page = 0
+range/value = 1
+range/exp_edit = false
+rounded_values = false
+tick_count = 0
+ticks_on_borders = false
+
+[node name="SFX" type="CheckBox" parent="Settings"]
+
+margin/left = 96
+margin/top = 160
+margin/right = 221
+margin/bottom = 188
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = true
+text = "Sound effects"
+flat = false
+align = 0
+
+[node name="SFXVolume" type="HSlider" parent="Settings"]
+
+margin/left = 256
+margin/top = 168
+margin/right = 320
+margin/bottom = 184
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+range/min = 0
+range/max = 3
+range/step = 0.2
+range/page = 0
+range/value = 1
+range/exp_edit = false
+rounded_values = false
+tick_count = 0
+ticks_on_borders = false
+
+[node name="GoControls" type="Button" parent="Settings"]
+
+margin/left = 256
+margin/top = 224
+margin/right = 416
+margin/bottom = 256
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "Controls"
+flat = false
+
+[node name="GoBack" type="Button" parent="Settings"]
+
+margin/left = 256
+margin/top = 320
+margin/right = 416
+margin/bottom = 352
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "Back"
+flat = false
+
+[node name="Controls" type="Control" parent="."]
+
+margin/left = 960
+margin/right = 1000
+margin/bottom = 40
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+script/script = ExtResource( 5 )
+
+[node name="ContextHelp" type="Label" parent="Controls"]
+
+margin/left = 64
+margin/top = 32
+margin/right = 416
+margin/bottom = 64
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Click a key binding to reassign it."
+align = 1
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Player1" type="Control" parent="Controls"]
+
+margin/left = 48
+margin/top = 8
+margin/right = 88
+margin/bottom = 48
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Label" type="Label" parent="Controls/Player1"]
+
+margin/left = 56
+margin/top = 64
+margin/right = 121
+margin/bottom = 83
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Player 1"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="move_up" type="Button" parent="Controls/Player1"]
+
+margin/left = 64
+margin/top = 96
+margin/right = 112
+margin/bottom = 117
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_down" type="Button" parent="Controls/Player1"]
+
+margin/left = 64
+margin/top = 136
+margin/right = 112
+margin/bottom = 157
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_left" type="Button" parent="Controls/Player1"]
+
+margin/left = 64
+margin/top = 176
+margin/right = 112
+margin/bottom = 197
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_right" type="Button" parent="Controls/Player1"]
+
+margin/left = 64
+margin/top = 216
+margin/right = 112
+margin/bottom = 237
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="drop_bomb" type="Button" parent="Controls/Player1"]
+
+margin/left = 64
+margin/top = 256
+margin/right = 112
+margin/bottom = 277
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="Player2" type="Control" parent="Controls"]
+
+margin/left = 128
+margin/top = 8
+margin/right = 168
+margin/bottom = 48
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Label" type="Label" parent="Controls/Player2"]
+
+margin/left = 56
+margin/top = 64
+margin/right = 122
+margin/bottom = 83
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Player 2"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="move_up" type="Button" parent="Controls/Player2"]
+
+margin/left = 64
+margin/top = 96
+margin/right = 112
+margin/bottom = 117
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_down" type="Button" parent="Controls/Player2"]
+
+margin/left = 64
+margin/top = 136
+margin/right = 112
+margin/bottom = 157
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_left" type="Button" parent="Controls/Player2"]
+
+margin/left = 64
+margin/top = 176
+margin/right = 112
+margin/bottom = 197
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_right" type="Button" parent="Controls/Player2"]
+
+margin/left = 64
+margin/top = 216
+margin/right = 112
+margin/bottom = 237
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="drop_bomb" type="Button" parent="Controls/Player2"]
+
+margin/left = 64
+margin/top = 256
+margin/right = 112
+margin/bottom = 277
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="Player3" type="Control" parent="Controls"]
+
+margin/left = 208
+margin/top = 8
+margin/right = 248
+margin/bottom = 48
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Label" type="Label" parent="Controls/Player3"]
+
+margin/left = 56
+margin/top = 64
+margin/right = 122
+margin/bottom = 83
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Player 3"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="move_up" type="Button" parent="Controls/Player3"]
+
+margin/left = 64
+margin/top = 96
+margin/right = 112
+margin/bottom = 117
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_down" type="Button" parent="Controls/Player3"]
+
+margin/left = 64
+margin/top = 136
+margin/right = 112
+margin/bottom = 157
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_left" type="Button" parent="Controls/Player3"]
+
+margin/left = 64
+margin/top = 176
+margin/right = 112
+margin/bottom = 197
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_right" type="Button" parent="Controls/Player3"]
+
+margin/left = 64
+margin/top = 216
+margin/right = 112
+margin/bottom = 237
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="drop_bomb" type="Button" parent="Controls/Player3"]
+
+margin/left = 64
+margin/top = 256
+margin/right = 112
+margin/bottom = 277
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="Player4" type="Control" parent="Controls"]
+
+margin/left = 288
+margin/top = 8
+margin/right = 328
+margin/bottom = 48
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Label" type="Label" parent="Controls/Player4"]
+
+margin/left = 56
+margin/top = 64
+margin/right = 122
+margin/bottom = 83
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/font = ExtResource( 4 )
+text = "Player 4"
+percent_visible = 1
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="move_up" type="Button" parent="Controls/Player4"]
+
+margin/left = 64
+margin/top = 96
+margin/right = 112
+margin/bottom = 117
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_down" type="Button" parent="Controls/Player4"]
+
+margin/left = 64
+margin/top = 136
+margin/right = 112
+margin/bottom = 157
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_left" type="Button" parent="Controls/Player4"]
+
+margin/left = 64
+margin/top = 176
+margin/right = 112
+margin/bottom = 197
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="move_right" type="Button" parent="Controls/Player4"]
+
+margin/left = 64
+margin/top = 216
+margin/right = 112
+margin/bottom = 237
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="drop_bomb" type="Button" parent="Controls/Player4"]
+
+margin/left = 64
+margin/top = 256
+margin/right = 112
+margin/bottom = 277
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+flat = false
+
+[node name="GoBack" type="Button" parent="Controls"]
+
+margin/left = 256
+margin/top = 320
+margin/right = 416
+margin/bottom = 352
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+text = "Back"
+flat = false
+
+[node name="MoveUp" type="Sprite" parent="Controls"]
+
+transform/pos = Vector2( 64, 112 )
+texture = ExtResource( 6 )
+
+[node name="MoveDown" type="Sprite" parent="Controls"]
+
+transform/pos = Vector2( 64, 152 )
+texture = ExtResource( 7 )
+
+[node name="MoveLeft" type="Sprite" parent="Controls"]
+
+transform/pos = Vector2( 64, 192 )
+texture = ExtResource( 8 )
+
+[node name="MoveRight" type="Sprite" parent="Controls"]
+
+transform/pos = Vector2( 64, 232 )
+texture = ExtResource( 9 )
+
+[node name="DropBomb" type="Sprite" parent="Controls"]
+
+transform/pos = Vector2( 64, 272 )
+texture = ExtResource( 10 )
+hframes = 4
+
+[connection signal="pressed" from="MainMenu/NewGame" to="." method="new_game"]
+
+[connection signal="pressed" from="MainMenu/GoSettings" to="." method="goto_settings"]
+
+[connection signal="pressed" from="MainMenu/Quit" to="." method="quit"]
+
+[connection signal="value_changed" from="Settings/NbPlayers/Slider" to="." method="settings_set_players"]
+
+[connection signal="value_changed" from="Settings/NbLives/Slider" to="." method="settings_set_lives"]
+
+[connection signal="toggled" from="Settings/Fullscreen" to="." method="settings_toggle_fullscreen"]
+
+[connection signal="toggled" from="Settings/Music" to="." method="settings_toggle_music"]
+
+[connection signal="value_changed" from="Settings/MusicVolume" to="." method="settings_set_music_volume"]
+
+[connection signal="toggled" from="Settings/SFX" to="." method="settings_toggle_sfx"]
+
+[connection signal="value_changed" from="Settings/SFXVolume" to="." method="settings_set_sfx_volume"]
+
+[connection signal="pressed" from="Settings/GoControls" to="." method="goto_controls"]
+
+[connection signal="pressed" from="Settings/GoBack" to="." method="goto_mainmenu"]
+
+[connection signal="pressed" from="Controls/GoBack" to="." method="goto_settings"]
+
+

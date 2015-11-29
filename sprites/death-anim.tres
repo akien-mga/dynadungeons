@@ -1,0 +1,15 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=1]
+
+[ext_resource path="res://sprites/death-anim/splash1.png" type="Texture" id=1]
+[ext_resource path="res://sprites/death-anim/splash7.png" type="Texture" id=7]
+[ext_resource path="res://sprites/death-anim/splash8.png" type="Texture" id=8]
+[ext_resource path="res://sprites/death-anim/splash2.png" type="Texture" id=2]
+[ext_resource path="res://sprites/death-anim/splash3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/death-anim/splash5.png" type="Texture" id=5]
+[ext_resource path="res://sprites/death-anim/splash6.png" type="Texture" id=6]
+[ext_resource path="res://sprites/death-anim/splash4.png" type="Texture" id=4]
+
+[resource]
+
+frames = [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+

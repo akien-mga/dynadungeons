@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scripts/bomb.gd" type="Script" id=1]
+[ext_resource path="res://sprites/bomb.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="Animation" id=1]
+
+length = 1
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/keys = { "cont":true, "times":FloatArray( 0, 1 ), "transitions":FloatArray( 1, 1 ), "values":[ 0, 1 ] }
+
+[sub_resource type="Animation" id=2]
+
+length = 1
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/keys = { "cont":true, "times":FloatArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ), "transitions":FloatArray( 1, 1, 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3, 4, 5 ] }
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0
+extents = Vector2( 16, 16 )
+
+[node name="Bomb" type="Node2D"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -364.77, -215.09 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 16, 16 ), "zoom":1.85062 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 } }
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+frames = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0
+root/root = NodePath("..")
+anims/idle = SubResource( 1 )
+anims/countdown = SubResource( 2 )
+playback/active = true
+playback/speed = 1
+blend_times = [  ]
+autoplay = "idle"
+
+[node name="TimerIdle" type="Timer" parent="AnimatedSprite"]
+
+process_mode = 1
+wait_time = 3
+one_shot = true
+autostart = true
+
+[node name="TimerAnim" type="Timer" parent="AnimatedSprite"]
+
+process_mode = 1
+wait_time = 0.15
+one_shot = true
+autostart = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+input/pickable = false
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0
+friction = 1
+bounce = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+
+shape = SubResource( 3 )
+trigger = false
+_update_shape_index = -1
+
+[connection signal="finished" from="AnimatedSprite/AnimationPlayer" to="." method="trigger_explosion"]
+
+[connection signal="timeout" from="AnimatedSprite/TimerIdle" to="." method="_on_TimerIdle_timeout"]
+
+[connection signal="timeout" from="AnimatedSprite/TimerAnim" to="." method="_on_TimerAnim_timeout"]
+
+

@@ -270,7 +270,7 @@ func _ready():
 	gameover = get_node("/root/World/Gameover")
 	level = get_node("/root/World/Level")
 	# Initialise character sprite
-	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".xml"))
+	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
 	lives = global.nb_lives
 	
 	set_fixed_process(true)
