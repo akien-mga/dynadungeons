@@ -9,8 +9,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-extends Node
-
 ### Constants
 const TILE_SIZE = 32				# Characteristic size of a square tile, in pixels
 const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE # Vector2 of the offset to reach the center of a tile
