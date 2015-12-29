@@ -12,9 +12,8 @@
 extends KinematicBody2D
 
 ### Nodes
-var global
-var gameover
-var level
+onready var gameover = get_node("/root/World/Gameover")
+onready var level = get_node("/root/World/Level")
 
 ### Member variables
 export var id = 1					# Player ID, used to reference the scene
@@ -271,9 +270,6 @@ func _on_ActionAnimations_finished():
 ### Initialisation
 
 func _ready():
-	global = get_node("/root/global")
-	gameover = get_node("/root/World/Gameover")
-	level = get_node("/root/World/Level")
 	# Initialise character sprite
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
 	lives = global.nb_lives

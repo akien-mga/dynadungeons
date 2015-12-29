@@ -12,8 +12,7 @@
 extends Area2D
 
 # Nodes
-var global
-var level
+onready var level = get_node("/root/World/Level")
 
 # Member variables
 var effect = "bomb_increase"		# Effect of this collectible object
@@ -48,7 +47,5 @@ func _on_AnimationPlayer_finished():
 	self.queue_free()
 
 func _ready():
-	global = get_node("/root/global")
-	level = get_node("/root/World/Level")
 	# Initalise texture based on the effect
 	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))

@@ -12,13 +12,12 @@
 extends Node2D
 
 ### Nodes
-var global
-var map_manager
-var player_manager
-var bomb_manager
-var collectible_manager
-var tilemap_destr
-var tilemap_indestr
+onready var map_manager = get_node("MapManager")
+onready var player_manager = get_node("PlayerManager")
+onready var bomb_manager = get_node("BombManager")
+onready var collectible_manager = get_node("CollectibleManager")
+onready var tilemap_destr = map_manager.get_node("Destructible")
+onready var tilemap_indestr = map_manager.get_node("Indestructible")
 
 ### Member variables
 var exploding_bombs = []			# Array of bombs that are currently exploding
@@ -52,16 +51,6 @@ func _input(event):
 ### Initialisation
 
 func _ready():
-	# Definitions of references to useful nodes
-	# These are provided for easy access to various components of the level from other scripts
-	global = get_node("/root/global")
-	map_manager = self.get_node("MapManager")
-	player_manager = self.get_node("PlayerManager")
-	bomb_manager = self.get_node("BombManager")
-	collectible_manager = self.get_node("CollectibleManager")
-	tilemap_destr = map_manager.get_node("Destructible")
-	tilemap_indestr = map_manager.get_node("Indestructible")
-	
 	# Instance players
 	var player
 	for i in range(global.nb_players):

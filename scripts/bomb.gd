@@ -12,8 +12,7 @@
 extends Node2D
 
 ### Nodes
-var global
-var level
+onready var level = get_node("/root/World/Level")
 var player
 
 ### Constants
@@ -312,5 +311,4 @@ func _fixed_process(delta):
 ### Initialisation
 
 func _ready():
-	global = get_node("/root/global")
-	level = get_node("/root/World/Level")
+	pass

@@ -11,9 +11,6 @@
 
 extends Control
 
-### Nodes
-var global
-
 ### Windows and scenes
 
 func new_game():
@@ -78,8 +75,6 @@ func settings_set_lives(value):
 ### Initialisation
 
 func _ready():
-	global = get_node("/root/global")
-	
 	# Initialise settings widgets
 	get_node("Settings/Fullscreen").set_pressed(global.fullscreen)
 	get_node("Settings/Music").set_pressed(global.music)

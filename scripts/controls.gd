@@ -11,9 +11,6 @@
 
 extends Control
 
-### Nodes
-var global
-
 ### Member variables
 var player_id
 var action
@@ -58,8 +55,6 @@ func _input(event):
 ### Initialisation
 
 func _ready():
-	global = get_node("/root/global")
-	
 	# Add signals based on player ID and action name for each key mapping button
 	for id in range(1,5):
 		for action in global.INPUT_ACTIONS:

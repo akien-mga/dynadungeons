@@ -3,13 +3,13 @@
 [ext_resource path="res://scripts/menu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/firasans-book-16.fnt" type="Font" id=4]
 [ext_resource path="res://background.png" type="Texture" id=2]
-[ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=7]
 [ext_resource path="res://fonts/firasans-book-32.fnt" type="Font" id=3]
 [ext_resource path="res://sprites/icons/arrow-right.png" type="Texture" id=9]
+[ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=7]
 [ext_resource path="res://scripts/controls.gd" type="Script" id=5]
 [ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" id=6]
-[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=10]
 [ext_resource path="res://sprites/icons/arrow-left.png" type="Texture" id=8]
+[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=10]
 
 [node name="Menu" type="Control"]
 
@@ -157,7 +157,7 @@ range/step = 1
 range/page = 0
 range/value = 1
 range/exp_edit = false
-rounded_values = true
+range/rounded = true
 tick_count = 0
 ticks_on_borders = false
 
@@ -201,7 +201,7 @@ range/step = 1
 range/page = 0
 range/value = 1
 range/exp_edit = false
-rounded_values = true
+range/rounded = true
 tick_count = 0
 ticks_on_borders = false
 
@@ -252,7 +252,7 @@ range/step = 0.2
 range/page = 0
 range/value = 1
 range/exp_edit = false
-rounded_values = false
+range/rounded = false
 tick_count = 0
 ticks_on_borders = false
 
@@ -287,7 +287,7 @@ range/step = 0.2
 range/page = 0
 range/value = 1
 range/exp_edit = false
-rounded_values = false
+range/rounded = false
 tick_count = 0
 ticks_on_borders = false
 
