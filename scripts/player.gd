@@ -115,7 +115,7 @@ func die():
 			else:
 				winner = 1
 			# Show gameover screen
-			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " wins!")
+			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " Wins!")
 			gameover.show()
 	else:
 		# The player still has lives, start timer for respawn
@@ -209,11 +209,16 @@ func process_explosions():
 					self.die()
 					return
 
+func process_gameover():
+	if gameover.is_visible() and Input.is_action_pressed("ui_accept"):
+		get_tree().change_scene_to(global.menu_scene)
+
 func _fixed_process(delta):
 	process_movement(delta)
 	process_actions()
 	if (not invincible):
 		process_explosions()
+	process_gameover()
 	
 	# Check if the player is leaving the tile of a bomb in his collision exceptions
 	# If so, remove the bomb from the exceptions
