@@ -22,20 +22,20 @@ var button
 
 func _ready():
 	# Add signals based on player ID and action name for each key mapping button
-	for id in range(1,5):
+	for id in range(1, 5):
 		for action in global.INPUT_ACTIONS:
 			var button = get_node("Player" + str(id)).get_node(action)
-			button.connect("pressed", self, "wait_for_input", [ id, action ])
+			button.connect("pressed", self, "wait_for_input", [id, action])
 			# Initialise button text based on the current InputMap
 			button.set_text(OS.get_scancode_string(InputMap.get_action_list(str(id) + "_" + action)[0].scancode))
 
 func _input(event):
-	if (event.type == InputEvent.KEY):
+	if event.type == InputEvent.KEY:
 		# Got a valid input, stop polling and reinitialise context help
 		set_process_input(false)
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
 		# Unless the input is a cancel key, display the typed key and change the binding
-		if (not event.is_action("ui_cancel")):
+		if not event.is_action("ui_cancel"):
 			button.set_text(OS.get_scancode_string(event.scancode))
 			change_key(player_id, action, event)
 

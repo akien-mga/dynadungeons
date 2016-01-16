@@ -27,21 +27,21 @@ func _ready():
 	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))
 
 func _on_body_enter(body):
-	if (pickable and body extends global.player_script):
+	if pickable and body extends global.player_script:
 		# Apply effect
-		if (effect == "bomb_increase" and body.bomb_quota < global.MAX_BOMBS):
+		if effect == "bomb_increase" and body.bomb_quota < global.MAX_BOMBS:
 			body.bomb_quota += 1
-		elif (effect == "flame_increase" and body.bomb_range < global.MAX_FLAMERANGE):
+		elif effect == "flame_increase" and body.bomb_range < global.MAX_FLAMERANGE:
 			body.bomb_range += 1
-		elif (effect == "speed_increase" and body.speed < global.MAX_SPEED):
+		elif effect == "speed_increase" and body.speed < global.MAX_SPEED:
 			body.speed += 1
-		elif (effect == "speed_decrease" and body.speed > 0):
+		elif effect == "speed_decrease" and body.speed > 0:
 			body.speed -= 1
-		elif (effect == "confusion"):
+		elif effect == "confusion":
 			body.set_tmp_powerup("confusion", 10, "modulate")
-		elif (effect == "life_increase"):
+		elif effect == "life_increase":
 			body.lives += 1
-		elif (effect == "kick_skill"):
+		elif effect == "kick_skill":
 			body.kick = true
 		get_node("AnimationPlayer").play("pickup")
 		level.get_node("SamplePlayer").play("pickup")

@@ -14,10 +14,10 @@ extends Node2D
 ### Variables ###
 
 ## Consts
-const dir = { "up": Vector2(0,-1),
-              "down": Vector2(0,1),
-              "left": Vector2(-1,0),
-              "right": Vector2(1,0) }
+const dir = { "up": Vector2(0, -1),
+              "down": Vector2(0, 1),
+              "left": Vector2(-1, 0),
+              "right": Vector2(1, 0) }
 # Tile IDs in the tilemap
 const FLAME_SOURCE = 8
 const FLAME_SMALL = 9
@@ -52,14 +52,14 @@ func _fixed_process(delta):
 	# FIXME: Why the 0.5 btw?
 	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta
 	# Check if the bomb is past its target cell
-	if (slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0):
+	if slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0:
 		set_pos_and_update(level.map_to_world(target_cell))
 		
 		# The bomb reached its target, check if it can continue to slide to the next tile
 		var space_state = level.get_world_2d().get_direct_space_state()
 		var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + slide_dir), [ get_node("StaticBody2D") ])
 		
-		if (raycast.empty()):
+		if raycast.empty():
 			target_cell = get_cell_pos() + slide_dir
 		else:
 			set_fixed_process(false)
@@ -69,9 +69,9 @@ func _fixed_process(delta):
 	
 	# Check currently exploding bombs that might trigger this one
 	for trigger_bomb in level.exploding_bombs:
-		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
+		for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
 			for cell_dict in bomb.flame_cells:
-				if (self.get_cell_pos() == cell_dict.pos):
+				if self.get_cell_pos() == cell_dict.pos:
 					# Stop animations and timer
 					get_node("AnimatedSprite/TimerIdle").stop()
 					get_node("AnimatedSprite/AnimationPlayer").stop()
@@ -83,7 +83,7 @@ func _on_TimerIdle_timeout():
 
 func _on_TimerAnim_timeout():
 	"""Handle the update of the explosion animation and the freeing of the exploded bomb nodes"""
-	if (counter < 5):
+	if counter < 5:
 		update_animation()
 		counter += 1
 		get_node("AnimatedSprite/TimerAnim").start()
@@ -93,10 +93,10 @@ func _on_TimerAnim_timeout():
 		# Free chained bombs and trigger bomb after removing their owner's collision exception
 		level.exploding_bombs.erase(self)
 		for bomb in self.chained_bombs:
-			if (bomb.player != null):
+			if bomb.player != null:
 				bomb.player.collision_exceptions.erase(bomb)
 			bomb.queue_free()
-		if (self.player != null):
+		if self.player != null:
 			self.player.collision_exceptions.erase(self)
 		self.queue_free()
 
@@ -111,7 +111,7 @@ func push_dir(direction):
 	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
 	
 	# If there is no obstacle, start sliding and use _fixed_process to handle it
-	if (raycast.empty()):
+	if raycast.empty():
 		# Save the slide direction and target cell for use in _fixed_process
 		slide_dir = direction
 		target_cell = get_cell_pos() + slide_dir
@@ -139,7 +139,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 		# Check first for other bombs in range that would be chain-triggered
 		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
 			var bomb_found = raycast.collider.get_parent()
-			if (not bomb_found.exploding):
+			if not bomb_found.exploding:
 				# Register the bomb found as a chained bomb of the originally triggered bomb
 				trigger_bomb.chained_bombs.append(bomb_found)
 				new_bombs.append(bomb_found)
@@ -150,7 +150,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			exceptions.append(raycast.collider)
 			raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 15)
 		
-		if (raycast.empty()):
+		if raycast.empty():
 			# No collision in range, so full range for the animation
 			self.anim_ranges[key] = self.bomb_range
 		else:
@@ -159,18 +159,18 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			var distance_rel = target_cell_pos - get_cell_pos()
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
 			
-			if (target_cell_pos in trigger_bomb.destruct_cells or target_cell_pos in trigger_bomb.indestruct_cells):
+			if target_cell_pos in trigger_bomb.destruct_cells or target_cell_pos in trigger_bomb.indestruct_cells:
 				# This cell was already taken into account in another bomb of the chain reaction, bail out
 				continue
 			
-			if (raycast.collider == level.tilemap_destr):
+			if raycast.collider == level.tilemap_destr:
 				# Register target cell to be destroyed
 				trigger_bomb.destruct_cells.append(target_cell_pos)
-			elif (raycast.collider == level.tilemap_indestr):
+			elif raycast.collider == level.tilemap_indestr:
 				# Register indestructible target cell
 				# TODO: Currently useless, but the idea would be to animate the tile with flames on the edge
 				trigger_bomb.indestruct_cells.append(target_cell_pos)
-			elif (raycast.collider extends global.collectible_script):
+			elif raycast.collider extends global.collectible_script:
 				# Destroy the collectible
 				raycast.collider.destroy()
 			else:
@@ -189,8 +189,8 @@ func trigger_explosion():
 	# Find collisions and act accordingly
 	find_chain_and_collisions(self)
 	# Free bomb spots for the players as soon as they are triggered
-	for bomb in self.chained_bombs + [ self ]:
-		if (bomb.player != null):
+	for bomb in self.chained_bombs + [self]:
+		if bomb.player != null:
 			bomb.player.active_bombs.erase(bomb)
 		# Make sure the bomb is no longer in the collision_exceptions of a player
 		for any_player in level.player_manager.get_children():
@@ -213,13 +213,13 @@ func start_animation():
 	for bomb in [self] + self.chained_bombs:
 		# Display flame "branches" depending on their length
 		for key in dir:
-			if (bomb.anim_ranges[key] != 0):
+			if bomb.anim_ranges[key] != 0:
 				# Handle branch orientation based on the direction
 				var xflip = dir[key].x > 0
 				var yflip = dir[key].x + dir[key].y > 0
 				var transpose = dir[key].y != 0
 				# Change tiles visuals and register their characteristics for later cleaning
-				if (bomb.anim_ranges[key] == 1):
+				if bomb.anim_ranges[key] == 1:
 					# Display a "small" flame
 					var pos = bomb.get_cell_pos() + dir[key]
 					bomb.flame_cells.append({'pos': pos, 'tile': FLAME_SMALL, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
@@ -229,7 +229,7 @@ func start_animation():
 					for i in range(1, bomb.anim_ranges[key] + 1):
 						var pos = bomb.get_cell_pos() + i*dir[key]
 						var tile_index
-						if (i == bomb.anim_ranges[key]):
+						if i == bomb.anim_ranges[key]:
 							# Could be split out of the for loop, but then the display is not synced
 							tile_index = FLAME_LONG_END
 						else:
@@ -278,7 +278,7 @@ func stop_animation():
 		# Spawn collectibles randomly based on the rates for each type
 		for pos in bomb.destruct_cells:
 			# Spawn something if we pass the global rate test
-			if (randi() % 100 < global.COLLECTIBLE_RATE):
+			if randi() % 100 < global.COLLECTIBLE_RATE:
 				var collectible = global.collectible_scene.instance()
 				# Determine the collectible type based on their individual frequencies
 				# by picking a number in range of the cumulated frequencies, and then checking
@@ -289,7 +289,7 @@ func stop_animation():
 					if index <= sum:
 						index = i
 						break
-					sum += global.collectibles.freq[i+1]
+					sum += global.collectibles.freq[i + 1]
 				collectible.effect = global.collectibles.types[index]
 				collectible.set_pos(level.map_to_world(pos))
 				level.collectible_manager.add_child(collectible)

@@ -38,7 +38,7 @@ func _ready():
 		player_manager.add_child(player)
 	
 	# Start music if enabled
-	if (global.music):
+	if global.music:
 		get_node("StreamPlayer").play()
 	# Initialise volume levels as loaded from the config
 	get_node("StreamPlayer").set_volume(global.music_volume)
@@ -48,7 +48,7 @@ func _ready():
 	set_process_input(true)
 
 func _input(event):
-	if (Input.is_action_pressed("ui_cancel")):
+	if Input.is_action_pressed("ui_cancel"):
 		# Quit to main menu
 		get_tree().change_scene_to(global.menu_scene)
 
@@ -68,5 +68,5 @@ func tile_center_pos(absolute_pos):
 
 func play_sound(sound):
 	"""Play the requested sound if sound effects are enabled"""
-	if (global.sfx):
+	if global.sfx:
 		get_node("SamplePlayer").play(sound)
