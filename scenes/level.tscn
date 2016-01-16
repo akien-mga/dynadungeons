@@ -1,34 +1,34 @@
 [gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/level.gd" type="Script" id=1]
-[ext_resource path="res://music/dynadingo.ogg" type="AudioStream" id=3]
-[ext_resource path="res://sounds/explosion1.smp" type="Sample" id=6]
-[ext_resource path="res://sounds/pickup.smp" type="Sample" id=8]
-[ext_resource path="res://sounds/explosion2.smp" type="Sample" id=7]
-[ext_resource path="res://sounds/push2.smp" type="Sample" id=10]
-[ext_resource path="res://sounds/push1.smp" type="Sample" id=9]
-[ext_resource path="res://sounds/iamback.smp" type="Sample" id=12]
-[ext_resource path="res://sounds/hahaha.smp" type="Sample" id=5]
-[ext_resource path="res://sounds/bombdrop.smp" type="Sample" id=4]
-[ext_resource path="res://sounds/yoohoo.smp" type="Sample" id=11]
 [ext_resource path="res://sprites/tileset.tres" type="TileSet" id=2]
+[ext_resource path="res://music/dynadingo.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sounds/bombdrop.smp" type="Sample" id=4]
+[ext_resource path="res://sounds/hahaha.smp" type="Sample" id=5]
+[ext_resource path="res://sounds/explosion1.smp" type="Sample" id=6]
+[ext_resource path="res://sounds/explosion2.smp" type="Sample" id=7]
+[ext_resource path="res://sounds/pickup.smp" type="Sample" id=8]
+[ext_resource path="res://sounds/push1.smp" type="Sample" id=9]
+[ext_resource path="res://sounds/push2.smp" type="Sample" id=10]
+[ext_resource path="res://sounds/yoohoo.smp" type="Sample" id=11]
+[ext_resource path="res://sounds/iamback.smp" type="Sample" id=12]
 
 [sub_resource type="SampleLibrary" id=1]
 
-samples/push2 = { "db":10, "pitch":1, "sample":ExtResource( 10 ) }
-samples/push1 = { "db":10, "pitch":1, "sample":ExtResource( 9 ) }
-samples/bombdrop = { "db":0, "pitch":1, "sample":ExtResource( 4 ) }
-samples/respawn2 = { "db":-5, "pitch":1, "sample":ExtResource( 12 ) }
-samples/death = { "db":5, "pitch":1, "sample":ExtResource( 5 ) }
-samples/pickup = { "db":0, "pitch":1, "sample":ExtResource( 8 ) }
-samples/explosion1 = { "db":0, "pitch":1, "sample":ExtResource( 6 ) }
-samples/explosion2 = { "db":0, "pitch":1, "sample":ExtResource( 7 ) }
-samples/respawn1 = { "db":-3, "pitch":1, "sample":ExtResource( 11 ) }
+samples/respawn2 = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 12 ) }
+samples/push2 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 10 ) }
+samples/bombdrop = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/push1 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 9 ) }
+samples/death = { "db":5.0, "pitch":1.0, "sample":ExtResource( 5 ) }
+samples/pickup = { "db":0.0, "pitch":1.0, "sample":ExtResource( 8 ) }
+samples/explosion1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 6 ) }
+samples/explosion2 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 7 ) }
+samples/respawn1 = { "db":-3.0, "pitch":1.0, "sample":ExtResource( 11 ) }
 
 [node name="Level" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D", "__editor_plugin_states__":{ "2D":{ "ofs":Vector2( -340.891, -100.59 ), "snap_grid":true, "snap_offset":Vector2( 0, 0 ), "snap_pixel":false, "snap_relative":false, "snap_rotation":false, "snap_rotation_offset":0, "snap_rotation_step":0.261799, "snap_show_grid":false, "snap_step":Vector2( 32, 32 ), "zoom":1.10803 }, "3D":{ "ambient_light_color":Color( 0.15, 0.15, 0.15, 1 ), "default_light":true, "default_srgb":false, "deflight_rot_x":0.942478, "deflight_rot_y":0.628319, "fov":45, "show_grid":true, "show_origin":true, "viewport_mode":1, "viewports":[ { "distance":4, "listener":true, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 }, { "distance":4, "listener":false, "pos":Vector3( 0, 0, 0 ), "use_environment":false, "use_orthogonal":false, "x_rot":0, "y_rot":0 } ], "zfar":500, "znear":0.1 }, "Anim":{ "visible":false } }, "__editor_run_settings__":{ "custom_args":"-l $scene", "run_mode":0 }, "_edit_lock_":true }
+__meta__ = { "__editor_plugin_screen__":"2D", "_edit_lock_":true }
 
 [node name="MapManager" type="Node" parent="."]
 
@@ -44,8 +44,8 @@ cell/half_offset = 2
 cell/tile_origin = 0
 cell/y_sort = false
 collision/use_kinematic = false
-collision/friction = 1
-collision/bounce = 0
+collision/friction = 1.0
+collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
@@ -64,8 +64,8 @@ cell/half_offset = 2
 cell/tile_origin = 0
 cell/y_sort = false
 collision/use_kinematic = false
-collision/friction = 1
-collision/bounce = 0
+collision/friction = 1.0
+collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
@@ -83,27 +83,27 @@ __meta__ = { "_edit_lock_":true }
 stream/stream = ExtResource( 3 )
 stream/play = false
 stream/loop = true
-stream/volume_db = 0
+stream/volume_db = 0.0
 stream/autoplay = false
 stream/paused = false
-stream/loop_restart_time = 0
+stream/loop_restart_time = 0.0
 stream/buffering_ms = 500
 
 [node name="SamplePlayer" type="SamplePlayer" parent="."]
 
 config/polyphony = 1
 config/samples = SubResource( 1 )
-default/volume_db = 0
-default/pitch_scale = 1
-default/pan = 0
-default/depth = 0
-default/height = 0
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
 default/filter/type = 0
-default/filter/cutoff = 0
-default/filter/resonance = 0
-default/filter/gain = 0
+default/filter/cutoff = 0.0
+default/filter/resonance = 0.0
+default/filter/gain = 0.0
 default/reverb_room = 2
-default/reverb_send = 0
-default/chorus_send = 0
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 
