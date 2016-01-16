@@ -11,7 +11,10 @@
 
 extends Node
 
-### Constants
+### Variables ###
+
+## Consts
+
 const TILE_SIZE = 32 # Characteristic size of a square tile, in pixels
 const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE # Vector2 of the offset to reach the center of a tile
 const MAX_BOMBS = 8 # How many bombs can a player amass
@@ -28,7 +31,7 @@ const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
 # List of remappable actions
 const INPUT_ACTIONS = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
-### Resources
+# Resources
 const menu_scene = preload("res://scenes/menu.tscn")
 const world_scene = preload("res://scenes/world.tscn")
 const level_scene = preload("res://scenes/level.tscn")
@@ -41,21 +44,20 @@ const collectible_script = preload("res://scripts/collectible.gd")
 
 const settings_filename = "user://settings.cfg"
 
+## Parameters
 
-### Parameters
-
-## Display
+# Display
 var width = 960 # Display width
 var height = 832 # Display height
 var fullscreen = false # Whether we run in fullscreen or not
 
-## Audio
+# Audio
 var music = true # Should the music play
 var music_volume = 1 # Volume of the music, between 0 and 1
 var sfx = true # Should sound effects play
 var sfx_volume = 1 # Volume of sound effects, between 0 and 1
 
-## Gameplay
+# Gameplay
 var nb_players = 2 # How many players participate in a new game
 var nb_lives = 1 # How many lives each player has
 # Drop frequencies for each type of collectible. Frequencies should be in theory be
@@ -63,7 +65,29 @@ var nb_lives = 1 # How many lives each player has
 var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "speed_decrease", "confusion", "life_increase", "kick_skill" ],
                      'freq': [ 100, 100, 70, 50, 30, 5*nb_lives, 30 ] }
 
-### Config management
+### Callbacks ###
+
+func _ready():
+	# Get a new seed to generate random numbers
+	randomize()
+	
+	# Load parameters from the config file, overriding the default ones
+	load_config()
+	
+	# Handle display
+	OS.set_window_size(Vector2(width, height))
+	OS.set_window_fullscreen(fullscreen)
+	
+	# Save window size if changed by the user
+	get_tree().connect("screen_resized", self, "save_screen_size")
+	
+	# Calculate the sum of the frequencies of all collectibles, to be used
+	# in calculations when a collectible has to be picked randomly
+	collectibles.sum_freq = 0
+	for freq in collectibles.freq:
+		collectibles.sum_freq += freq
+
+### Helpers ###
 
 func load_config():
 	"""Load the user-defined settings from the default settings file. Create this file
@@ -159,25 +183,3 @@ func save_screen_size():
 	height = int(screen_size.y)
 	save_to_config("display", "width", width)
 	save_to_config("display", "height", height)
-
-### Initialisation
-
-func _ready():
-	# Get a new seed to generate random numbers
-	randomize()
-	
-	# Load parameters from the config file, overriding the default ones
-	load_config()
-	
-	# Handle display
-	OS.set_window_size(Vector2(width, height))
-	OS.set_window_fullscreen(fullscreen)
-	
-	# Save window size if changed by the user
-	get_tree().connect("screen_resized", self, "save_screen_size")
-	
-	# Calculate the sum of the frequencies of all collectibles, to be used
-	# in calculations when a collectible has to be picked randomly
-	collectibles.sum_freq = 0
-	for freq in collectibles.freq:
-		collectibles.sum_freq += freq

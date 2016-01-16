@@ -11,17 +11,20 @@
 
 extends Area2D
 
-# Nodes
+### Variables ###
+
+## Nodes
 onready var level = get_node("/root/World/Level")
 
-# Member variables
+## Member variables
 var effect = "bomb_increase" # Effect of this collectible object
 var pickable = true # Can it be picked? Prevents picking multiple times
 
-func destroy():
-	# Make sure the effect won't be applied several times and play destroy animation
-	pickable = false
-	get_node("AnimationPlayer").play("destroy")
+### Callbacks ###
+
+func _ready():
+	# Initalise texture based on the effect
+	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))
 
 func _on_body_enter(body):
 	if (pickable and body extends global.player_script):
@@ -46,6 +49,9 @@ func _on_body_enter(body):
 func _on_AnimationPlayer_finished():
 	self.queue_free()
 
-func _ready():
-	# Initalise texture based on the effect
-	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))
+### Functions ###
+
+func destroy():
+	# Make sure the effect won't be applied several times and play destroy animation
+	pickable = false
+	get_node("AnimationPlayer").play("destroy")

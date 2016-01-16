@@ -11,7 +11,9 @@
 
 extends Node2D
 
-### Nodes
+### Variables ###
+
+## Nodes
 onready var map_manager = get_node("MapManager")
 onready var player_manager = get_node("PlayerManager")
 onready var bomb_manager = get_node("BombManager")
@@ -19,36 +21,10 @@ onready var collectible_manager = get_node("CollectibleManager")
 onready var tilemap_destr = map_manager.get_node("Destructible")
 onready var tilemap_indestr = map_manager.get_node("Indestructible")
 
-### Member variables
+## Member variables
 var exploding_bombs = [] # Array of bombs that are currently exploding
 
-### Helper functions
-
-func map_to_world(map_pos):
-	"""Return absolute position of the center of the tile"""
-	return tilemap_destr.map_to_world(map_pos) + global.TILE_OFFSET
-
-func world_to_map(world_pos):
-	"""Return tilemap position"""
-	return tilemap_destr.world_to_map(world_pos)
-
-func tile_center_pos(absolute_pos):
-	"""Give the absolute coordinates of the center of the nearest tile"""
-	return map_to_world(world_to_map(absolute_pos))
-
-func play_sound(sound):
-	"""Play the requested sound if sound effects are enabled"""
-	if (global.sfx):
-		get_node("SamplePlayer").play(sound)
-
-### Input processing
-
-func _input(event):
-	if (Input.is_action_pressed("ui_cancel")):
-		# Quit to main menu
-		get_tree().change_scene_to(global.menu_scene)
-
-### Initialisation
+### Callbacks ###
 
 func _ready():
 	# Instance players
@@ -70,3 +46,27 @@ func _ready():
 	
 	# Process input for the "cancel" quit that returns to the main menu
 	set_process_input(true)
+
+func _input(event):
+	if (Input.is_action_pressed("ui_cancel")):
+		# Quit to main menu
+		get_tree().change_scene_to(global.menu_scene)
+
+### Helpers ###
+
+func map_to_world(map_pos):
+	"""Return absolute position of the center of the tile"""
+	return tilemap_destr.map_to_world(map_pos) + global.TILE_OFFSET
+
+func world_to_map(world_pos):
+	"""Return tilemap position"""
+	return tilemap_destr.world_to_map(world_pos)
+
+func tile_center_pos(absolute_pos):
+	"""Give the absolute coordinates of the center of the nearest tile"""
+	return map_to_world(world_to_map(absolute_pos))
+
+func play_sound(sound):
+	"""Play the requested sound if sound effects are enabled"""
+	if (global.sfx):
+		get_node("SamplePlayer").play(sound)

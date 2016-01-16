@@ -11,7 +11,25 @@
 
 extends Control
 
-### Windows and scenes
+### Callbacks ###
+
+func _ready():
+	# Initialise settings widgets
+	get_node("Settings/Fullscreen").set_pressed(global.fullscreen)
+	get_node("Settings/Music").set_pressed(global.music)
+	get_node("Settings/MusicVolume").set_value(global.music_volume)
+	get_node("Settings/SFX").set_pressed(global.sfx)
+	get_node("Settings/SFXVolume").set_value(global.sfx_volume)
+	
+	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
+	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
+	
+	get_node("Settings/NbLives/Slider").set_value(global.nb_lives)
+	get_node("Settings/NbLives/Label").set_text("Lives: " + str(global.nb_lives))
+
+### Functions ###
+
+## Windows and scenes
 
 func new_game():
 	get_tree().change_scene_to(global.world_scene)
@@ -33,17 +51,15 @@ func goto_settings():
 func goto_controls():
 	goto_screen("Controls")
 
-### Settings
+## Settings
 
-## Display
-
+# Display
 func settings_toggle_fullscreen(pressed):
 	global.fullscreen = pressed
 	OS.set_window_fullscreen(global.fullscreen)
 	global.save_to_config("display", "fullscreen", pressed)
 
-## Audio
-
+# Audio
 func settings_toggle_music(pressed):
 	global.music = pressed
 	global.save_to_config("audio", "music", pressed)
@@ -60,8 +76,7 @@ func settings_set_sfx_volume(value):
 	global.sfx_volume = value
 	global.save_to_config("audio", "sfx_volume", value)
 
-## Gameplay
-
+# Gameplay
 func settings_set_players(value):
 	global.nb_players = int(value)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(value))
@@ -71,19 +86,3 @@ func settings_set_lives(value):
 	global.nb_lives = int(value)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(value))
 	global.save_to_config("gameplay", "nb_lives", int(value))
-
-### Initialisation
-
-func _ready():
-	# Initialise settings widgets
-	get_node("Settings/Fullscreen").set_pressed(global.fullscreen)
-	get_node("Settings/Music").set_pressed(global.music)
-	get_node("Settings/MusicVolume").set_value(global.music_volume)
-	get_node("Settings/SFX").set_pressed(global.sfx)
-	get_node("Settings/SFXVolume").set_value(global.sfx_volume)
-	
-	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
-	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
-	
-	get_node("Settings/NbLives/Slider").set_value(global.nb_lives)
-	get_node("Settings/NbLives/Label").set_text("Lives: " + str(global.nb_lives))

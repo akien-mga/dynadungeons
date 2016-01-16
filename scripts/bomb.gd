@@ -11,11 +11,9 @@
 
 extends Node2D
 
-### Nodes
-onready var level = get_node("/root/World/Level")
-var player
+### Variables ###
 
-### Constants
+## Consts
 const dir = { "up": Vector2(0,-1),
               "down": Vector2(0,1),
               "left": Vector2(-1,0),
@@ -27,7 +25,11 @@ const FLAME_LONG_MIDDLE = 10
 const FLAME_LONG_END = 11
 const SLIDE_SPEED = 8 # How fast a bomb slides when kicked
 
-### Member variables
+## Nodes
+onready var level = get_node("/root/World/Level")
+var player
+
+## Member variables
 var cell_pos = Vector2() # Bomb tilemap coordinates
 var bomb_range # Range of the bomb explosion
 var counter = 1 # Counter for flame animation
@@ -42,23 +44,81 @@ var indestruct_cells = [] # Coordinates of the destructible cells in range
 var slide_dir = Vector2() # Direction in which to slide upon kick
 var target_cell = Vector2() # The tilemap coordinates of the target
 
-### Helper functions
+### Callbacks ###
 
-func get_cell_pos():
-	return cell_pos
+func _fixed_process(delta):
+	"""Handle the potential sliding movement of the bomb if it has been kicked"""
+	# Calculate the candidate position of the bomb for the next frame
+	# FIXME: Why the 0.5 btw?
+	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta
+	# Check if the bomb is past its target cell
+	if (slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0):
+		set_pos_and_update(level.map_to_world(target_cell))
+		
+		# The bomb reached its target, check if it can continue to slide to the next tile
+		var space_state = level.get_world_2d().get_direct_space_state()
+		var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + slide_dir), [ get_node("StaticBody2D") ])
+		
+		if (raycast.empty()):
+			target_cell = get_cell_pos() + slide_dir
+		else:
+			set_fixed_process(false)
+			return
+	else:
+		set_pos(new_pos)
+	
+	# Check currently exploding bombs that might trigger this one
+	for trigger_bomb in level.exploding_bombs:
+		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
+			for cell_dict in bomb.flame_cells:
+				if (self.get_cell_pos() == cell_dict.pos):
+					# Stop animations and timer
+					get_node("AnimatedSprite/TimerIdle").stop()
+					get_node("AnimatedSprite/AnimationPlayer").stop()
+					trigger_explosion()
+					return
 
-func update_cell_pos():
-	"""Save the tilemap position to access it with less calculations involved
-	The drawback being that this function must be called each time the bomb changes cell
-	"""
-	cell_pos = level.world_to_map(self.get_pos())
+func _on_TimerIdle_timeout():
+	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
 
-func set_pos_and_update(abs_pos):
-	"""Set the absolute position and update the discrete tilemap position"""
-	set_pos(abs_pos)
-	update_cell_pos()
+func _on_TimerAnim_timeout():
+	"""Handle the update of the explosion animation and the freeing of the exploded bomb nodes"""
+	if (counter < 5):
+		update_animation()
+		counter += 1
+		get_node("AnimatedSprite/TimerAnim").start()
+	else:
+		# Stop the animation before freeing the chained and trigger bombs
+		stop_animation()
+		# Free chained bombs and trigger bomb after removing their owner's collision exception
+		level.exploding_bombs.erase(self)
+		for bomb in self.chained_bombs:
+			if (bomb.player != null):
+				bomb.player.collision_exceptions.erase(bomb)
+			bomb.queue_free()
+		if (self.player != null):
+			self.player.collision_exceptions.erase(self)
+		self.queue_free()
 
-### Main logic
+### Functions ###
+
+## Movement logic
+
+func push_dir(direction):
+	"""Let the bomb slide in the specified direction until it hits an obstacle"""
+	# Initialise the space state and cast a ray to check for an obstacle in the adjacent tile
+	var space_state = level.get_world_2d().get_direct_space_state()
+	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
+	
+	# If there is no obstacle, start sliding and use _fixed_process to handle it
+	if (raycast.empty()):
+		# Save the slide direction and target cell for use in _fixed_process
+		slide_dir = direction
+		target_cell = get_cell_pos() + slide_dir
+		set_fixed_process(true)
+		level.play_sound("push" + str(randi() % 2 + 1))
+
+## Trigger logic
 
 func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	"""Cast rays to determine collisions with other bombs, and do that recursively to find the complete chain reaction
@@ -120,21 +180,30 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 	for bomb in new_bombs:
 		bomb.find_chain_and_collisions(trigger_bomb, exceptions)
 
-func push_dir(direction):
-	"""Let the bomb slide in the specified direction until it hits an obstacle"""
-	# Initialise the space state and cast a ray to check for an obstacle in the adjacent tile
-	var space_state = level.get_world_2d().get_direct_space_state()
-	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
+func trigger_explosion():
+	"""Main process called when the bombs reaches its timeout. This function stops the bomb if slides,
+	checks for collisions, removes bombs from their player parent and starts the animation.
+	"""
+	# Stop potential sliding movement
+	set_fixed_process(false)
+	# Find collisions and act accordingly
+	find_chain_and_collisions(self)
+	# Free bomb spots for the players as soon as they are triggered
+	for bomb in self.chained_bombs + [ self ]:
+		if (bomb.player != null):
+			bomb.player.active_bombs.erase(bomb)
+		# Make sure the bomb is no longer in the collision_exceptions of a player
+		for any_player in level.player_manager.get_children():
+			if bomb in any_player.collision_exceptions:
+				any_player.remove_collision_exception_with(self.get_node("StaticBody2D"))
+				any_player.collision_exceptions.erase(bomb)
 	
-	# If there is no obstacle, start sliding and use _fixed_process to handle it
-	if (raycast.empty()):
-		# Save the slide direction and target cell for use in _fixed_process
-		slide_dir = direction
-		target_cell = get_cell_pos() + slide_dir
-		set_fixed_process(true)
-		level.play_sound("push" + str(randi() % 2 + 1))
+	# Register as exploding bomb
+	level.exploding_bombs.append(self)
+	# Play animation corresponding to the explosion of self and its chain reaction
+	start_animation()
 
-### Explosion animation and logic
+## Explosion animation and logic
 
 func start_animation():
 	"""Start displaying the explosion animation for all bombs triggered by this node
@@ -226,86 +295,18 @@ func stop_animation():
 				level.collectible_manager.add_child(collectible)
 			level.tilemap_destr.set_cell(pos.x, pos.y, -1)
 
-### Process
+## Helpers
 
-func _on_TimerIdle_timeout():
-	self.get_node("AnimatedSprite/AnimationPlayer").play("countdown")
+func get_cell_pos():
+	return cell_pos
 
-func trigger_explosion():
-	"""Main process called when the bombs reaches its timeout. This function stops the bomb if slides,
-	checks for collisions, removes bombs from their player parent and starts the animation.
+func update_cell_pos():
+	"""Save the tilemap position to access it with less calculations involved
+	The drawback being that this function must be called each time the bomb changes cell
 	"""
-	# Stop potential sliding movement
-	set_fixed_process(false)
-	# Find collisions and act accordingly
-	find_chain_and_collisions(self)
-	# Free bomb spots for the players as soon as they are triggered
-	for bomb in self.chained_bombs + [ self ]:
-		if (bomb.player != null):
-			bomb.player.active_bombs.erase(bomb)
-		# Make sure the bomb is no longer in the collision_exceptions of a player
-		for any_player in level.player_manager.get_children():
-			if bomb in any_player.collision_exceptions:
-				any_player.remove_collision_exception_with(self.get_node("StaticBody2D"))
-				any_player.collision_exceptions.erase(bomb)
+	cell_pos = level.world_to_map(self.get_pos())
 
-	# Register as exploding bomb
-	level.exploding_bombs.append(self)
-	# Play animation corresponding to the explosion of self and its chain reaction
-	start_animation()
-
-func _on_TimerAnim_timeout():
-	"""Handle the update of the explosion animation and the freeing of the exploded bomb nodes"""
-	if (counter < 5):
-		update_animation()
-		counter += 1
-		get_node("AnimatedSprite/TimerAnim").start()
-	else:
-		# Stop the animation before freeing the chained and trigger bombs
-		stop_animation()
-		# Free chained bombs and trigger bomb after removing their owner's collision exception
-		level.exploding_bombs.erase(self)
-		for bomb in self.chained_bombs:
-			if (bomb.player != null):
-				bomb.player.collision_exceptions.erase(bomb)
-			bomb.queue_free()
-		if (self.player != null):
-			self.player.collision_exceptions.erase(self)
-		self.queue_free()
-
-func _fixed_process(delta):
-	"""Handle the potential sliding movement of the bomb if it has been kicked"""
-	# Calculate the candidate position of the bomb for the next frame
-	# FIXME: Why the 0.5 btw?
-	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta
-	# Check if the bomb is past its target cell
-	if (slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0):
-		set_pos_and_update(level.map_to_world(target_cell))
-		
-		# The bomb reached its target, check if it can continue to slide to the next tile
-		var space_state = level.get_world_2d().get_direct_space_state()
-		var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + slide_dir), [ get_node("StaticBody2D") ])
-		
-		if (raycast.empty()):
-			target_cell = get_cell_pos() + slide_dir
-		else:
-			set_fixed_process(false)
-			return
-	else:
-		set_pos(new_pos)
-	
-	# Check currently exploding bombs that might trigger this one
-	for trigger_bomb in level.exploding_bombs:
-		for bomb in [ trigger_bomb ] + trigger_bomb.chained_bombs:
-			for cell_dict in bomb.flame_cells:
-				if (self.get_cell_pos() == cell_dict.pos):
-					# Stop animations and timer
-					get_node("AnimatedSprite/TimerIdle").stop()
-					get_node("AnimatedSprite/AnimationPlayer").stop()
-					trigger_explosion()
-					return
-
-### Initialisation
-
-func _ready():
-	pass
+func set_pos_and_update(abs_pos):
+	"""Set the absolute position and update the discrete tilemap position"""
+	set_pos(abs_pos)
+	update_cell_pos()

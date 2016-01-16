@@ -11,11 +11,13 @@
 
 extends KinematicBody2D
 
-### Nodes
+### Variables ###
+
+## Nodes
 onready var gameover = get_node("/root/World/Gameover")
 onready var level = get_node("/root/World/Level")
 
-### Member variables
+## Member variables
 export var id = 1 # Player ID, used to reference the scene
 export var char = "goblin-brown" # Name of the char sprite
 var dead = false # Is the player dead for good?
@@ -26,7 +28,7 @@ var collision_exceptions = [] # List of collision exceptions (typically bomb jus
 var old_motion = Vector2() # Previous motion, to check anim changes
 var anim = "down_idle" # Current movement animation
 
-### Characteristics
+# Characteristics
 var lives # Current number of lives
 var speed = 10 # Current movement speed
 var bomb_quota = 3 # Current max number of bombs
@@ -37,90 +39,35 @@ var confusion = false # Is the player confused (movement inverted)?
 var tmp_powerup = null # Current temporary powerup affecting the player
 var tmp_anim = null # Current temporary animation playing, linked to tmp_powerup
 
-### Helper functions
+### Callbacks ###
 
-func get_cell_pos():
-	"""Return tilemap position"""
-	return level.world_to_map(self.get_pos())
-
-func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
-	"""Define a temporary powerup that affects the player, start corresponding timer
-	with the specified duration and specified animation if any.
-	"""
-	# If another temporary powerup is active, disable it
-	if (tmp_powerup != null):
-		set(tmp_powerup, false)
-	# Save the type name for later reference
-	tmp_powerup = powerup_type
-	# Enable the corresponding variable (same var name as the string content)
-	set(tmp_powerup, true)
-	# Start the timer that should disable the temporary powerup
-	get_node("TimerPowerup").set_wait_time(duration)
-	get_node("TimerPowerup").start()
+func _ready():
+	# Initialise character sprite
+	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
+	lives = global.nb_lives
 	
-	# If a status animation is given, stop previous animation and start playing new one
-	if (status_anim != null and status_anim != tmp_anim):
-		if (tmp_anim != null):
-			# Force stopping previous animation and reset it (to e.g. remove modulation)
-			get_node("StatusAnimations").stop(true)
-		get_node("StatusAnimations").get_animation(status_anim).set_loop(true)
-		get_node("StatusAnimations").play(status_anim)
-		tmp_anim = status_anim
+	set_fixed_process(true)
 
-### Actions
+func _fixed_process(delta):
+	process_movement(delta)
+	process_actions()
+	if (not invincible):
+		process_explosions()
+	process_gameover()
+	
+	# Check if the player is leaving the tile of a bomb in his collision exceptions
+	# If so, remove the bomb from the exceptions
+	for bomb in collision_exceptions:
+		if (self.get_pos().x < (bomb.get_cell_pos().x - 0.5)*global.TILE_SIZE \
+			or self.get_pos().x > (bomb.get_cell_pos().x + 1.5)*global.TILE_SIZE \
+			or self.get_pos().y < (bomb.get_cell_pos().y - 0.5)*global.TILE_SIZE \
+			or self.get_pos().y > (bomb.get_cell_pos().y + 1.5)*global.TILE_SIZE):
+			remove_collision_exception_with(bomb.get_node("StaticBody2D"))
+			collision_exceptions.erase(bomb)
 
-func place_bomb():
-	"""Instance a bomb and place it on the tile where the player stands.
-	Bombs are added as children to the bomb manager.
-	"""
-	var bomb = global.bomb_scene.instance()
-	level.bomb_manager.add_child(bomb)
-	# Define position and update the bomb's discrete tilemap pos member var
-	bomb.set_pos_and_update(level.tile_center_pos(self.get_pos()))
-	bomb.player = self
-	bomb.bomb_range = self.bomb_range
-	# Add a collision exception for any player currently standing on the tile
-	for player in level.player_manager.get_children():
-		if (player.get_cell_pos() == bomb.get_cell_pos()):
-			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
-			player.collision_exceptions.append(bomb)
-	# List bomb as an active bomb of its dropper
-	active_bombs.append(bomb)
-	# Play bomb drop sound effect
-	level.get_node("SamplePlayer").play("bombdrop")
+### Functions ###
 
-func die():
-	"""Handle the death of the player. If the player has more than one lives,
-	a timer is started for respawn. Else, the player is marked as "dead" for good.
-	"""
-	# Stop processing input and possible explosions, the player is dead
-	set_fixed_process(false)
-	# Play death animation and remove a life
-	get_node("CharSprite").hide()
-	get_node("ActionAnimations").play("death")
-	level.play_sound("death")
-	lives -= 1
-	if (lives == 0):
-		# The player is dead for good, make its bombs orphans since the scene will be freed
-		for bomb in level.bomb_manager.get_children():
-			bomb.player = null
-		dead = true
-		# If there are only two players when self dies, the other player wins
-		var players = level.player_manager.get_children()
-		if (players.size() == 2):
-			var winner
-			if (self != players[0]):
-				winner = 0
-			else:
-				winner = 1
-			# Show gameover screen
-			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " Wins!")
-			gameover.show()
-	else:
-		# The player still has lives, start timer for respawn
-		get_node("TimerRespawn").start()
-
-### Process
+## Process
 
 func process_movement(delta):
 	"""Process movement input and act accordingly"""
@@ -212,24 +159,60 @@ func process_gameover():
 	if gameover.is_visible() and Input.is_action_pressed("ui_accept"):
 		get_tree().change_scene_to(global.menu_scene)
 
-func _fixed_process(delta):
-	process_movement(delta)
-	process_actions()
-	if (not invincible):
-		process_explosions()
-	process_gameover()
-	
-	# Check if the player is leaving the tile of a bomb in his collision exceptions
-	# If so, remove the bomb from the exceptions
-	for bomb in collision_exceptions:
-		if (self.get_pos().x < (bomb.get_cell_pos().x - 0.5)*global.TILE_SIZE \
-			or self.get_pos().x > (bomb.get_cell_pos().x + 1.5)*global.TILE_SIZE \
-			or self.get_pos().y < (bomb.get_cell_pos().y - 0.5)*global.TILE_SIZE \
-			or self.get_pos().y > (bomb.get_cell_pos().y + 1.5)*global.TILE_SIZE):
-			remove_collision_exception_with(bomb.get_node("StaticBody2D"))
-			collision_exceptions.erase(bomb)
+## Actions
 
-### Signals
+func place_bomb():
+	"""Instance a bomb and place it on the tile where the player stands.
+	Bombs are added as children to the bomb manager.
+	"""
+	var bomb = global.bomb_scene.instance()
+	level.bomb_manager.add_child(bomb)
+	# Define position and update the bomb's discrete tilemap pos member var
+	bomb.set_pos_and_update(level.tile_center_pos(self.get_pos()))
+	bomb.player = self
+	bomb.bomb_range = self.bomb_range
+	# Add a collision exception for any player currently standing on the tile
+	for player in level.player_manager.get_children():
+		if (player.get_cell_pos() == bomb.get_cell_pos()):
+			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
+			player.collision_exceptions.append(bomb)
+	# List bomb as an active bomb of its dropper
+	active_bombs.append(bomb)
+	# Play bomb drop sound effect
+	level.get_node("SamplePlayer").play("bombdrop")
+
+func die():
+	"""Handle the death of the player. If the player has more than one lives,
+	a timer is started for respawn. Else, the player is marked as "dead" for good.
+	"""
+	# Stop processing input and possible explosions, the player is dead
+	set_fixed_process(false)
+	# Play death animation and remove a life
+	get_node("CharSprite").hide()
+	get_node("ActionAnimations").play("death")
+	level.play_sound("death")
+	lives -= 1
+	if (lives == 0):
+		# The player is dead for good, make its bombs orphans since the scene will be freed
+		for bomb in level.bomb_manager.get_children():
+			bomb.player = null
+		dead = true
+		# If there are only two players when self dies, the other player wins
+		var players = level.player_manager.get_children()
+		if (players.size() == 2):
+			var winner
+			if (self != players[0]):
+				winner = 0
+			else:
+				winner = 1
+			# Show gameover screen
+			gameover.get_node("Label").set_text("Player " + str(players[winner].id) + " Wins!")
+			gameover.show()
+	else:
+		# The player still has lives, start timer for respawn
+		get_node("TimerRespawn").start()
+
+## Signals
 
 func _on_TimerPowerup_timeout():
 	if (tmp_powerup == null):
@@ -267,11 +250,32 @@ func _on_ActionAnimations_finished():
 		# Completely remove this player from the game
 		self.queue_free()
 
-### Initialisation
+### Helpers ###
 
-func _ready():
-	# Initialise character sprite
-	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
-	lives = global.nb_lives
+func get_cell_pos():
+	"""Return tilemap position"""
+	return level.world_to_map(self.get_pos())
+
+func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
+	"""Define a temporary powerup that affects the player, start corresponding timer
+	with the specified duration and specified animation if any.
+	"""
+	# If another temporary powerup is active, disable it
+	if (tmp_powerup != null):
+		set(tmp_powerup, false)
+	# Save the type name for later reference
+	tmp_powerup = powerup_type
+	# Enable the corresponding variable (same var name as the string content)
+	set(tmp_powerup, true)
+	# Start the timer that should disable the temporary powerup
+	get_node("TimerPowerup").set_wait_time(duration)
+	get_node("TimerPowerup").start()
 	
-	set_fixed_process(true)
+	# If a status animation is given, stop previous animation and start playing new one
+	if (status_anim != null and status_anim != tmp_anim):
+		if (tmp_anim != null):
+			# Force stopping previous animation and reset it (to e.g. remove modulation)
+			get_node("StatusAnimations").stop(true)
+		get_node("StatusAnimations").get_animation(status_anim).set_loop(true)
+		get_node("StatusAnimations").play(status_anim)
+		tmp_anim = status_anim

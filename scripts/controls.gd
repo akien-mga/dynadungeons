@@ -11,12 +11,37 @@
 
 extends Control
 
-### Member variables
+### Variables ###
+
+## Member variables
 var player_id
 var action
 var button
 
-### Keybindings management
+### Callbacks ###
+
+func _ready():
+	# Add signals based on player ID and action name for each key mapping button
+	for id in range(1,5):
+		for action in global.INPUT_ACTIONS:
+			var button = get_node("Player" + str(id)).get_node(action)
+			button.connect("pressed", self, "wait_for_input", [ id, action ])
+			# Initialise button text based on the current InputMap
+			button.set_text(OS.get_scancode_string(InputMap.get_action_list(str(id) + "_" + action)[0].scancode))
+
+func _input(event):
+	if (event.type == InputEvent.KEY):
+		# Got a valid input, stop polling and reinitialise context help
+		set_process_input(false)
+		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
+		# Unless the input is a cancel key, display the typed key and change the binding
+		if (not event.is_action("ui_cancel")):
+			button.set_text(OS.get_scancode_string(event.scancode))
+			change_key(player_id, action, event)
+
+### Functions ###
+
+## Keybindings management
 
 func wait_for_input(local_player_id, local_action):
 	"""Waits for a user input to assign to the action corresponding to the pressed button
@@ -40,24 +65,3 @@ func change_key(player_id, action, event):
 	InputMap.action_add_event(id_action, event)
 	# Save the human-readable string in the config file
 	global.save_to_config("input", id_action, OS.get_scancode_string(event.scancode))
-
-func _input(event):
-	if (event.type == InputEvent.KEY):
-		# Got a valid input, stop polling and reinitialise context help
-		set_process_input(false)
-		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
-		# Unless the input is a cancel key, display the typed key and change the binding
-		if (not event.is_action("ui_cancel")):
-			button.set_text(OS.get_scancode_string(event.scancode))
-			change_key(player_id, action, event)
-
-### Initialisation
-
-func _ready():
-	# Add signals based on player ID and action name for each key mapping button
-	for id in range(1,5):
-		for action in global.INPUT_ACTIONS:
-			var button = get_node("Player" + str(id)).get_node(action)
-			button.connect("pressed", self, "wait_for_input", [ id, action ])
-			# Initialise button text based on the current InputMap
-			button.set_text(OS.get_scancode_string(InputMap.get_action_list(str(id) + "_" + action)[0].scancode))
