@@ -16,26 +16,26 @@ onready var gameover = get_node("/root/World/Gameover")
 onready var level = get_node("/root/World/Level")
 
 ### Member variables
-export var id = 1					# Player ID, used to reference the scene
-export var char = "goblin-brown"	# Name of the char sprite
-var dead = false					# Is the player dead for good?
+export var id = 1 # Player ID, used to reference the scene
+export var char = "goblin-brown" # Name of the char sprite
+var dead = false # Is the player dead for good?
 
-var active_bombs = []				# List of active bombs dropped by this player
-var collision_exceptions = []		# List of collision exceptions (typically bomb just dropped)
+var active_bombs = [] # List of active bombs dropped by this player
+var collision_exceptions = [] # List of collision exceptions (typically bomb just dropped)
 
-var old_motion = Vector2()			# Previous motion, to check anim changes
-var anim = "down_idle"				# Current movement animation
+var old_motion = Vector2() # Previous motion, to check anim changes
+var anim = "down_idle" # Current movement animation
 
 ### Characteristics
-var lives							# Current number of lives
-var speed = 10						# Current movement speed
-var bomb_quota = 3					# Current max number of bombs
-var bomb_range = 2					# Current range of bomb explosiosn
-var kick = false					# Can the play kick bomb away?
-var invincible = false				# Is the player invincible (typically at respawn)?
-var confusion = false				# Is the player confused (movement inverted)?
-var tmp_powerup = null				# Current temporary powerup affecting the player
-var tmp_anim = null					# Current temporary animation playing, linked to tmp_powerup
+var lives # Current number of lives
+var speed = 10 # Current movement speed
+var bomb_quota = 3 # Current max number of bombs
+var bomb_range = 2 # Current range of bomb explosiosn
+var kick = false # Can the play kick bomb away?
+var invincible = false # Is the player invincible (typically at respawn)?
+var confusion = false # Is the player confused (movement inverted)?
+var tmp_powerup = null # Current temporary powerup affecting the player
+var tmp_anim = null # Current temporary animation playing, linked to tmp_powerup
 
 ### Helper functions
 

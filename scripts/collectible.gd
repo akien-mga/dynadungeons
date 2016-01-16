@@ -15,8 +15,8 @@ extends Area2D
 onready var level = get_node("/root/World/Level")
 
 # Member variables
-var effect = "bomb_increase"		# Effect of this collectible object
-var pickable = true					# Can it be picked? Prevents picking multiple times
+var effect = "bomb_increase" # Effect of this collectible object
+var pickable = true # Can it be picked? Prevents picking multiple times
 
 func destroy():
 	# Make sure the effect won't be applied several times and play destroy animation

@@ -25,22 +25,22 @@ const FLAME_SOURCE = 8
 const FLAME_SMALL = 9
 const FLAME_LONG_MIDDLE = 10
 const FLAME_LONG_END = 11
-const SLIDE_SPEED = 8		# How fast a bomb slides when kicked
+const SLIDE_SPEED = 8 # How fast a bomb slides when kicked
 
 ### Member variables
-var cell_pos = Vector2()	# Bomb tilemap coordinates
-var bomb_range				# Range of the bomb explosion
-var counter = 1				# Counter for flame animation
+var cell_pos = Vector2() # Bomb tilemap coordinates
+var bomb_range # Range of the bomb explosion
+var counter = 1 # Counter for flame animation
 
-var exploding = false		# Is the bomb exploding?
-var chained_bombs = []		# Bombs triggered by the chain reaction
-var anim_ranges = {}		# Explosion range for each direction
-var flame_cells = []		# Coordinates and orientation of the cells with flame animation
-var destruct_cells = []		# Coordinates of the destructible cells in range
-var indestruct_cells = []	# Coordinates of the destructible cells in range
+var exploding = false # Is the bomb exploding?
+var chained_bombs = [] # Bombs triggered by the chain reaction
+var anim_ranges = {} # Explosion range for each direction
+var flame_cells = [] # Coordinates and orientation of the cells with flame animation
+var destruct_cells = [] # Coordinates of the destructible cells in range
+var indestruct_cells = [] # Coordinates of the destructible cells in range
 
-var slide_dir = Vector2()	# Direction in which to slide upon kick
-var target_cell = Vector2()	# The tilemap coordinates of the target
+var slide_dir = Vector2() # Direction in which to slide upon kick
+var target_cell = Vector2() # The tilemap coordinates of the target
 
 ### Helper functions
 
@@ -122,7 +122,6 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 
 func push_dir(direction):
 	"""Let the bomb slide in the specified direction until it hits an obstacle"""
-	
 	# Initialise the space state and cast a ray to check for an obstacle in the adjacent tile
 	var space_state = level.get_world_2d().get_direct_space_state()
 	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
@@ -236,7 +235,6 @@ func trigger_explosion():
 	"""Main process called when the bombs reaches its timeout. This function stops the bomb if slides,
 	checks for collisions, removes bombs from their player parent and starts the animation.
 	"""
-	
 	# Stop potential sliding movement
 	set_fixed_process(false)
 	# Find collisions and act accordingly
@@ -277,7 +275,6 @@ func _on_TimerAnim_timeout():
 
 func _fixed_process(delta):
 	"""Handle the potential sliding movement of the bomb if it has been kicked"""
-	
 	# Calculate the candidate position of the bomb for the next frame
 	# FIXME: Why the 0.5 btw?
 	var new_pos = get_pos() + slide_dir*SLIDE_SPEED*0.5*global.TILE_SIZE*delta

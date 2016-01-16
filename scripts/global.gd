@@ -12,17 +12,19 @@
 extends Node
 
 ### Constants
-const TILE_SIZE = 32				# Characteristic size of a square tile, in pixels
+const TILE_SIZE = 32 # Characteristic size of a square tile, in pixels
 const TILE_OFFSET = Vector2(0.5,0.5)*TILE_SIZE # Vector2 of the offset to reach the center of a tile
-const MAX_BOMBS = 8					# How many bombs can a player amass
-const MAX_FLAMERANGE = 8			# How far can an exploding bomb's flame reach
-const MAX_SPEED = 20				# How fast can a player walk
-const COLLECTIBLE_RATE = 25			# How often (in %) will a destroyed object spawn a pickup
+const MAX_BOMBS = 8 # How many bombs can a player amass
+const MAX_FLAMERANGE = 8 # How far can an exploding bomb's flame reach
+const MAX_SPEED = 20 # How fast can a player walk
+const COLLECTIBLE_RATE = 25 # How often (in %) will a destroyed object spawn a pickup
+
 # Data for player intialisation: sprite and position
 const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1,1) },
                       {'char': "goblin-violet", 'tile_pos': Vector2(13,11) },
                       {'char': "goblin-brown", 'tile_pos': Vector2(1,11) },
                       {'char': "human-orange", 'tile_pos': Vector2(13,1) } ]
+
 # List of remappable actions
 const INPUT_ACTIONS = [ "move_up", "move_down", "move_left", "move_right", "drop_bomb" ]
 
@@ -43,19 +45,19 @@ const settings_filename = "user://settings.cfg"
 ### Parameters
 
 ## Display
-var width = 960						# Display width
-var height = 832					# Display height
-var fullscreen = false				# Whether we run in fullscreen or not
+var width = 960 # Display width
+var height = 832 # Display height
+var fullscreen = false # Whether we run in fullscreen or not
 
 ## Audio
-var music = true					# Should the music play
-var music_volume = 1				# Volume of the music, between 0 and 1
-var sfx = true						# Should sound effects play
-var sfx_volume = 1					# Volume of sound effects, between 0 and 1
+var music = true # Should the music play
+var music_volume = 1 # Volume of the music, between 0 and 1
+var sfx = true # Should sound effects play
+var sfx_volume = 1 # Volume of sound effects, between 0 and 1
 
 ## Gameplay
-var nb_players = 2					# How many players participate in a new game
-var nb_lives = 1					# How many lives each player has
+var nb_players = 2 # How many players participate in a new game
+var nb_lives = 1 # How many lives each player has
 # Drop frequencies for each type of collectible. Frequencies should be in theory be
 # between 0 and 100, though higher frequencies would also work.
 var collectibles = { 'types': [ "bomb_increase", "flame_increase", "speed_increase", "speed_decrease", "confusion", "life_increase", "kick_skill" ],

@@ -22,7 +22,6 @@ func wait_for_input(local_player_id, local_action):
 	"""Waits for a user input to assign to the action corresponding to the pressed button
 	This is done by activating input polling and processing it in _input
 	"""
-	
 	# Save the parameters of the binding being remapped for use in _input
 	player_id = local_player_id
 	action = local_action

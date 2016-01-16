@@ -20,7 +20,7 @@ onready var tilemap_destr = map_manager.get_node("Destructible")
 onready var tilemap_indestr = map_manager.get_node("Indestructible")
 
 ### Member variables
-var exploding_bombs = []			# Array of bombs that are currently exploding
+var exploding_bombs = [] # Array of bombs that are currently exploding
 
 ### Helper functions
 
