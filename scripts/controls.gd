@@ -27,7 +27,9 @@ func _ready():
 			var button = get_node("Player" + str(id)).get_node(action)
 			button.connect("pressed", self, "wait_for_input", [id, action])
 			# Initialise button text based on the current InputMap
-			button.set_text(OS.get_scancode_string(InputMap.get_action_list(str(id) + "_" + action)[0].scancode))
+			for event in InputMap.get_action_list(str(id) + "_" + action):
+				if event.type == InputEvent.KEY:
+					button.set_text(OS.get_scancode_string(event.scancode))
 
 func _input(event):
 	if event.type == InputEvent.KEY:
@@ -60,7 +62,9 @@ func change_key(player_id, action, event):
 	var id_action = str(player_id) + "_" + str(action)
 	# Clean all previous bindings
 	for old_event in InputMap.get_action_list(id_action):
-		InputMap.action_erase_event(id_action, old_event)
+		#But don't remove gamepad bindings
+		if old_event.type != InputEvent.JOYSTICK_BUTTON:
+			InputMap.action_erase_event(id_action, old_event)
 	# Bind the new event to the chosen action
 	InputMap.action_add_event(id_action, event)
 	# Save the human-readable string in the config file
