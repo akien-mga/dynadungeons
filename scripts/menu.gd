@@ -26,6 +26,9 @@ func _ready():
 	
 	get_node("Settings/NbLives/Slider").set_value(global.nb_lives)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(global.nb_lives))
+	
+	# Set initial control focus on the "New Game" button
+	get_node("MainMenu/NewGame").grab_focus()
 
 ### Functions ###
 
@@ -44,6 +47,7 @@ func goto_screen(screen):
 
 func goto_mainmenu():
 	goto_screen("MainMenu")
+	get_node("MainMenu/NewGame").grab_focus()
 
 func goto_settings():
 	goto_screen("Settings")
