@@ -54,11 +54,11 @@ func _fixed_process(delta):
 	# Check if the bomb is past its target cell
 	if slide_dir.dot(level.map_to_world(target_cell) - new_pos) < 0:
 		set_pos_and_update(level.map_to_world(target_cell))
-		
+
 		# The bomb reached its target, check if it can continue to slide to the next tile
 		var space_state = level.get_world_2d().get_direct_space_state()
 		var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + slide_dir), [ get_node("StaticBody2D") ])
-		
+
 		if raycast.empty():
 			target_cell = get_cell_pos() + slide_dir
 		else:
@@ -66,7 +66,7 @@ func _fixed_process(delta):
 			return
 	else:
 		set_pos(new_pos)
-	
+
 	# Check currently exploding bombs that might trigger this one
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
@@ -109,7 +109,7 @@ func push_dir(direction):
 	# Initialise the space state and cast a ray to check for an obstacle in the adjacent tile
 	var space_state = level.get_world_2d().get_direct_space_state()
 	var raycast = space_state.intersect_ray(level.map_to_world(get_cell_pos()), level.map_to_world(get_cell_pos() + direction), [ get_node("StaticBody2D") ])
-	
+
 	# If there is no obstacle, start sliding and use _fixed_process to handle it
 	if raycast.empty():
 		# Save the slide direction and target cell for use in _fixed_process
@@ -131,11 +131,11 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 		exceptions += level.player_manager.get_children()
 	# Array of newly triggered bombs for which collisions have to be checked
 	var new_bombs = []
-	
+
 	for key in dir:
 		# Cast a ray between the bomb and its maximal range
 		var raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 31)
-		
+
 		# Check first for other bombs in range that would be chain-triggered
 		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
 			var bomb_found = raycast.collider.get_parent()
@@ -149,7 +149,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			# Add found bomb as an exception and cast a new ray to check for other targets in range of the triggered bomb
 			exceptions.append(raycast.collider)
 			raycast = space_state.intersect_ray(self.get_pos(), self.get_pos() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 15)
-		
+
 		if raycast.empty():
 			# No collision in range, so full range for the animation
 			self.anim_ranges[key] = self.bomb_range
@@ -158,11 +158,11 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 			var target_cell_pos = level.world_to_map(raycast.position + dir[key]*global.TILE_SIZE*0.5)
 			var distance_rel = target_cell_pos - get_cell_pos()
 			self.anim_ranges[key] = dir[key].x*distance_rel.x + dir[key].y*distance_rel.y - 1
-			
+
 			if target_cell_pos in trigger_bomb.destruct_cells or target_cell_pos in trigger_bomb.indestruct_cells:
 				# This cell was already taken into account in another bomb of the chain reaction, bail out
 				continue
-			
+
 			if raycast.collider == level.tilemap_destr:
 				# Register target cell to be destroyed
 				trigger_bomb.destruct_cells.append(target_cell_pos)
@@ -175,7 +175,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 				raycast.collider.destroy()
 			else:
 				print("Warning: Unexpected collision with '", raycast.collider, "' for the bomb explosion.")
-	
+
 	# Run this function on the newly triggered bombs to build the complete chained explosion
 	for bomb in new_bombs:
 		bomb.find_chain_and_collisions(trigger_bomb, exceptions)
@@ -197,7 +197,7 @@ func trigger_explosion():
 			if bomb in any_player.collision_exceptions:
 				any_player.remove_collision_exception_with(self.get_node("StaticBody2D"))
 				any_player.collision_exceptions.erase(bomb)
-	
+
 	# Register as exploding bomb
 	level.exploding_bombs.append(self)
 	# Play animation corresponding to the explosion of self and its chain reaction
@@ -236,33 +236,33 @@ func start_animation():
 							tile_index = FLAME_LONG_MIDDLE
 						bomb.flame_cells.append({'pos': pos, 'tile': tile_index, 'xflip': xflip, 'yflip': yflip, 'transpose': transpose})
 						level.tilemap_destr.set_cell(pos.x, pos.y, tile_index, xflip, yflip, transpose)
-	
+
 	for pos in self.destruct_cells:
 		# "Exploding" tile ID should be normal tile ID + 1
 		level.tilemap_destr.set_cell(pos.x, pos.y, level.tilemap_destr.get_cell(pos.x, pos.y) + 1)
-	
+
 	# Display "source" flame tile where the bomb is, and hide bomb
 	# This is done in a separate loop to make sure source flames override branches
 	for bomb in [self] + self.chained_bombs:
 		bomb.get_node("AnimatedSprite").hide()
 		bomb.exploding = true
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE)
-	
+
 	# Play explosion sound
 	level.play_sound("explosion" + str(randi() % 2 + 1))
-	
+
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()
 
 func update_animation():
 	"""Make the explosion animation loop over a set of sprites for a livelier animation"""
 	var index = 4*(self.counter % 3)
-	
+
 	# Update "branch" tiles first
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
 			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + index, cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
-	
+
 	# Update "source" tiles afterwards to ensure a nice overlap
 	for bomb in [self] + self.chained_bombs:
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, FLAME_SOURCE + index)
@@ -274,7 +274,7 @@ func stop_animation():
 		for cell_dict in bomb.flame_cells:
 			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
 		level.tilemap_destr.set_cell(bomb.get_cell_pos().x, bomb.get_cell_pos().y, -1)
-		
+
 		# Spawn collectibles randomly based on the rates for each type
 		for pos in bomb.destruct_cells:
 			# Spawn something if we pass the global rate test

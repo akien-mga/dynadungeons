@@ -45,7 +45,7 @@ func _ready():
 	# Initialise character sprite
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
 	lives = global.nb_lives
-	
+
 	set_fixed_process(true)
 
 func _fixed_process(delta):
@@ -54,7 +54,7 @@ func _fixed_process(delta):
 	if not invincible:
 		process_explosions()
 	process_gameover()
-	
+
 	# Check if the player is leaving the tile of a bomb in his collision exceptions
 	# If so, remove the bomb from the exceptions
 	for bomb in collision_exceptions:
@@ -72,7 +72,7 @@ func _fixed_process(delta):
 func process_movement(delta):
 	"""Process movement input and act accordingly"""
 	var motion = Vector2(0, 0)
-	
+
 	if Input.is_action_pressed(str(id) + "_move_up"):
 		motion += Vector2(0, -1)
 	if Input.is_action_pressed(str(id) + "_move_down"):
@@ -81,16 +81,16 @@ func process_movement(delta):
 		motion += Vector2(-1, 0)
 	if Input.is_action_pressed(str(id) + "_move_right"):
 		motion += Vector2(1, 0)
-	
+
 	if confusion:
 		# Go in the opposite direction since the player is confused
 		motion = -motion
-	
+
 	# Normalise motion vector and apply speed modifiers to get motion in px
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	# Actually move the player
 	move(motion)
-	
+
 	# Handle kicking of bombs
 	if kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children():
 		var bomb = get_collider().get_parent()
@@ -98,7 +98,7 @@ func process_movement(delta):
 		# FIXME: Use Vector2.angle_to() when it's fixed https://github.com/okamstudio/godot/pull/2260
 		if motion.normalized() != bomb.slide_dir.normalized():
 			bomb.push_dir(bomb.get_cell_pos() - self.get_cell_pos())
-	
+
 	# If the previous movement generated a collision, try to slide (e.g. along an edge)
 	# Too many slide attempts provide "jumping" through tiles
 	# TODO: Needs investigating as even with one attempt some unusual effects
@@ -108,11 +108,11 @@ func process_movement(delta):
 		motion = get_collision_normal().slide(motion)
 		move(motion)
 		slide_attempts -= 1
-	
+
 	# If the motion doesn't change, don't try to change the animation
 	if old_motion == motion:
 		return
-	
+
 	old_motion = motion
 	if motion == Vector2(0, 0):
 		anim += "_idle"
@@ -123,7 +123,7 @@ func process_movement(delta):
 		anim = "down"
 	elif motion.y < 0:
 		anim = "up"
-	
+
 	get_node("ActionAnimations").play(anim)
 
 func process_actions():
@@ -218,7 +218,7 @@ func _on_TimerPowerup_timeout():
 	if tmp_powerup == null:
 		print("ERROR: empty tmp_powerup at end of timer")
 		return
-	
+
 	# Deactivate the current temprary powerup animation if any
 	if tmp_anim != null:
 		get_node("StatusAnimations").get_animation(tmp_anim).set_loop(false)
@@ -270,7 +270,7 @@ func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
 	# Start the timer that should disable the temporary powerup
 	get_node("TimerPowerup").set_wait_time(duration)
 	get_node("TimerPowerup").start()
-	
+
 	# If a status animation is given, stop previous animation and start playing new one
 	if status_anim != null and status_anim != tmp_anim:
 		if tmp_anim != null:

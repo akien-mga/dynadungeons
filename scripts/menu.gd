@@ -20,13 +20,13 @@ func _ready():
 	get_node("Settings/MusicVolume").set_value(global.music_volume)
 	get_node("Settings/SFX").set_pressed(global.sfx)
 	get_node("Settings/SFXVolume").set_value(global.sfx_volume)
-	
+
 	get_node("Settings/NbPlayers/Slider").set_value(global.nb_players)
 	get_node("Settings/NbPlayers/Label").set_text("Players: " + str(global.nb_players))
-	
+
 	get_node("Settings/NbLives/Slider").set_value(global.nb_lives)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(global.nb_lives))
-	
+
 	# Set initial control focus on the "New Game" button
 	get_node("MainMenu/NewGame").grab_focus()
 

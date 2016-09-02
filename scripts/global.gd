@@ -71,17 +71,17 @@ var collectibles = { 'types': ["bomb_increase", "flame_increase", "speed_increas
 func _ready():
 	# Get a new seed to generate random numbers
 	randomize()
-	
+
 	# Load parameters from the config file, overriding the default ones
 	load_config()
-	
+
 	# Handle display
 	OS.set_window_size(Vector2(width, height))
 	OS.set_window_fullscreen(fullscreen)
-	
+
 	# Save window size if changed by the user
 	get_tree().connect("screen_resized", self, "save_screen_size")
-	
+
 	# Calculate the sum of the frequencies of all collectibles, to be used
 	# in calculations when a collectible has to be picked randomly
 	collectibles.sum_freq = 0
@@ -99,46 +99,46 @@ func load_config():
 	if err:
 		# TODO: Better error handling
 		# Config file does not exist, dump default settings in it
-		
+
 		# Display parameters
 		config.set_value("display", "width", width)
 		config.set_value("display", "height", height)
 		config.set_value("display", "fullscreen", fullscreen)
-		
+
 		# Audio parameters
 		config.set_value("audio", "music", music)
 		config.set_value("audio", "music_volume", music_volume)
 		config.set_value("audio", "sfx", sfx)
 		config.set_value("audio", "sfx_volume", sfx_volume)
-		
+
 		# Gameplay parameters
 		config.set_value("gameplay", "nb_players", nb_players)
 		config.set_value("gameplay", "nb_lives", nb_lives)
-		
+
 		# Default inputs
 		var action_name
 		for i in range(1, 5):
 			for action in INPUT_ACTIONS:
 				action_name = str(i) + "_" + action
 				config.set_value("input", action_name, OS.get_scancode_string(InputMap.get_action_list(action_name)[0].scancode))
-		
+
 		config.save(settings_filename)
 	else:
 		# Display parameters
 		set_from_cfg(config, "display", "width")
 		set_from_cfg(config, "display", "height")
 		set_from_cfg(config, "display", "fullscreen")
-		
+
 		# Audio parameters
 		set_from_cfg(config, "audio", "music")
 		set_from_cfg(config, "audio", "music_volume")
 		set_from_cfg(config, "audio", "sfx")
 		set_from_cfg(config, "audio", "sfx_volume")
-		
+
 		# Gameplay parameters
 		set_from_cfg(config, "gameplay", "nb_players")
 		set_from_cfg(config, "gameplay", "nb_lives")
-		
+
 		# User-defined input overrides
 		var scancode
 		var event

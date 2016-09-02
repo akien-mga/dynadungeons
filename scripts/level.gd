@@ -36,14 +36,14 @@ func _ready():
 		player.char = global.PLAYER_DATA[i].char
 		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
 		player_manager.add_child(player)
-	
+
 	# Start music if enabled
 	if global.music:
 		get_node("StreamPlayer").play()
 	# Initialise volume levels as loaded from the config
 	get_node("StreamPlayer").set_volume(global.music_volume)
 	get_node("SamplePlayer").set_default_volume(global.sfx_volume)
-	
+
 	# Process input for the "cancel" quit that returns to the main menu
 	set_process_input(true)
 
