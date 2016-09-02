@@ -15,15 +15,15 @@
 
 [sub_resource type="SampleLibrary" id=1]
 
-samples/respawn2 = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 12 ) }
-samples/push2 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 10 ) }
 samples/bombdrop = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
-samples/push1 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 9 ) }
 samples/death = { "db":5.0, "pitch":1.0, "sample":ExtResource( 5 ) }
-samples/pickup = { "db":0.0, "pitch":1.0, "sample":ExtResource( 8 ) }
 samples/explosion1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 6 ) }
 samples/explosion2 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 7 ) }
+samples/pickup = { "db":0.0, "pitch":1.0, "sample":ExtResource( 8 ) }
+samples/push1 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 9 ) }
+samples/push2 = { "db":10.0, "pitch":1.0, "sample":ExtResource( 10 ) }
 samples/respawn1 = { "db":-3.0, "pitch":1.0, "sample":ExtResource( 11 ) }
+samples/respawn2 = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 12 ) }
 
 [node name="Level" type="Node2D"]
 

@@ -13,11 +13,12 @@ __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="WallMiddle" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 80, 16 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 64, 0, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WallMiddle"]
 
@@ -40,11 +41,12 @@ _update_shape_index = -1
 
 [node name="WallBottom" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 112, 16 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 96, 0, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WallBottom"]
 
@@ -67,11 +69,12 @@ _update_shape_index = -1
 
 [node name="Crate" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 80, 48 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 64, 32, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Crate"]
 
@@ -94,11 +97,12 @@ _update_shape_index = -1
 
 [node name="CrateExploding" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 112, 48 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 96, 32, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="CrateExploding"]
 
@@ -121,11 +125,12 @@ _update_shape_index = -1
 
 [node name="Bush" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 16, 48 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 0, 32, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Bush"]
 
@@ -148,11 +153,12 @@ _update_shape_index = -1
 
 [node name="BushExploding" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( 48, 48 )
 texture = ExtResource( 1 )
 region = true
 region_rect = Rect2( 32, 32, 32, 32 )
-__meta__ = { "_edit_group_":true, "_editor_collapsed":true }
+__meta__ = { "_edit_group_":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="BushExploding"]
 

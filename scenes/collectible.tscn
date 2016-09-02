@@ -11,17 +11,6 @@ extents = Vector2( 16, 16 )
 
 [sub_resource type="Animation" id=2]
 
-resource/name = "pickup"
-length = 0.4
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.1, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3 ] }
-
-[sub_resource type="Animation" id=3]
-
 resource/name = "destroy"
 length = 1.3
 loop = false
@@ -29,11 +18,24 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("FireOverlay:visibility/visible")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 1.3 ), "transitions":FloatArray( 1, 1 ), "values":[ true, false ] }
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 1.3 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
 tracks/1/type = "value"
 tracks/1/path = NodePath("FireOverlay:visibility/opacity")
 tracks/1/interp = 1
-tracks/1/keys = { "cont":true, "times":FloatArray( 0, 0.6, 0.8, 1, 1.3 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "values":[ 0, 1, 0.6, 1, 0 ] }
+tracks/1/imported = false
+tracks/1/keys = { "times":FloatArray( 0, 0.6, 0.8, 1, 1.3 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "update":0, "values":[ 0, 1, 0.6, 1, 0 ] }
+
+[sub_resource type="Animation" id=3]
+
+length = 0.4
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.1, 0.2, 0.3 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3 ] }
 
 [node name="Collectible" type="Area2D"]
 
@@ -66,8 +68,8 @@ texture = ExtResource( 3 )
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/pickup = SubResource( 2 )
-anims/destroy = SubResource( 3 )
+anims/destroy = SubResource( 2 )
+anims/pickup = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
