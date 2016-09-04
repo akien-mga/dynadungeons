@@ -1,15 +1,16 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=12 format=1]
 
 [ext_resource path="res://scripts/menu.gd" type="Script" id=1]
 [ext_resource path="res://background.png" type="Texture" id=2]
 [ext_resource path="res://fonts/firasans-book-32.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://fonts/firasans-book-16.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://scripts/controls.gd" type="Script" id=5]
-[ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" id=6]
-[ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=7]
-[ext_resource path="res://sprites/icons/arrow-left.png" type="Texture" id=8]
-[ext_resource path="res://sprites/icons/arrow-right.png" type="Texture" id=9]
-[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=10]
+[ext_resource path="res://scripts/lobby.gd" type="Script" id=5]
+[ext_resource path="res://scripts/controls.gd" type="Script" id=6]
+[ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" id=7]
+[ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=8]
+[ext_resource path="res://sprites/icons/arrow-left.png" type="Texture" id=9]
+[ext_resource path="res://sprites/icons/arrow-right.png" type="Texture" id=10]
+[ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=11]
 
 [node name="Menu" type="Control"]
 
@@ -49,7 +50,7 @@ margin/top = 0.0
 margin/right = 40.0
 margin/bottom = 40.0
 
-[node name="Label" type="Label" parent="MainMenu"]
+[node name="Title" type="Label" parent="MainMenu"]
 
 focus/ignore_mouse = true
 focus/stop_mouse = true
@@ -68,7 +69,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="NewGame" type="Button" parent="MainMenu"]
+[node name="LocalGame" type="Button" parent="MainMenu"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
@@ -82,7 +83,24 @@ custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
-text = "New Game"
+text = "Local Game"
+flat = false
+
+[node name="GoNetwork" type="Button" parent="MainMenu"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 256.0
+margin/top = 180.0
+margin/right = 416.0
+margin/bottom = 212.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Network Game"
 flat = false
 
 [node name="GoSettings" type="Button" parent="MainMenu"]
@@ -92,9 +110,9 @@ focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 margin/left = 256.0
-margin/top = 192.0
+margin/top = 256.0
 margin/right = 416.0
-margin/bottom = 224.0
+margin/bottom = 288.0
 custom_fonts/font = ExtResource( 4 )
 toggle_mode = false
 enabled_focus_mode = 2
@@ -117,6 +135,326 @@ toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Quit"
+flat = false
+
+[node name="Lobby" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 416.0
+margin/right = 40.0
+margin/bottom = 456.0
+script/script = ExtResource( 5 )
+
+[node name="NameLabel" type="Label" parent="Lobby"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 48.0
+margin/right = 161.0
+margin/bottom = 67.0
+custom_fonts/font = ExtResource( 4 )
+text = "Player Nick"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Name" type="LineEdit" parent="Lobby"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 192.0
+margin/top = 48.0
+margin/right = 336.0
+margin/bottom = 72.0
+text = "BomberDude"
+placeholder/text = "Set a nickname"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="Server" type="Panel" parent="Lobby"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 64.0
+margin/top = 96.0
+margin/right = 416.0
+margin/bottom = 168.0
+
+[node name="PortLabel" type="Label" parent="Lobby/Server"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 8.0
+margin/right = 56.0
+margin/bottom = 32.0
+custom_fonts/font = ExtResource( 4 )
+text = "Port"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Port" type="LineEdit" parent="Lobby/Server"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 88.0
+margin/top = 8.0
+margin/right = 160.0
+margin/bottom = 32.0
+text = "10567"
+placeholder/text = "10567"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="PlayersLabel" type="Label" parent="Lobby/Server"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 40.0
+margin/right = 69.0
+margin/bottom = 64.0
+custom_fonts/font = ExtResource( 4 )
+text = "Players"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Players" type="LineEdit" parent="Lobby/Server"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 88.0
+margin/top = 40.0
+margin/right = 160.0
+margin/bottom = 64.0
+text = "4"
+placeholder/text = "4"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="Host" type="Button" parent="Lobby/Server"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 256.0
+margin/top = 16.0
+margin/right = 328.0
+margin/bottom = 56.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Host"
+flat = false
+
+[node name="Client" type="Panel" parent="Lobby"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 64.0
+margin/top = 184.0
+margin/right = 416.0
+margin/bottom = 256.0
+
+[node name="IPLabel" type="Label" parent="Lobby/Client"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 8.0
+margin/right = 69.0
+margin/bottom = 32.0
+custom_fonts/font = ExtResource( 4 )
+text = "IP"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="IP" type="LineEdit" parent="Lobby/Client"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 88.0
+margin/top = 8.0
+margin/right = 208.0
+margin/bottom = 32.0
+text = "127.0.0.1"
+placeholder/text = "127.0.0.1"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="PortLabel" type="Label" parent="Lobby/Client"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 16.0
+margin/top = 40.0
+margin/right = 56.0
+margin/bottom = 64.0
+custom_fonts/font = ExtResource( 4 )
+text = "Port"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Port" type="LineEdit" parent="Lobby/Client"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 88.0
+margin/top = 40.0
+margin/right = 160.0
+margin/bottom = 64.0
+text = "10567"
+placeholder/text = "10567"
+placeholder/alpha = 0.6
+focus_mode = 2
+caret/caret_blink = false
+caret/caret_blink_speed = 0.65
+
+[node name="Join" type="Button" parent="Lobby/Client"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 256.0
+margin/top = 16.0
+margin/right = 328.0
+margin/bottom = 56.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Join"
+flat = false
+
+[node name="GoBack" type="Button" parent="Lobby"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 256.0
+margin/top = 320.0
+margin/right = 416.0
+margin/bottom = 352.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Back"
+flat = false
+
+[node name="ErrorLabel" type="Label" parent="Lobby"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 80.0
+margin/top = 272.0
+margin/right = 392.0
+margin/bottom = 296.0
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="LobbyPlayers" type="Control" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 480.0
+margin/top = 416.0
+margin/right = 520.0
+margin/bottom = 456.0
+
+[node name="PlayersList" type="ItemList" parent="LobbyPlayers"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 64.0
+margin/top = 96.0
+margin/right = 312.0
+margin/bottom = 264.0
+
+[node name="Start" type="Button" parent="LobbyPlayers"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 336.0
+margin/top = 96.0
+margin/right = 416.0
+margin/bottom = 264.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Start!"
+flat = false
+
+[node name="Leave" type="Button" parent="LobbyPlayers"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 256.0
+margin/top = 320.0
+margin/right = 416.0
+margin/bottom = 352.0
+custom_fonts/font = ExtResource( 4 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Leave"
 flat = false
 
 [node name="Settings" type="Control" parent="."]
@@ -372,7 +710,7 @@ margin/left = 960.0
 margin/top = 0.0
 margin/right = 1000.0
 margin/bottom = 40.0
-script/script = ExtResource( 5 )
+script/script = ExtResource( 6 )
 
 [node name="ContextHelp" type="Label" parent="Controls"]
 
@@ -402,22 +740,6 @@ margin/left = 48.0
 margin/top = 8.0
 margin/right = 88.0
 margin/bottom = 48.0
-
-[node name="Label" type="Label" parent="Controls/Player1"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 56.0
-margin/top = 64.0
-margin/right = 121.0
-margin/bottom = 83.0
-custom_fonts/font = ExtResource( 4 )
-text = "Player 1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="move_up" type="Button" parent="Controls/Player1"]
 
@@ -823,34 +1145,46 @@ flat = false
 [node name="MoveUp" type="Sprite" parent="Controls"]
 
 transform/pos = Vector2( 64, 112 )
-texture = ExtResource( 6 )
+texture = ExtResource( 7 )
 
 [node name="MoveDown" type="Sprite" parent="Controls"]
 
 transform/pos = Vector2( 64, 152 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 
 [node name="MoveLeft" type="Sprite" parent="Controls"]
 
 transform/pos = Vector2( 64, 192 )
-texture = ExtResource( 8 )
+texture = ExtResource( 9 )
 
 [node name="MoveRight" type="Sprite" parent="Controls"]
 
 transform/pos = Vector2( 64, 232 )
-texture = ExtResource( 9 )
+texture = ExtResource( 10 )
 
 [node name="DropBomb" type="Sprite" parent="Controls"]
 
 transform/pos = Vector2( 64, 272 )
-texture = ExtResource( 10 )
+texture = ExtResource( 11 )
 hframes = 4
 
-[connection signal="pressed" from="MainMenu/NewGame" to="." method="new_game"]
+[connection signal="pressed" from="MainMenu/LocalGame" to="." method="new_game"]
+
+[connection signal="pressed" from="MainMenu/GoNetwork" to="." method="goto_lobby"]
 
 [connection signal="pressed" from="MainMenu/GoSettings" to="." method="goto_settings"]
 
 [connection signal="pressed" from="MainMenu/Quit" to="." method="quit"]
+
+[connection signal="pressed" from="Lobby/Server/Host" to="Lobby" method="_on_host_pressed"]
+
+[connection signal="pressed" from="Lobby/Client/Join" to="Lobby" method="_on_join_pressed"]
+
+[connection signal="pressed" from="Lobby/GoBack" to="." method="goto_mainmenu"]
+
+[connection signal="pressed" from="LobbyPlayers/Start" to="Lobby" method="_on_start_pressed"]
+
+[connection signal="pressed" from="LobbyPlayers/Leave" to="Lobby" method="_on_leave_pressed"]
 
 [connection signal="value_changed" from="Settings/NbPlayers/Slider" to="." method="settings_set_players"]
 

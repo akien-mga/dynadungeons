@@ -28,14 +28,15 @@ var exploding_bombs = [] # Array of bombs that are currently exploding
 
 func _ready():
 	# Instance players
-	var player
-	for i in range(global.nb_players):
-		player = global.player_scene.instance()
-		player.id = i+1
-		# Set sprite and position based on player number
-		player.char = global.PLAYER_DATA[i].char
-		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
-		player_manager.add_child(player)
+	if not gamestate.networked:
+		var player
+		for i in range(global.nb_players):
+			player = global.player_scene.instance()
+			player.id = i+1
+			# Set sprite and position based on player number
+			player.char = global.PLAYER_DATA[i].char
+			player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
+			player_manager.add_child(player)
 
 	# Start music if enabled
 	if global.music:
