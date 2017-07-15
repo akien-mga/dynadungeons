@@ -6,7 +6,6 @@
 [node name="Gameover" type="Node2D"]
 
 visibility/visible = false
-__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Sprite" type="Sprite" parent="."]
 

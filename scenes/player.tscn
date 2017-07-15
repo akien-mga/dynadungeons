@@ -18,12 +18,22 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("DeathSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 0, 7 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 7 ]
+}
 tracks/1/type = "value"
 tracks/1/path = NodePath("DeathSprite:visibility/visible")
 tracks/1/interp = 1
 tracks/1/imported = false
-tracks/1/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":1, "values":[ true, false ] }
+tracks/1/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="Animation" id=3]
 
@@ -34,7 +44,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 3, 4 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 3, 4 ]
+}
 
 [sub_resource type="Animation" id=4]
 
@@ -45,7 +60,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=5]
 
@@ -56,7 +76,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 7, 8, 9 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.4, 0.8 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 7, 8, 9 ]
+}
 
 [sub_resource type="Animation" id=6]
 
@@ -67,7 +92,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 2 ] }
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
 
 [sub_resource type="Animation" id=7]
 
@@ -78,7 +108,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5 ), "transitions":FloatArray( 1, 1 ), "update":0, "values":[ 5, 6 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 5, 6 ]
+}
 
 [sub_resource type="Animation" id=8]
 
@@ -89,7 +124,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 1 ] }
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 1,
+"values": [ 1 ]
+}
 
 [sub_resource type="Animation" id=9]
 
@@ -100,7 +140,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:visibility/opacity")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ 1.0, 0.0, 1.0 ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.4, 0.8 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 1.0 ]
+}
 
 [sub_resource type="Animation" id=10]
 
@@ -111,7 +156,12 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:modulate")
 tracks/0/interp = 1
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.2, 1.6 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "update":0, "values":[ Color( 1, 1, 1, 1 ), Color( 0.501961, 1, 1, 1 ), Color( 1, 0.501961, 1, 1 ), Color( 1, 1, 0.501961, 1 ), Color( 1, 1, 1, 1 ) ] }
+tracks/0/keys = {
+"times": FloatArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.501961, 1, 1, 1 ), Color( 1, 0.501961, 1, 1 ), Color( 1, 1, 0.501961, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -123,7 +173,6 @@ collision/layers = 2
 collision/mask = 1
 collision/margin = 0.08
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D", "_edit_group_":true }
 id = 1
 char = "goblin-brown"
 

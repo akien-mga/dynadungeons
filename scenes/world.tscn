@@ -6,8 +6,6 @@
 
 [node name="World" type="Node2D"]
 
-__meta__ = { "__editor_plugin_screen__":"2D" }
-
 [node name="Gameover" parent="." instance=ExtResource( 1 )]
 
 [node name="UI" parent="." instance=ExtResource( 2 )]
