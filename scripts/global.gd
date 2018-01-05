@@ -53,7 +53,7 @@ var height = 832 # Display height
 var fullscreen = false # Whether we run in fullscreen or not
 
 # Audio
-var music = true # Should the music play
+var music = false # Should the music play
 var music_volume = 1 # Volume of the music, between 0 and 1
 var sfx = true # Should sound effects play
 var sfx_volume = 1 # Volume of sound effects, between 0 and 1
