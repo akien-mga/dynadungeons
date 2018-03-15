@@ -28,11 +28,11 @@ func _ready():
 			button.connect("pressed", self, "wait_for_input", [id, action])
 			# Initialise button text based on the current InputMap
 			for event in InputMap.get_action_list(str(id) + "_" + action):
-				if event.type == InputEvent.KEY:
+				if event is InputEventKey:
 					button.set_text(OS.get_scancode_string(event.scancode))
 
 func _input(event):
-	if event.type == InputEvent.KEY:
+	if event is InputEventKey:
 		# Got a valid input, stop polling and reinitialise context help
 		set_process_input(false)
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
@@ -69,3 +69,4 @@ func change_key(player_id, action, event):
 	InputMap.action_add_event(id_action, event)
 	# Save the human-readable string in the config file
 	global.save_to_config("input", id_action, OS.get_scancode_string(event.scancode))
+

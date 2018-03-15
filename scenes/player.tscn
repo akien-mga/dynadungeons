@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/goblin-brown.tres" type="SpriteFrames" id=2]
@@ -7,7 +7,7 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -7.75, -15.75, 7.75, -15.75, 15.75, -7.75, 15.75, 7.75, 7.75, 15.75, -7.75, 15.75, -15.75, 7.75, -15.75, -7.75 )
+points = PoolVector2Array( -7.75, -15.75, 7.75, -15.75, 15.75, -7.75, 15.75, 7.75, 7.75, 15.75, -7.75, 15.75, -15.75, 7.75, -15.75, -7.75 )
 
 [sub_resource type="Animation" id=2]
 
@@ -19,18 +19,18 @@ tracks/0/path = NodePath("DeathSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.5 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 7 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("DeathSprite:visibility/visible")
+tracks/1/path = NodePath("DeathSprite:visible")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.5 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
@@ -45,8 +45,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.5 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 3, 4 ]
 }
@@ -61,8 +61,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
 }
@@ -77,8 +77,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.4, 0.8 ),
-"transitions": FloatArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 7, 8, 9 ]
 }
@@ -93,8 +93,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 2 ]
 }
@@ -109,8 +109,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.5 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 5, 6 ]
 }
@@ -125,8 +125,8 @@ tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0 ),
-"transitions": FloatArray( 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 1 ]
 }
@@ -137,12 +137,12 @@ length = 0.8
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("CharSprite:visibility/opacity")
+tracks/0/path = NodePath("CharSprite:modulate:a")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.4, 0.8 ),
-"transitions": FloatArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0, 1.0 ]
 }
@@ -157,22 +157,22 @@ tracks/0/path = NodePath("CharSprite:modulate")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.4, 0.8, 1.2, 1.6 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.501961, 1, 1, 1 ), Color( 1, 0.501961, 1, 1 ), Color( 1, 1, 0.501961, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="Player" type="KinematicBody2D"]
 
-input/pickable = false
+input_pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-collision/layers = 2
-collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 1 )
+collision_layer = 2
+collision_mask = 1
+collision/safe_margin = 0.08
+script = ExtResource( 1 )
 id = 1
 char = "goblin-brown"
 
@@ -183,25 +183,25 @@ animation = "default"
 
 [node name="DeathSprite" type="AnimatedSprite" parent="."]
 
-visibility/visible = false
-z/z = 1
+visible = false
+z_index = 1
 frames = ExtResource( 3 )
 animation = "default"
 frame = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
-visibility/visible = false
+visible = false
 build_mode = 0
-polygon = Vector2Array( -15.75, -7.75, -15.75, 7.75, -7.75, 15.75, 7.75, 15.75, 15.75, 7.75, 15.75, -7.75, 7.75, -15.75, -7.75, -15.75 )
+polygon = PoolVector2Array( -15.75, -7.75, -15.75, 7.75, -7.75, 15.75, 7.75, 15.75, 15.75, 7.75, 15.75, -7.75, 7.75, -15.75, -7.75, -15.75 )
 shape_range = Vector2( -1, -1 )
 trigger = false
 
 [node name="ActionAnimations" type="AnimationPlayer" parent="."]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
 anims/death = SubResource( 2 )
 anims/down = SubResource( 3 )
 anims/down_idle = SubResource( 4 )
@@ -209,20 +209,20 @@ anims/side = SubResource( 5 )
 anims/side_idle = SubResource( 6 )
 anims/up = SubResource( 7 )
 anims/up_idle = SubResource( 8 )
-playback/active = true
-playback/speed = 1.0
+playback_active = true
+playback_speed = 1.0
 blend_times = [  ]
 autoplay = "down_idle"
 
 [node name="StatusAnimations" type="AnimationPlayer" parent="."]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
 anims/blink = SubResource( 9 )
 anims/modulate = SubResource( 10 )
-playback/active = true
-playback/speed = 1.0
+playback_active = true
+playback_speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
@@ -240,10 +240,8 @@ wait_time = 3.0
 one_shot = true
 autostart = false
 
-[connection signal="finished" from="ActionAnimations" to="." method="_on_ActionAnimations_finished"]
+[connection signal="animation_finished" from="ActionAnimations" to="." method="_on_ActionAnimations_finished" binds=[  ]]
 
-[connection signal="timeout" from="TimerPowerup" to="." method="_on_TimerPowerup_timeout"]
+[connection signal="timeout" from="TimerPowerup" to="." method="_on_TimerPowerup_timeout" binds=[  ]]
 
-[connection signal="timeout" from="TimerRespawn" to="." method="_on_TimerRespawn_timeout"]
-
-
+[connection signal="timeout" from="TimerRespawn" to="." method="_on_TimerRespawn_timeout" binds=[  ]]

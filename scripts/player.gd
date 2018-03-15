@@ -46,9 +46,9 @@ func _ready():
 	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
 	lives = global.nb_lives
 
-	set_fixed_process(true)
+	set_physics_process(true)
 
-func _fixed_process(delta):
+func _physics_process(delta):
 	process_movement(delta)
 	process_actions()
 	if not invincible:
@@ -58,10 +58,10 @@ func _fixed_process(delta):
 	# Check if the player is leaving the tile of a bomb in his collision exceptions
 	# If so, remove the bomb from the exceptions
 	for bomb in collision_exceptions:
-		if (self.get_pos().x < (bomb.get_cell_pos().x - 0.5)*global.TILE_SIZE \
-				or self.get_pos().x > (bomb.get_cell_pos().x + 1.5)*global.TILE_SIZE \
-				or self.get_pos().y < (bomb.get_cell_pos().y - 0.5)*global.TILE_SIZE \
-				or self.get_pos().y > (bomb.get_cell_pos().y + 1.5)*global.TILE_SIZE):
+		if (self.get_position().x < (bomb.get_cell_position().x - 0.5)*global.TILE_SIZE \
+				or self.get_position().x > (bomb.get_cell_position().x + 1.5)*global.TILE_SIZE \
+				or self.get_position().y < (bomb.get_cell_position().y - 0.5)*global.TILE_SIZE \
+				or self.get_position().y > (bomb.get_cell_position().y + 1.5)*global.TILE_SIZE):
 			remove_collision_exception_with(bomb.get_node("StaticBody2D"))
 			collision_exceptions.erase(bomb)
 
@@ -89,7 +89,7 @@ func process_movement(delta):
 	# Normalise motion vector and apply speed modifiers to get motion in px
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	# Actually move the player
-	move(motion)
+	move_and_collide(motion)
 
 	# Handle kicking of bombs
 	if kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children():
@@ -97,7 +97,7 @@ func process_movement(delta):
 		# Check whether we are pushing a moving bomb in its current sliding direction
 		# FIXME: Use Vector2.angle_to() when it's fixed https://github.com/okamstudio/godot/pull/2260
 		if motion.normalized() != bomb.slide_dir.normalized():
-			bomb.push_dir(bomb.get_cell_pos() - self.get_cell_pos())
+			bomb.push_dir(bomb.get_cell_position() - self.get_cell_position())
 
 	# If the previous movement generated a collision, try to slide (e.g. along an edge)
 	# Too many slide attempts provide "jumping" through tiles
@@ -106,7 +106,7 @@ func process_movement(delta):
 	var slide_attempts = 1
 	while is_colliding() and slide_attempts > 0:
 		motion = get_collision_normal().slide(motion)
-		move(motion)
+		move_and_collide(motion)
 		slide_attempts -= 1
 
 	# If the motion doesn't change, don't try to change the animation
@@ -136,7 +136,7 @@ func process_actions():
 		# It should only happen if the player or an enemy already dropped a bomb on the tile,
 		# so it would be in the player's collision_exceptions.
 		for bomb in collision_exceptions:
-			if bomb.get_cell_pos() == self.get_cell_pos():
+			if bomb.get_cell_position() == self.get_cell_position():
 				return
 		place_bomb()
 
@@ -145,13 +145,13 @@ func process_explosions():
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
 			# Kill player if he's standing on an exploding bomb
-			if self.get_cell_pos() == bomb.get_cell_pos():
+			if self.get_cell_position() == bomb.get_cell_position():
 				self.die()
 				return
 			# FIXME: This flame_cells stuff is really getting messy
 			# Check all cells currently "in flames" due to the bomb's explosion
 			for cell_dict in bomb.flame_cells:
-				if self.get_cell_pos() == cell_dict.pos:
+				if self.get_cell_position() == cell_dict.position:
 					self.die()
 					return
 
@@ -168,25 +168,25 @@ func place_bomb():
 	var bomb = global.bomb_scene.instance()
 	level.bomb_manager.add_child(bomb)
 	# Define position and update the bomb's discrete tilemap pos member var
-	bomb.set_pos_and_update(level.tile_center_pos(self.get_pos()))
+	bomb.set_pos_and_update(level.tile_center_position(self.get_position()))
 	bomb.player = self
 	bomb.bomb_range = self.bomb_range
 	# Add a collision exception for any player currently standing on the tile
 	for player in level.player_manager.get_children():
-		if player.get_cell_pos() == bomb.get_cell_pos():
+		if player.get_cell_position() == bomb.get_cell_position():
 			player.add_collision_exception_with(bomb.get_node("StaticBody2D"))
 			player.collision_exceptions.append(bomb)
 	# List bomb as an active bomb of its dropper
 	active_bombs.append(bomb)
 	# Play bomb drop sound effect
-	level.get_node("SamplePlayer").play("bombdrop")
+	level.get_node("Node").play("bombdrop")
 
 func die():
 	"""Handle the death of the player. If the player has more than one lives,
 	a timer is started for respawn. Else, the player is marked as "dead" for good.
 	"""
 	# Stop processing input and possible explosions, the player is dead
-	set_fixed_process(false)
+	set_physics_process(false)
 	# Play death animation and remove a life
 	get_node("CharSprite").hide()
 	get_node("ActionAnimations").play("death")
@@ -232,10 +232,10 @@ func _on_TimerRespawn_timeout():
 	spot and make it temporarily invincible.
 	"""
 	# Resurrect the player in its original spot as it still has lives
-	set_pos(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
+	set_position(level.map_to_world(global.PLAYER_DATA[id - 1].tile_pos))
 	get_node("CharSprite").show()
 	# Start processing input again
-	set_fixed_process(true)
+	set_physics_process(true)
 	# Play one of two respawn sound effects
 	level.play_sound("respawn" + str(randi() % 2 + 1))
 	# Add collision exceptions with all bombs to avoid blocking the player
@@ -252,9 +252,9 @@ func _on_ActionAnimations_finished():
 
 ### Helpers ###
 
-func get_cell_pos():
+func get_cell_position():
 	"""Return tilemap position"""
-	return level.world_to_map(self.get_pos())
+	return level.world_to_map(self.get_position())
 
 func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
 	"""Define a temporary powerup that affects the player, start corresponding timer
@@ -279,3 +279,4 @@ func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
 		get_node("StatusAnimations").get_animation(status_anim).set_loop(true)
 		get_node("StatusAnimations").play(status_anim)
 		tmp_anim = status_anim
+

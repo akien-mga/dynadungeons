@@ -1,0 +1,53 @@
+[application]
+
+config/icon = "res://icon.png"
+config/name = "DynaDungeons"
+run/main_scene = "res://scenes/menu.tscn"
+
+[autoload]
+
+global = "*res://scripts/global.gd"
+
+[display]
+
+window/size/height = 416
+window/size/width = 480
+window/stretch/aspect = "keep"
+window/stretch/mode = "viewport"
+
+[image_loader]
+
+filter = false
+gen_mipmaps = false
+
+[importer_defaults]
+
+texture = {
+"flags/filter": false,
+"flags/mipmaps": false
+}
+
+[input]
+
+1_drop_bomb = [ InputEvent(KEY,16777221), InputEvent(JBUTTON,0) ]
+1_move_down = [ InputEvent(KEY,16777234), InputEvent(JBUTTON,13) ]
+1_move_left = [ InputEvent(KEY,16777231), InputEvent(JBUTTON,14) ]
+1_move_right = [ InputEvent(KEY,16777233), InputEvent(JBUTTON,15) ]
+1_move_up = [ InputEvent(KEY,16777232), InputEvent(JBUTTON,12) ]
+2_drop_bomb = [ InputEvent(KEY,16777218), InputEvent(JBUTTON,0) ]
+2_move_down = [ InputEvent(KEY,83), InputEvent(JBUTTON,13) ]
+2_move_left = [ InputEvent(KEY,65), InputEvent(JBUTTON,14) ]
+2_move_right = [ InputEvent(KEY,68), InputEvent(JBUTTON,15) ]
+2_move_up = [ InputEvent(KEY,87), InputEvent(JBUTTON,12) ]
+3_drop_bomb = [ InputEvent(KEY,85), InputEvent(JBUTTON,0) ]
+3_move_down = [ InputEvent(KEY,75), InputEvent(JBUTTON,13) ]
+3_move_left = [ InputEvent(KEY,74), InputEvent(JBUTTON,14) ]
+3_move_right = [ InputEvent(KEY,76), InputEvent(JBUTTON,15) ]
+3_move_up = [ InputEvent(KEY,73), InputEvent(JBUTTON,12) ]
+4_drop_bomb = [ InputEvent(KEY,16777222), InputEvent(JBUTTON,0) ]
+4_move_down = [ InputEvent(KEY,16777355), InputEvent(JBUTTON,13) ]
+4_move_left = [ InputEvent(KEY,16777354), InputEvent(JBUTTON,14) ]
+4_move_right = [ InputEvent(KEY,16777356), InputEvent(JBUTTON,15) ]
+4_move_up = [ InputEvent(KEY,16777358), InputEvent(JBUTTON,12) ]
+ui_cancel = [ InputEvent(KEY,16777217), InputEvent(JBUTTON,11), InputEvent(JBUTTON,11), InputEvent(JBUTTON,11), InputEvent(JBUTTON,11) ]
+

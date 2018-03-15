@@ -43,7 +43,7 @@ func quit():
 func goto_screen(screen):
 	# The sign is negative because the whole root is translated in the opposite direction
 	# to the actual position that we want to have on focus (i.e. at 0,0)
-	set_pos(-get_node(screen).get_pos())
+	set_position(-get_node(screen).get_position())
 
 func goto_mainmenu():
 	goto_screen("MainMenu")
@@ -90,3 +90,4 @@ func settings_set_lives(value):
 	global.nb_lives = int(value)
 	get_node("Settings/NbLives/Label").set_text("Lives: " + str(value))
 	global.save_to_config("gameplay", "nb_lives", int(value))
+

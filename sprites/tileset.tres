@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=1]
+[gd_resource type="TileSet" load_steps=2 format=2]
 
 [ext_resource path="res://sprites/tileset.png" type="Texture" id=1]
 
@@ -229,4 +229,3 @@ extents = Vector2( 16, 16 )
 19/shapes = [  ]
 19/one_way_collision_direction = Vector2( 0, 0 )
 19/one_way_collision_max_depth = 0.0
-

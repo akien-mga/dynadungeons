@@ -153,7 +153,7 @@ func load_config():
 			# works better to get the control buttons properly initialised in the UI
 			# TODO: Handle multiple events per action in a better way
 			for old_event in InputMap.get_action_list(action):
-				if old_event.type == InputEvent.KEY:
+				if old_event is InputEventKey:
 					InputMap.action_erase_event(action, old_event)
 			InputMap.action_add_event(action, event)
 
@@ -185,3 +185,4 @@ func save_screen_size():
 	height = int(screen_size.y)
 	save_to_config("display", "width", width)
 	save_to_config("display", "height", height)
+
