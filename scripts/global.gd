@@ -24,24 +24,24 @@ const COLLECTIBLE_RATE = 25 # How often (in %) will a destroyed object spawn a p
 
 # Data for player intialisation: sprite and position
 # TODO: Dehardcore these values
-const PLAYER_DATA = [ {'char': "goblin-blue", 'tile_pos': Vector2(1, 1)},
-                      {'char': "goblin-violet", 'tile_pos': Vector2(13, 11)},
-                      {'char': "goblin-brown", 'tile_pos': Vector2(1, 11)},
-                      {'char': "human-orange", 'tile_pos': Vector2(13, 1)} ]
+const PLAYER_DATA = [ {'charname': "goblin-blue", 'tile_pos': Vector2(1, 1)},
+                      {'charname': "goblin-violet", 'tile_pos': Vector2(13, 11)},
+                      {'charname': "goblin-brown", 'tile_pos': Vector2(1, 11)},
+                      {'charname': "human-orange", 'tile_pos': Vector2(13, 1)} ]
 
 # List of remappable actions
 const INPUT_ACTIONS = ["move_up", "move_down", "move_left", "move_right", "drop_bomb"]
 
 # Resources
-const menu_scene = preload("res://scenes/menu.tscn")
-const world_scene = preload("res://scenes/world.tscn")
-const level_scene = preload("res://scenes/level.tscn")
-const player_scene = preload("res://scenes/player.tscn")
-const bomb_scene = preload("res://scenes/bomb.tscn")
-const collectible_scene = preload("res://scenes/collectible.tscn")
+var menu_scene = load("res://scenes/menu.tscn")
+var world_scene = load("res://scenes/world.tscn")
+var level_scene = load("res://scenes/level.tscn")
+var player_scene = load("res://scenes/player.tscn")
+var bomb_scene = load("res://scenes/bomb.tscn")
+var collectible_scene = load("res://scenes/collectible.tscn")
 
-const player_script = preload("res://scripts/player.gd")
-const collectible_script = preload("res://scripts/collectible.gd")
+var player_script = load("res://scripts/player.gd")
+var collectible_script = load("res://scripts/collectible.gd")
 
 const settings_filename = "user://settings.cfg"
 
@@ -146,8 +146,7 @@ func load_config():
 			# Get the key scancode corresponding to the saved human-readable string
 			scancode = OS.find_scancode_from_string(config.get_value("input", action))
 			# Create a new event object based on the saved scancode
-			event = InputEvent()
-			event.type = InputEvent.KEY
+			event = InputEventKey.new()
 			event.scancode = scancode
 			# Replace old actions by the new one - apparently erasing the old action
 			# works better to get the control buttons properly initialised in the UI

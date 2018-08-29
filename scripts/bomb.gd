@@ -46,6 +46,9 @@ var target_cell = Vector2() # The tilemap coordinates of the target
 
 ### Callbacks ###
 
+func _ready():
+	set_physics_process(false)
+
 func _physics_process(delta):
 	"""Handle the potential sliding movement of the bomb if it has been kicked"""
 	# Calculate the candidate position of the bomb for the next frame
@@ -71,7 +74,7 @@ func _physics_process(delta):
 	for trigger_bomb in level.exploding_bombs:
 		for bomb in [trigger_bomb] + trigger_bomb.chained_bombs:
 			for cell_dict in bomb.flame_cells:
-				if self.get_cell_position() == cell_dict.position:
+				if self.get_cell_position() == cell_dict.pos:
 					# Stop animations and timer
 					get_node("AnimatedSprite/TimerIdle").stop()
 					get_node("AnimatedSprite/AnimationPlayer").stop()
@@ -99,6 +102,9 @@ func _on_TimerAnim_timeout():
 		if self.player != null:
 			self.player.collision_exceptions.erase(self)
 		self.queue_free()
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	trigger_explosion()
 
 ### Functions ###
 
@@ -134,7 +140,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 
 	for key in dir:
 		# Cast a ray between the bomb and its maximal range
-		var raycast = space_state.intersect_ray(self.get_position(), self.get_position() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 31)
+		var raycast = space_state.intersect_ray(self.get_position(), self.get_position() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 0x7FFFFFFF, true, true)
 
 		# Check first for other bombs in range that would be chain-triggered
 		while (!raycast.empty() and raycast.collider.get_parent() in level.bomb_manager.get_children()):
@@ -148,7 +154,7 @@ func find_chain_and_collisions(trigger_bomb, exceptions = []):
 				bomb_found.get_node("AnimatedSprite/AnimationPlayer").stop()
 			# Add found bomb as an exception and cast a new ray to check for other targets in range of the triggered bomb
 			exceptions.append(raycast.collider)
-			raycast = space_state.intersect_ray(self.get_position(), self.get_position() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 2147483647, 15)
+			raycast = space_state.intersect_ray(self.get_position(), self.get_position() + dir[key]*self.bomb_range*global.TILE_SIZE, exceptions, 0x7FFFFFFF, false, true)
 
 		if raycast.empty():
 			# No collision in range, so full range for the animation
@@ -261,7 +267,7 @@ func update_animation():
 	# Update "branch" tiles first
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
-			level.tilemap_destr.set_cell(cell_dict.position.x, cell_dict.position.y, cell_dict.tile + index, cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
+			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, cell_dict.tile + index, cell_dict.xflip, cell_dict.yflip, cell_dict.transpose)
 
 	# Update "source" tiles afterwards to ensure a nice overlap
 	for bomb in [self] + self.chained_bombs:
@@ -272,7 +278,7 @@ func stop_animation():
 	and spawn collectibles randomly where destructible objects were present"""
 	for bomb in [self] + self.chained_bombs:
 		for cell_dict in bomb.flame_cells:
-			level.tilemap_destr.set_cell(cell_dict.position.x, cell_dict.position.y, -1)
+			level.tilemap_destr.set_cell(cell_dict.pos.x, cell_dict.pos.y, -1)
 		level.tilemap_destr.set_cell(bomb.get_cell_position().x, bomb.get_cell_position().y, -1)
 
 		# Spawn collectibles randomly based on the rates for each type
@@ -310,4 +316,3 @@ func set_pos_and_update(abs_pos):
 	"""Set the absolute position and update the discrete tilemap position"""
 	set_position(abs_pos)
 	update_cell_position()
-

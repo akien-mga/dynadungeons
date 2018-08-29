@@ -19,7 +19,7 @@ onready var level = get_node("/root/World/Level")
 
 ## Member variables
 export var id = 1 # Player ID, used to reference the scene
-export var char = "goblin-brown" # Name of the char sprite
+export var charname = "goblin-brown" # Name of the char sprite
 var dead = false # Is the player dead for good?
 
 var active_bombs = [] # List of active bombs dropped by this player
@@ -43,10 +43,8 @@ var tmp_anim = null # Current temporary animation playing, linked to tmp_powerup
 
 func _ready():
 	# Initialise character sprite
-	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + char + ".tres"))
+	get_node("CharSprite").set_sprite_frames(load("res://sprites/" + charname + ".tres"))
 	lives = global.nb_lives
-
-	set_physics_process(true)
 
 func _physics_process(delta):
 	process_movement(delta)
@@ -89,11 +87,11 @@ func process_movement(delta):
 	# Normalise motion vector and apply speed modifiers to get motion in px
 	motion = motion.normalized()*speed*0.5*global.TILE_SIZE*delta
 	# Actually move the player
-	move_and_collide(motion)
+	var collision = move_and_collide(motion)
 
 	# Handle kicking of bombs
-	if kick and is_colliding() and get_collider().get_parent() in level.bomb_manager.get_children():
-		var bomb = get_collider().get_parent()
+	if kick and collision and collision.collider.get_parent() in level.bomb_manager.get_children():
+		var bomb = collision.collider.get_parent()
 		# Check whether we are pushing a moving bomb in its current sliding direction
 		# FIXME: Use Vector2.angle_to() when it's fixed https://github.com/okamstudio/godot/pull/2260
 		if motion.normalized() != bomb.slide_dir.normalized():
@@ -104,9 +102,9 @@ func process_movement(delta):
 	# TODO: Needs investigating as even with one attempt some unusual effects
 	# can be seen when going diagonally against walls
 	var slide_attempts = 1
-	while is_colliding() and slide_attempts > 0:
-		motion = get_collision_normal().slide(motion)
-		move_and_collide(motion)
+	while collision and slide_attempts > 0:
+		motion = motion.slide(collision.normal)
+		collision = move_and_collide(motion)
 		slide_attempts -= 1
 
 	# If the motion doesn't change, don't try to change the animation
@@ -151,7 +149,7 @@ func process_explosions():
 			# FIXME: This flame_cells stuff is really getting messy
 			# Check all cells currently "in flames" due to the bomb's explosion
 			for cell_dict in bomb.flame_cells:
-				if self.get_cell_position() == cell_dict.position:
+				if self.get_cell_position() == cell_dict.pos:
 					self.die()
 					return
 
@@ -179,7 +177,8 @@ func place_bomb():
 	# List bomb as an active bomb of its dropper
 	active_bombs.append(bomb)
 	# Play bomb drop sound effect
-	level.get_node("Node").play("bombdrop")
+	# FIXME: Disabled in 2 to 3 conversion
+	#level.get_node("SamplePlayer").play("bombdrop")
 
 func die():
 	"""Handle the death of the player. If the player has more than one lives,
@@ -245,7 +244,7 @@ func _on_TimerRespawn_timeout():
 	# Make the player invicible after respawning to prevent spawnkilling
 	set_tmp_powerup("invincible", 3, "blink")
 
-func _on_ActionAnimations_finished():
+func _on_ActionAnimations_finished(anim_name):
 	if dead:
 		# Completely remove this player from the game
 		self.queue_free()

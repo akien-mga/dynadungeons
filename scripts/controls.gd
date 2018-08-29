@@ -21,6 +21,8 @@ var button
 ### Callbacks ###
 
 func _ready():
+	set_process_input(false)
+
 	# Add signals based on player ID and action name for each key mapping button
 	for id in range(1, 5):
 		for action in global.INPUT_ACTIONS:
@@ -63,7 +65,7 @@ func change_key(player_id, action, event):
 	# Clean all previous bindings
 	for old_event in InputMap.get_action_list(id_action):
 		#But don't remove gamepad bindings
-		if old_event.type != InputEvent.JOYSTICK_BUTTON:
+		if not old_event is InputEventJoypadButton:
 			InputMap.action_erase_event(id_action, old_event)
 	# Bind the new event to the chosen action
 	InputMap.action_add_event(id_action, event)

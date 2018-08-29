@@ -1,5 +1,4 @@
-[gd_scene load_steps=1 format=2]
-
+[gd_scene format=2]
 
 [node name="UI" type="Node2D"]
 
