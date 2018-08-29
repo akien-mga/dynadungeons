@@ -55,7 +55,7 @@ tile_data = PoolIntArray( 65539, 2, 0, 65540, 2, 0, 65541, 2, 0, 65542, 2, 0, 65
 
 [node name="CollectibleManager" type="Node" parent="."]
 
-[node name="StreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 volume_db = 0.0
 pitch_scale = 1.0
@@ -63,6 +63,4 @@ autoplay = false
 stream_paused = false
 mix_target = 0
 bus = "Master"
-
-[node name="SamplePlayer" type="Node" parent="."]
 

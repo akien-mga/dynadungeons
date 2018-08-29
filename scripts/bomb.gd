@@ -122,7 +122,7 @@ func push_dir(direction):
 		slide_dir = direction
 		target_cell = get_cell_position() + slide_dir
 		set_physics_process(true)
-		level.play_sound("push" + str(randi() % 2 + 1))
+		play_sound("push" + str(randi() % 2 + 1))
 
 ## Trigger logic
 
@@ -255,7 +255,7 @@ func start_animation():
 		level.tilemap_destr.set_cell(bomb.get_cell_position().x, bomb.get_cell_position().y, FLAME_SOURCE)
 
 	# Play explosion sound
-	level.play_sound("explosion" + str(randi() % 2 + 1))
+	play_sound("explosion" + str(randi() % 2 + 1))
 
 	# Start timer that should trigger the cleanup of the animation
 	self.get_node("AnimatedSprite/TimerAnim").start()
@@ -316,3 +316,8 @@ func set_pos_and_update(abs_pos):
 	"""Set the absolute position and update the discrete tilemap position"""
 	set_position(abs_pos)
 	update_cell_position()
+
+func play_sound(sound):
+	"""Play the requested sound if sound effects are enabled"""
+	if global.sfx:
+		get_node("SoundEffects/%s" % sound).play()

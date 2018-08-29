@@ -39,10 +39,10 @@ func _ready():
 
 	# Start music if enabled
 	if global.music:
-		get_node("StreamPlayer").play()
+		get_node("MusicPlayer").play()
 	# Initialise volume levels as loaded from the config
 	# FIXME: Disabled during 2 to 3 conversion
-	#get_node("StreamPlayer").set_volume(global.music_volume)
+	#get_node("MusicPlayer").set_volume(global.music_volume)
 	#get_node("SamplePlayer").set_default_volume(global.sfx_volume)
 
 func _input(event):
@@ -63,10 +63,3 @@ func world_to_map(world_pos):
 func tile_center_position(absolute_pos):
 	"""Give the absolute coordinates of the center of the nearest tile"""
 	return map_to_world(world_to_map(absolute_pos))
-
-func play_sound(sound):
-	"""Play the requested sound if sound effects are enabled"""
-	if global.sfx:
-		# FIXME: Disabled during 2 to 3 conversion
-		pass #get_node("SamplePlayer").play(sound)
-

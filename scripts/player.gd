@@ -178,7 +178,7 @@ func place_bomb():
 	active_bombs.append(bomb)
 	# Play bomb drop sound effect
 	# FIXME: Disabled in 2 to 3 conversion
-	#level.get_node("SamplePlayer").play("bombdrop")
+	play_sound("bombdrop")
 
 func die():
 	"""Handle the death of the player. If the player has more than one lives,
@@ -189,7 +189,7 @@ func die():
 	# Play death animation and remove a life
 	get_node("CharSprite").hide()
 	get_node("ActionAnimations").play("death")
-	level.play_sound("death")
+	play_sound("death")
 	lives -= 1
 	if lives == 0:
 		# The player is dead for good, make its bombs orphans since the scene will be freed
@@ -236,7 +236,7 @@ func _on_TimerRespawn_timeout():
 	# Start processing input again
 	set_physics_process(true)
 	# Play one of two respawn sound effects
-	level.play_sound("respawn" + str(randi() % 2 + 1))
+	play_sound("respawn%d" % (randi() % 2 + 1))
 	# Add collision exceptions with all bombs to avoid blocking the player
 	# if an enemy lined up a range of bombs at the spawn point
 	for bomb in level.bomb_manager.get_children():
@@ -279,3 +279,7 @@ func set_tmp_powerup(powerup_type, duration = 5, status_anim = null):
 		get_node("StatusAnimations").play(status_anim)
 		tmp_anim = status_anim
 
+func play_sound(sound):
+	"""Play the requested sound if sound effects are enabled"""
+	if global.sfx:
+		get_node("SoundEffects/%s" % sound).play()

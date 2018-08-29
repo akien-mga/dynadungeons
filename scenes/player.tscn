@@ -1,8 +1,13 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://sprites/goblin-brown.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://sprites/death-anim.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://sounds/bombdrop.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/hahaha.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/yoohoo.wav" type="AudioStream" id=6]
+[ext_resource path="res://sounds/iamback.wav" type="AudioStream" id=7]
+[ext_resource path="res://sounds/pickup.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
 
@@ -240,6 +245,63 @@ process_mode = 1
 wait_time = 3.0
 one_shot = true
 autostart = false
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="bombdrop" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 4 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="death" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="respawn1" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="respawn2" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
+
+[node name="pickup" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 8 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="animation_finished" from="ActionAnimations" to="." method="_on_ActionAnimations_finished"]
 [connection signal="timeout" from="TimerPowerup" to="." method="_on_TimerPowerup_timeout"]

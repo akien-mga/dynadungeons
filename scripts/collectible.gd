@@ -44,8 +44,7 @@ func _on_body_enter(body):
 		elif effect == "kick_skill":
 			body.kick = true
 		get_node("AnimationPlayer").play("pickup")
-		# FIXME: Disabled during 2 to 3 conversion
-		#level.get_node("SamplePlayer").play("pickup")
+		body.play_sound("pickup")
 
 func _on_AnimationPlayer_finished(anim_name):
 	self.queue_free()
