@@ -1,9 +1,9 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/menu.gd" type="Script" id=1]
 [ext_resource path="res://background.png" type="Texture" id=2]
-[ext_resource path="res://fonts/firasans-book-32.fnt" type="BitmapFont" id=3]
-[ext_resource path="res://fonts/firasans-book-16.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://fonts/firasans-book-32.font" type="BitmapFont" id=3]
+[ext_resource path="res://fonts/firasans-book-16.font" type="BitmapFont" id=4]
 [ext_resource path="res://scripts/controls.gd" type="Script" id=5]
 [ext_resource path="res://sprites/icons/arrow-up.png" type="Texture" id=6]
 [ext_resource path="res://sprites/icons/arrow-down.png" type="Texture" id=7]
@@ -12,861 +12,405 @@
 [ext_resource path="res://sprites/pickups/bomb_increase.png" type="Texture" id=10]
 
 [node name="Menu" type="Control"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
-script/script = ExtResource( 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Background" type="CanvasLayer" parent="."]
-
-editor/display_folded = true
 layer = -1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="Background"]
-
+modulate = Color( 1, 1, 0.746254, 0.492285 )
 texture = ExtResource( 2 )
 centered = false
-modulate = Color( 1, 1, 0.746254, 0.492285 )
 
 [node name="MainMenu" type="Control" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 40.0
-margin/bottom = 40.0
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="Label" type="Label" parent="MainMenu"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 96.0
-margin/top = 64.0
-margin/right = 384.0
-margin/bottom = 98.0
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 98.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 text = "DynaDungeons"
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="NewGame" type="Button" parent="MainMenu"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 128.0
-margin/right = 416.0
-margin/bottom = 160.0
+margin_left = 256.0
+margin_top = 128.0
+margin_right = 416.0
+margin_bottom = 160.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "New Game"
-flat = false
 
 [node name="GoSettings" type="Button" parent="MainMenu"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 192.0
-margin/right = 416.0
-margin/bottom = 224.0
+margin_left = 256.0
+margin_top = 192.0
+margin_right = 416.0
+margin_bottom = 224.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Settings"
-flat = false
 
 [node name="Quit" type="Button" parent="MainMenu"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 320.0
-margin/right = 416.0
-margin/bottom = 352.0
+margin_left = 256.0
+margin_top = 320.0
+margin_right = 416.0
+margin_bottom = 352.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Quit"
-flat = false
 
 [node name="Settings" type="Control" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 480.0
-margin/top = 0.0
-margin/right = 520.0
-margin/bottom = 40.0
+margin_left = 480.0
+margin_right = 520.0
+margin_bottom = 40.0
 
 [node name="NbPlayers" type="Control" parent="Settings"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 32.0
-margin/right = 104.0
-margin/bottom = 72.0
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 104.0
+margin_bottom = 72.0
 
 [node name="Label" type="Label" parent="Settings/NbPlayers"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 80.0
-margin/bottom = 32.0
+margin_right = 80.0
+margin_bottom = 32.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Players:"
 align = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="Slider" type="HSlider" parent="Settings/NbPlayers"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 96.0
-margin/top = 0.0
-margin/right = 160.0
-margin/bottom = 20.0
-range/min = 1.0
-range/max = 4.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = true
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
+margin_left = 96.0
+margin_right = 160.0
+margin_bottom = 20.0
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+rounded = true
 
 [node name="NbLives" type="Control" parent="Settings"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 64.0
-margin/right = 104.0
-margin/bottom = 104.0
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 104.0
+margin_bottom = 104.0
 
 [node name="Label" type="Label" parent="Settings/NbLives"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 80.0
-margin/bottom = 32.0
+margin_right = 80.0
+margin_bottom = 32.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Lives:"
 align = 2
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="Slider" type="HSlider" parent="Settings/NbLives"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 96.0
-margin/top = 0.0
-margin/right = 160.0
-margin/bottom = 20.0
-range/min = 1.0
-range/max = 5.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = true
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
+margin_left = 96.0
+margin_right = 160.0
+margin_bottom = 20.0
+min_value = 1.0
+max_value = 5.0
+value = 1.0
+rounded = true
 
 [node name="Fullscreen" type="CheckBox" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 96.0
-margin/top = 96.0
-margin/right = 197.0
-margin/bottom = 124.0
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 197.0
+margin_bottom = 124.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
 text = "Fullscreen"
-flat = false
-align = 0
 
 [node name="Music" type="CheckBox" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 96.0
-margin/top = 128.0
-margin/right = 197.0
-margin/bottom = 156.0
+margin_left = 96.0
+margin_top = 128.0
+margin_right = 197.0
+margin_bottom = 156.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
 text = "Music"
-flat = false
-align = 0
 
 [node name="MusicVolume" type="HSlider" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 256.0
-margin/top = 136.0
-margin/right = 320.0
-margin/bottom = 152.0
-range/min = 0.0
-range/max = 2.0
-range/step = 0.2
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
+margin_left = 256.0
+margin_top = 136.0
+margin_right = 320.0
+margin_bottom = 152.0
+max_value = 2.0
+step = 0.2
+value = 1.0
 
 [node name="SFX" type="CheckBox" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 96.0
-margin/top = 160.0
-margin/right = 221.0
-margin/bottom = 188.0
+margin_left = 96.0
+margin_top = 160.0
+margin_right = 221.0
+margin_bottom = 188.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = true
-enabled_focus_mode = 2
-shortcut = null
 text = "Sound effects"
-flat = false
-align = 0
 
 [node name="SFXVolume" type="HSlider" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 256.0
-margin/top = 168.0
-margin/right = 320.0
-margin/bottom = 184.0
-range/min = 0.0
-range/max = 3.0
-range/step = 0.2
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-tick_count = 0
-ticks_on_borders = false
-focus_mode = 2
+margin_left = 256.0
+margin_top = 168.0
+margin_right = 320.0
+margin_bottom = 184.0
+max_value = 3.0
+step = 0.2
+value = 1.0
 
 [node name="GoControls" type="Button" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 224.0
-margin/right = 416.0
-margin/bottom = 256.0
+margin_left = 256.0
+margin_top = 224.0
+margin_right = 416.0
+margin_bottom = 256.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Controls"
-flat = false
 
 [node name="GoBack" type="Button" parent="Settings"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 320.0
-margin/right = 416.0
-margin/bottom = 352.0
+margin_left = 256.0
+margin_top = 320.0
+margin_right = 416.0
+margin_bottom = 352.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Back"
-flat = false
 
 [node name="Controls" type="Control" parent="."]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 960.0
-margin/top = 0.0
-margin/right = 1000.0
-margin/bottom = 40.0
-script/script = ExtResource( 5 )
+margin_left = 960.0
+margin_right = 1000.0
+margin_bottom = 40.0
+script = ExtResource( 5 )
 
 [node name="ContextHelp" type="Label" parent="Controls"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 64.0
-margin/top = 32.0
-margin/right = 416.0
-margin/bottom = 64.0
+margin_left = 64.0
+margin_top = 32.0
+margin_right = 416.0
+margin_bottom = 64.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Click a key binding to reassign it."
 align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="Player1" type="Control" parent="Controls"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 48.0
-margin/top = 8.0
-margin/right = 88.0
-margin/bottom = 48.0
+margin_left = 48.0
+margin_top = 8.0
+margin_right = 88.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="Controls/Player1"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 56.0
-margin/top = 64.0
-margin/right = 121.0
-margin/bottom = 83.0
+margin_left = 56.0
+margin_top = 64.0
+margin_right = 121.0
+margin_bottom = 83.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Player 1"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="move_up" type="Button" parent="Controls/Player1"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 96.0
-margin/right = 112.0
-margin/bottom = 117.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 112.0
+margin_bottom = 117.0
 
 [node name="move_down" type="Button" parent="Controls/Player1"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 136.0
-margin/right = 112.0
-margin/bottom = 157.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 112.0
+margin_bottom = 157.0
 
 [node name="move_left" type="Button" parent="Controls/Player1"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 176.0
-margin/right = 112.0
-margin/bottom = 197.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 176.0
+margin_right = 112.0
+margin_bottom = 197.0
 
 [node name="move_right" type="Button" parent="Controls/Player1"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 216.0
-margin/right = 112.0
-margin/bottom = 237.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 216.0
+margin_right = 112.0
+margin_bottom = 237.0
 
 [node name="drop_bomb" type="Button" parent="Controls/Player1"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 256.0
-margin/right = 112.0
-margin/bottom = 277.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 112.0
+margin_bottom = 277.0
 
 [node name="Player2" type="Control" parent="Controls"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 128.0
-margin/top = 8.0
-margin/right = 168.0
-margin/bottom = 48.0
+margin_left = 128.0
+margin_top = 8.0
+margin_right = 168.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="Controls/Player2"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 56.0
-margin/top = 64.0
-margin/right = 122.0
-margin/bottom = 83.0
+margin_left = 56.0
+margin_top = 64.0
+margin_right = 122.0
+margin_bottom = 83.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Player 2"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="move_up" type="Button" parent="Controls/Player2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 96.0
-margin/right = 112.0
-margin/bottom = 117.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 112.0
+margin_bottom = 117.0
 
 [node name="move_down" type="Button" parent="Controls/Player2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 136.0
-margin/right = 112.0
-margin/bottom = 157.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 112.0
+margin_bottom = 157.0
 
 [node name="move_left" type="Button" parent="Controls/Player2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 176.0
-margin/right = 112.0
-margin/bottom = 197.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 176.0
+margin_right = 112.0
+margin_bottom = 197.0
 
 [node name="move_right" type="Button" parent="Controls/Player2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 216.0
-margin/right = 112.0
-margin/bottom = 237.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 216.0
+margin_right = 112.0
+margin_bottom = 237.0
 
 [node name="drop_bomb" type="Button" parent="Controls/Player2"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 256.0
-margin/right = 112.0
-margin/bottom = 277.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 112.0
+margin_bottom = 277.0
 
 [node name="Player3" type="Control" parent="Controls"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 208.0
-margin/top = 8.0
-margin/right = 248.0
-margin/bottom = 48.0
+margin_left = 208.0
+margin_top = 8.0
+margin_right = 248.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="Controls/Player3"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 56.0
-margin/top = 64.0
-margin/right = 122.0
-margin/bottom = 83.0
+margin_left = 56.0
+margin_top = 64.0
+margin_right = 122.0
+margin_bottom = 83.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Player 3"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="move_up" type="Button" parent="Controls/Player3"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 96.0
-margin/right = 112.0
-margin/bottom = 117.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 112.0
+margin_bottom = 117.0
 
 [node name="move_down" type="Button" parent="Controls/Player3"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 136.0
-margin/right = 112.0
-margin/bottom = 157.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 112.0
+margin_bottom = 157.0
 
 [node name="move_left" type="Button" parent="Controls/Player3"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 176.0
-margin/right = 112.0
-margin/bottom = 197.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 176.0
+margin_right = 112.0
+margin_bottom = 197.0
 
 [node name="move_right" type="Button" parent="Controls/Player3"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 216.0
-margin/right = 112.0
-margin/bottom = 237.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 216.0
+margin_right = 112.0
+margin_bottom = 237.0
 
 [node name="drop_bomb" type="Button" parent="Controls/Player3"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 256.0
-margin/right = 112.0
-margin/bottom = 277.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 112.0
+margin_bottom = 277.0
 
 [node name="Player4" type="Control" parent="Controls"]
-
-editor/display_folded = true
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 288.0
-margin/top = 8.0
-margin/right = 328.0
-margin/bottom = 48.0
+margin_left = 288.0
+margin_top = 8.0
+margin_right = 328.0
+margin_bottom = 48.0
 
 [node name="Label" type="Label" parent="Controls/Player4"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 56.0
-margin/top = 64.0
-margin/right = 122.0
-margin/bottom = 83.0
+margin_left = 56.0
+margin_top = 64.0
+margin_right = 122.0
+margin_bottom = 83.0
+size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
 text = "Player 4"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 [node name="move_up" type="Button" parent="Controls/Player4"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 96.0
-margin/right = 112.0
-margin/bottom = 117.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 112.0
+margin_bottom = 117.0
 
 [node name="move_down" type="Button" parent="Controls/Player4"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 136.0
-margin/right = 112.0
-margin/bottom = 157.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 112.0
+margin_bottom = 157.0
 
 [node name="move_left" type="Button" parent="Controls/Player4"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 176.0
-margin/right = 112.0
-margin/bottom = 197.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 176.0
+margin_right = 112.0
+margin_bottom = 197.0
 
 [node name="move_right" type="Button" parent="Controls/Player4"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 216.0
-margin/right = 112.0
-margin/bottom = 237.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 216.0
+margin_right = 112.0
+margin_bottom = 237.0
 
 [node name="drop_bomb" type="Button" parent="Controls/Player4"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 64.0
-margin/top = 256.0
-margin/right = 112.0
-margin/bottom = 277.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-flat = false
+margin_left = 64.0
+margin_top = 256.0
+margin_right = 112.0
+margin_bottom = 277.0
 
 [node name="GoBack" type="Button" parent="Controls"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 256.0
-margin/top = 320.0
-margin/right = 416.0
-margin/bottom = 352.0
+margin_left = 256.0
+margin_top = 320.0
+margin_right = 416.0
+margin_bottom = 352.0
 custom_fonts/font = ExtResource( 4 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
 text = "Back"
-flat = false
 
 [node name="MoveUp" type="Sprite" parent="Controls"]
-
-transform/pos = Vector2( 64, 112 )
+position = Vector2( 64, 112 )
 texture = ExtResource( 6 )
 
 [node name="MoveDown" type="Sprite" parent="Controls"]
-
-transform/pos = Vector2( 64, 152 )
+position = Vector2( 64, 152 )
 texture = ExtResource( 7 )
 
 [node name="MoveLeft" type="Sprite" parent="Controls"]
-
-transform/pos = Vector2( 64, 192 )
+position = Vector2( 64, 192 )
 texture = ExtResource( 8 )
 
 [node name="MoveRight" type="Sprite" parent="Controls"]
-
-transform/pos = Vector2( 64, 232 )
+position = Vector2( 64, 232 )
 texture = ExtResource( 9 )
 
 [node name="DropBomb" type="Sprite" parent="Controls"]
-
-transform/pos = Vector2( 64, 272 )
+position = Vector2( 64, 272 )
 texture = ExtResource( 10 )
 hframes = 4
 
 [connection signal="pressed" from="MainMenu/NewGame" to="." method="new_game"]
-
 [connection signal="pressed" from="MainMenu/GoSettings" to="." method="goto_settings"]
-
 [connection signal="pressed" from="MainMenu/Quit" to="." method="quit"]
-
 [connection signal="value_changed" from="Settings/NbPlayers/Slider" to="." method="settings_set_players"]
-
 [connection signal="value_changed" from="Settings/NbLives/Slider" to="." method="settings_set_lives"]
-
 [connection signal="toggled" from="Settings/Fullscreen" to="." method="settings_toggle_fullscreen"]
-
 [connection signal="toggled" from="Settings/Music" to="." method="settings_toggle_music"]
-
 [connection signal="value_changed" from="Settings/MusicVolume" to="." method="settings_set_music_volume"]
-
 [connection signal="toggled" from="Settings/SFX" to="." method="settings_toggle_sfx"]
-
 [connection signal="value_changed" from="Settings/SFXVolume" to="." method="settings_set_sfx_volume"]
-
 [connection signal="pressed" from="Settings/GoControls" to="." method="goto_controls"]
-
 [connection signal="pressed" from="Settings/GoBack" to="." method="goto_mainmenu"]
-
 [connection signal="pressed" from="Controls/GoBack" to="." method="goto_settings"]
-
-

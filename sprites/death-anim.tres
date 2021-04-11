@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=1]
+[gd_resource type="SpriteFrames" load_steps=1 format=2]
 
 [ext_resource path="res://sprites/death-anim/splash1.png" type="Texture" id=1]
 [ext_resource path="res://sprites/death-anim/splash2.png" type="Texture" id=2]
@@ -12,4 +12,3 @@
 [resource]
 
 frames = [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
-

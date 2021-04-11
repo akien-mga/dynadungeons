@@ -33,21 +33,19 @@ func _ready():
 		player = global.player_scene.instance()
 		player.id = i+1
 		# Set sprite and position based on player number
-		player.char = global.PLAYER_DATA[i].char
-		player.set_pos(map_to_world(global.PLAYER_DATA[i].tile_pos))
+		player.charname = global.PLAYER_DATA[i].charname
+		player.set_position(map_to_world(global.PLAYER_DATA[i].tile_pos))
 		player_manager.add_child(player)
 
 	# Start music if enabled
 	if global.music:
-		get_node("StreamPlayer").play()
+		get_node("MusicPlayer").play()
 	# Initialise volume levels as loaded from the config
-	get_node("StreamPlayer").set_volume(global.music_volume)
-	get_node("SamplePlayer").set_default_volume(global.sfx_volume)
+	# FIXME: Disabled during 2 to 3 conversion
+	#get_node("MusicPlayer").set_volume(global.music_volume)
+	#get_node("SamplePlayer").set_default_volume(global.sfx_volume)
 
-	# Process input for the "cancel" quit that returns to the main menu
-	set_process_input(true)
-
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("ui_cancel"):
 		# Quit to main menu
 		get_tree().change_scene_to(global.menu_scene)
@@ -62,11 +60,6 @@ func world_to_map(world_pos):
 	"""Return tilemap position"""
 	return tilemap_destr.world_to_map(world_pos)
 
-func tile_center_pos(absolute_pos):
+func tile_center_position(absolute_pos):
 	"""Give the absolute coordinates of the center of the nearest tile"""
 	return map_to_world(world_to_map(absolute_pos))
-
-func play_sound(sound):
-	"""Play the requested sound if sound effects are enabled"""
-	if global.sfx:
-		get_node("SamplePlayer").play(sound)

@@ -27,7 +27,7 @@ func _ready():
 	get_node("Sprite").set_texture(load("res://sprites/pickups/" + effect + ".png"))
 
 func _on_body_enter(body):
-	if pickable and body extends global.player_script:
+	if pickable and body is global.player_script:
 		# Apply effect
 		if effect == "bomb_increase" and body.bomb_quota < global.MAX_BOMBS:
 			body.bomb_quota += 1
@@ -44,9 +44,9 @@ func _on_body_enter(body):
 		elif effect == "kick_skill":
 			body.kick = true
 		get_node("AnimationPlayer").play("pickup")
-		level.get_node("SamplePlayer").play("pickup")
+		body.play_sound("pickup")
 
-func _on_AnimationPlayer_finished():
+func _on_AnimationPlayer_finished(_anim_name):
 	self.queue_free()
 
 ### Functions ###
@@ -55,3 +55,4 @@ func destroy():
 	# Make sure the effect won't be applied several times and play destroy animation
 	pickable = false
 	get_node("AnimationPlayer").play("destroy")
+

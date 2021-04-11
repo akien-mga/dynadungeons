@@ -1,103 +1,86 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scripts/bomb.gd" type="Script" id=1]
 [ext_resource path="res://sprites/bomb.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://sounds/explosion1.wav" type="AudioStream" id=3]
+[ext_resource path="res://sounds/explosion2.wav" type="AudioStream" id=4]
+[ext_resource path="res://sounds/push1.wav" type="AudioStream" id=5]
+[ext_resource path="res://sounds/push2.wav" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=1]
-
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"times": FloatArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
-"transitions": FloatArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 1, 2, 3, 4, 5 ]
 }
 
 [sub_resource type="Animation" id=2]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
 tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"times": FloatArray( 0, 1 ),
-"transitions": FloatArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="PhysicsMaterial" id=3]
 
-custom_solver_bias = 0.0
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 16, 16 )
 
 [node name="Bomb" type="Node2D"]
-
-script/script = ExtResource( 1 )
+script = ExtResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-
 frames = ExtResource( 2 )
-animation = "default"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite"]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
+autoplay = "idle"
 anims/countdown = SubResource( 1 )
 anims/idle = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
-autoplay = "idle"
 
 [node name="TimerIdle" type="Timer" parent="AnimatedSprite"]
-
-process_mode = 1
 wait_time = 3.0
 one_shot = true
 autostart = true
 
 [node name="TimerAnim" type="Timer" parent="AnimatedSprite"]
-
-process_mode = 1
 wait_time = 0.15
 one_shot = true
-autostart = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-input/pickable = false
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
+physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource( 4 )
 
-shape = SubResource( 3 )
-trigger = false
-_update_shape_index = -1
+[node name="SoundEffects" type="Node" parent="."]
 
-[connection signal="finished" from="AnimatedSprite/AnimationPlayer" to="." method="trigger_explosion"]
+[node name="explosion1" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 3 )
 
+[node name="explosion2" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 4 )
+
+[node name="push1" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 5 )
+
+[node name="push2" type="AudioStreamPlayer2D" parent="SoundEffects"]
+stream = ExtResource( 6 )
+
+[connection signal="animation_finished" from="AnimatedSprite/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="AnimatedSprite/TimerIdle" to="." method="_on_TimerIdle_timeout"]
-
 [connection signal="timeout" from="AnimatedSprite/TimerAnim" to="." method="_on_TimerAnim_timeout"]
-
-
