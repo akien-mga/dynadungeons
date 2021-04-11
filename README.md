@@ -1,16 +1,18 @@
 ## DynaDungeons
 
-Bomberman clone using the awesome open source [Godot](https://github.com/okamstudio/godot) game engine (MIT-licensed), and using the nice [Bomb Party tileset](http://opengameart.org/content/bomb-party-the-complete-set) from OpenGameArt (CC BY 3.0).
+Bomberman clone using the open source [Godot Engine](https://godotengine.org), and using the nice [Bomb Party tileset](http://opengameart.org/content/bomb-party-the-complete-set) from OpenGameArt (CC BY 3.0).
 
 ![In-game screenshot](background.png)
 
-The project is at an early stage of development; the first objective is to reimplement the well-known gameplay of games of the Bomberman series. A further objective might be to extend the gameplay by adding RPG elements and maybe different multiplayer modes such as Capture the Flag.
+This game was a learning project to get familiar with Godot Engine and is no longer actively developed.
 
-Those are mostly ideas so far, and this is a learning project to get familiar with Godot and game development, so don't put your hopes too high. ;-)
+It features local multiplayer for up to 4 players battling with bombs and power-ups on a basic level.
 
 ### Compilation
 
-This repository contains the scenes, scripts and assets that compose the game when used in the Godot game engine. You need the very latest development version of Godot 2.0 to play the current development branch. You can either download precompiled nightly builds for the engine (see [Godot's website](http://godotengine.org/)) or build the engine [from source](https://github.com/okamstudio/godot).
+This repository contains the scenes, scripts and assets that compose the game when used in the Godot game engine.
+
+You need [**Godot 3.x**](https://godotengine.org) to play the current development branch. The old **Godot 2.1** version is available in the [`godot-2.1`](https://github.com/akien-mga/dynadungeons/tree/godot-2.1) branch.
 
 To play the game, simply start Godot engine from DynaDungeons' repository, or import the project in the editor and click "Play". If you compiled or downloaded Godot's export templates, you can also export the game to the platform of your choice (Linux, Windows, Mac OSX, Android, etc.).
 
