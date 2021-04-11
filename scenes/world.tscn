@@ -13,4 +13,3 @@ visible = false
 
 [node name="Level" parent="." instance=ExtResource( 3 )]
 visible = false
-

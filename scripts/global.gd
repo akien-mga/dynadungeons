@@ -25,9 +25,9 @@ const COLLECTIBLE_RATE = 25 # How often (in %) will a destroyed object spawn a p
 # Data for player intialisation: sprite and position
 # TODO: Dehardcore these values
 const PLAYER_DATA = [ {'charname': "goblin-blue", 'tile_pos': Vector2(1, 1)},
-                      {'charname': "goblin-violet", 'tile_pos': Vector2(13, 11)},
-                      {'charname': "goblin-brown", 'tile_pos': Vector2(1, 11)},
-                      {'charname': "human-orange", 'tile_pos': Vector2(13, 1)} ]
+					  {'charname': "goblin-violet", 'tile_pos': Vector2(13, 11)},
+					  {'charname': "goblin-brown", 'tile_pos': Vector2(1, 11)},
+					  {'charname': "human-orange", 'tile_pos': Vector2(13, 1)} ]
 
 # List of remappable actions
 const INPUT_ACTIONS = ["move_up", "move_down", "move_left", "move_right", "drop_bomb"]
@@ -64,7 +64,7 @@ var nb_lives = 1 # How many lives each player has
 # Drop frequencies for each type of collectible. Frequencies should be in theory be
 # between 0 and 100, though higher frequencies would also work.
 var collectibles = { 'types': ["bomb_increase", "flame_increase", "speed_increase", "speed_decrease", "confusion", "life_increase", "kick_skill"],
-                     'freq': [100, 100, 70, 50, 30, 5*nb_lives, 30] }
+					 'freq': [100, 100, 70, 50, 30, 5*nb_lives, 30] }
 
 ### Callbacks ###
 

@@ -10,10 +10,7 @@
 [ext_resource path="res://sounds/pickup.wav" type="AudioStream" id=8]
 
 [sub_resource type="Animation" id=1]
-
 length = 0.5
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("DeathSprite:frame")
 tracks/0/interp = 1
@@ -40,10 +37,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -58,10 +52,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -76,10 +67,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 length = 1.2
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -94,10 +83,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=5]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -112,10 +98,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -130,10 +113,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=7]
-
-length = 1.0
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:frame")
 tracks/0/interp = 1
@@ -148,10 +128,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=8]
-
 length = 0.8
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:modulate:a")
 tracks/0/interp = 1
@@ -166,10 +144,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=9]
-
 length = 1.6
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("CharSprite:modulate")
 tracks/0/interp = 1
@@ -184,37 +159,24 @@ tracks/0/keys = {
 }
 
 [node name="Player" type="KinematicBody2D"]
-input_pickable = false
 collision_layer = 2
-collision_mask = 1
-collision/safe_margin = 0.08
-motion/sync_to_physics = false
 script = ExtResource( 1 )
-id = 1
-charname = "goblin-brown"
 
 [node name="CharSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
-animation = "default"
 
 [node name="DeathSprite" type="AnimatedSprite" parent="."]
 visible = false
 z_index = 1
 frames = ExtResource( 3 )
-animation = "default"
 frame = 7
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
-build_mode = 0
 polygon = PoolVector2Array( -15.75, -7.75, -15.75, 7.75, -7.75, 15.75, 7.75, 15.75, 15.75, 7.75, 15.75, -7.75, 7.75, -15.75, -7.75, -15.75 )
 
 [node name="ActionAnimations" type="AnimationPlayer" parent="."]
-root_node = NodePath("..")
 autoplay = "down_idle"
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
 anims/death = SubResource( 1 )
 anims/down = SubResource( 2 )
 anims/down_idle = SubResource( 3 )
@@ -222,86 +184,35 @@ anims/side = SubResource( 4 )
 anims/side_idle = SubResource( 5 )
 anims/up = SubResource( 6 )
 anims/up_idle = SubResource( 7 )
-blend_times = [  ]
 
 [node name="StatusAnimations" type="AnimationPlayer" parent="."]
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
 anims/blink = SubResource( 8 )
 anims/modulate = SubResource( 9 )
-blend_times = [  ]
 
 [node name="TimerPowerup" type="Timer" parent="."]
-process_mode = 1
 wait_time = 15.0
 one_shot = true
-autostart = false
 
 [node name="TimerRespawn" type="Timer" parent="."]
-process_mode = 1
 wait_time = 3.0
 one_shot = true
-autostart = false
 
 [node name="SoundEffects" type="Node" parent="."]
 
 [node name="bombdrop" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 4 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
 [node name="death" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 5 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
 [node name="respawn1" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 6 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
 [node name="respawn2" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 7 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
 [node name="pickup" type="AudioStreamPlayer2D" parent="SoundEffects"]
 stream = ExtResource( 8 )
-volume_db = 0.0
-pitch_scale = 1.0
-autoplay = false
-stream_paused = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
 
 [connection signal="animation_finished" from="ActionAnimations" to="." method="_on_ActionAnimations_finished"]
 [connection signal="timeout" from="TimerPowerup" to="." method="_on_TimerPowerup_timeout"]

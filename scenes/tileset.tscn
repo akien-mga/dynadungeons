@@ -4,50 +4,18 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
-
 [sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
 extents = Vector2( 16, 16 )
 
 [sub_resource type="PhysicsMaterial" id=3]
 
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
-
 [sub_resource type="PhysicsMaterial" id=4]
-
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
 
 [sub_resource type="PhysicsMaterial" id=5]
 
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
-
 [sub_resource type="PhysicsMaterial" id=6]
 
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
-
 [sub_resource type="PhysicsMaterial" id=7]
-
-friction = 1.0
-rough = false
-bounce = 0.0
-absorbent = false
 
 [node name="TilesetBombParty" type="Node2D"]
 
@@ -58,113 +26,66 @@ region_enabled = true
 region_rect = Rect2( 64, 0, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WallMiddle"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallMiddle/StaticBody2D"]
 shape = SubResource( 2 )
 
 [node name="WallBottom" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 112, 16 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 96, 0, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="WallBottom"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom/StaticBody2D"]
 shape = SubResource( 2 )
 
 [node name="Crate" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 80, 48 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 64, 32, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Crate"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Crate/StaticBody2D"]
 shape = SubResource( 2 )
 
 [node name="CrateExploding" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 112, 48 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 96, 32, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="CrateExploding"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CrateExploding/StaticBody2D"]
 shape = SubResource( 2 )
 
 [node name="Bush" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 16, 48 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 32, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Bush"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bush/StaticBody2D"]
 shape = SubResource( 2 )
 
 [node name="BushExploding" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 48, 48 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 32, 32, 32, 32 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="BushExploding"]
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
 physics_material_override = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BushExploding/StaticBody2D"]
@@ -253,4 +174,3 @@ position = Vector2( 16, 144 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 128, 32, 32 )
-
