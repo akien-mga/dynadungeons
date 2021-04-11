@@ -244,7 +244,7 @@ func _on_TimerRespawn_timeout():
 	# Make the player invicible after respawning to prevent spawnkilling
 	set_tmp_powerup("invincible", 3, "blink")
 
-func _on_ActionAnimations_finished(anim_name):
+func _on_ActionAnimations_finished(_anim_name):
 	if dead:
 		# Completely remove this player from the game
 		self.queue_free()

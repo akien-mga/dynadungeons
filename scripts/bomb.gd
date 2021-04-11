@@ -103,7 +103,7 @@ func _on_TimerAnim_timeout():
 			self.player.collision_exceptions.erase(self)
 		self.queue_free()
 
-func _on_AnimationPlayer_animation_finished(anim_name):
+func _on_AnimationPlayer_animation_finished(_anim_name):
 	trigger_explosion()
 
 ### Functions ###

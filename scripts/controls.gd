@@ -14,9 +14,12 @@ extends Control
 ### Variables ###
 
 ## Member variables
-var player_id
-var action
-var button
+
+var active_input = {
+	"player_id": 0,
+	"action": null,
+	"button": null,
+}
 
 ### Callbacks ###
 
@@ -40,21 +43,21 @@ func _input(event):
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
 		# Unless the input is a cancel key, display the typed key and change the binding
 		if not event.is_action("ui_cancel"):
-			button.set_text(OS.get_scancode_string(event.scancode))
-			change_key(player_id, action, event)
+			active_input.button.set_text(OS.get_scancode_string(event.scancode))
+			change_key(active_input.player_id, active_input.action, event)
 
 ### Functions ###
 
 ## Keybindings management
 
-func wait_for_input(local_player_id, local_action):
+func wait_for_input(player_id, action):
 	"""Waits for a user input to assign to the action corresponding to the pressed button
 	This is done by activating input polling and processing it in _input
 	"""
 	# Save the parameters of the binding being remapped for use in _input
-	player_id = local_player_id
-	action = local_action
-	button = get_node("Player" + str(player_id)).get_node(action)
+	active_input.player_id = player_id
+	active_input.action = action
+	active_input.button = get_node("Player" + str(player_id)).get_node(action)
 	get_node("ContextHelp").set_text("Press a key to assign to the '" + action + "' action.")
 	# Start polling the user input
 	set_process_input(true)

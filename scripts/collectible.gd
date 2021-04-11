@@ -46,7 +46,7 @@ func _on_body_enter(body):
 		get_node("AnimationPlayer").play("pickup")
 		body.play_sound("pickup")
 
-func _on_AnimationPlayer_finished(anim_name):
+func _on_AnimationPlayer_finished(_anim_name):
 	self.queue_free()
 
 ### Functions ###

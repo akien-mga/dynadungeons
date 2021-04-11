@@ -45,7 +45,7 @@ func _ready():
 	#get_node("MusicPlayer").set_volume(global.music_volume)
 	#get_node("SamplePlayer").set_default_volume(global.sfx_volume)
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_pressed("ui_cancel"):
 		# Quit to main menu
 		get_tree().change_scene_to(global.menu_scene)
