@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/yoohoo.wav-dc622af5b8fd6edc44a295535177a8bb.sample"
+type="AudioStreamWAV"
+uid="uid://dmwu6cnjyrcia"
+path="res://.godot/imported/yoohoo.wav-dc622af5b8fd6edc44a295535177a8bb.sample"
 
 [deps]
 
 source_file="res://sounds/yoohoo.wav"
-dest_files=[ "res://.import/yoohoo.wav-dc622af5b8fd6edc44a295535177a8bb.sample" ]
+dest_files=["res://.godot/imported/yoohoo.wav-dc622af5b8fd6edc44a295535177a8bb.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=true
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0

@@ -35,7 +35,7 @@ func _ready():
 ## Windows and scenes
 
 func new_game():
-	get_tree().change_scene_to(global.world_scene)
+	get_tree().change_scene_to_packed(global.world_scene)
 
 func quit():
 	get_tree().quit()
@@ -60,7 +60,7 @@ func goto_controls():
 # Display
 func settings_toggle_fullscreen(pressed):
 	global.fullscreen = pressed
-	OS.set_window_fullscreen(global.fullscreen)
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (global.fullscreen) else Window.MODE_WINDOWED
 	global.save_to_config("display", "fullscreen", pressed)
 
 # Audio

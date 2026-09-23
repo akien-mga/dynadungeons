@@ -1,330 +1,176 @@
-[gd_resource type="TileSet" load_steps=3 format=2]
+[gd_resource type="TileSet" load_steps=22 format=3]
 
-[ext_resource path="res://sprites/tileset.png" type="Texture" id=1]
+[ext_resource type="Texture2D" path="res://sprites/tileset.png" id="1"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 16 )
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0"]
+texture = ExtResource("1")
+margins = Vector2i(64, 0)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "WallMiddle"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1"]
+texture = ExtResource("1")
+margins = Vector2i(96, 0)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "WallBottom"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2"]
+texture = ExtResource("1")
+margins = Vector2i(64, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "Crate"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3"]
+texture = ExtResource("1")
+margins = Vector2i(96, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "CrateExploding"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4"]
+texture = ExtResource("1")
+margins = Vector2i(0, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "Bush"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5"]
+texture = ExtResource("1")
+margins = Vector2i(32, 32)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "BushExploding"
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6"]
+texture = ExtResource("1")
+margins = Vector2i(0, 0)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "GroundDirt"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7"]
+texture = ExtResource("1")
+margins = Vector2i(32, 0)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "GroundGrass"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8"]
+texture = ExtResource("1")
+margins = Vector2i(64, 64)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSource1"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_9"]
+texture = ExtResource("1")
+margins = Vector2i(96, 64)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSmall1"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_10"]
+texture = ExtResource("1")
+margins = Vector2i(32, 64)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongMiddle1"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_11"]
+texture = ExtResource("1")
+margins = Vector2i(0, 64)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongTip1"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_12"]
+texture = ExtResource("1")
+margins = Vector2i(64, 96)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSource2"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_13"]
+texture = ExtResource("1")
+margins = Vector2i(96, 96)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSmall2"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_14"]
+texture = ExtResource("1")
+margins = Vector2i(32, 96)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongMiddle2"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15"]
+texture = ExtResource("1")
+margins = Vector2i(0, 96)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongTip2"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_16"]
+texture = ExtResource("1")
+margins = Vector2i(64, 128)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSource3"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17"]
+texture = ExtResource("1")
+margins = Vector2i(96, 128)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameSmall3"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_18"]
+texture = ExtResource("1")
+margins = Vector2i(32, 128)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongMiddle3"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_19"]
+texture = ExtResource("1")
+margins = Vector2i(0, 128)
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "FlameLongTip3"
 
 [resource]
-0/name = "WallMiddle"
-0/texture = ExtResource( 1 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 64, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 16, 16 )
-0/navigation_offset = Vector2( 16, 16 )
-0/shape_offset = Vector2( 16, 16 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-0/shape = SubResource( 1 )
-0/shape_one_way = false
-0/shape_one_way_margin = 1.0
-0/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-0/z_index = 0
-1/name = "WallBottom"
-1/texture = ExtResource( 1 )
-1/tex_offset = Vector2( 0, 0 )
-1/modulate = Color( 1, 1, 1, 1 )
-1/region = Rect2( 96, 0, 32, 32 )
-1/tile_mode = 0
-1/occluder_offset = Vector2( 16, 16 )
-1/navigation_offset = Vector2( 16, 16 )
-1/shape_offset = Vector2( 16, 16 )
-1/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-1/shape = SubResource( 1 )
-1/shape_one_way = false
-1/shape_one_way_margin = 1.0
-1/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-1/z_index = 0
-2/name = "Crate"
-2/texture = ExtResource( 1 )
-2/tex_offset = Vector2( 0, 0 )
-2/modulate = Color( 1, 1, 1, 1 )
-2/region = Rect2( 64, 32, 32, 32 )
-2/tile_mode = 0
-2/occluder_offset = Vector2( 16, 16 )
-2/navigation_offset = Vector2( 16, 16 )
-2/shape_offset = Vector2( 16, 16 )
-2/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-2/shape = SubResource( 1 )
-2/shape_one_way = false
-2/shape_one_way_margin = 1.0
-2/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-2/z_index = 0
-3/name = "CrateExploding"
-3/texture = ExtResource( 1 )
-3/tex_offset = Vector2( 0, 0 )
-3/modulate = Color( 1, 1, 1, 1 )
-3/region = Rect2( 96, 32, 32, 32 )
-3/tile_mode = 0
-3/occluder_offset = Vector2( 16, 16 )
-3/navigation_offset = Vector2( 16, 16 )
-3/shape_offset = Vector2( 16, 16 )
-3/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-3/shape = SubResource( 1 )
-3/shape_one_way = false
-3/shape_one_way_margin = 1.0
-3/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-3/z_index = 0
-4/name = "Bush"
-4/texture = ExtResource( 1 )
-4/tex_offset = Vector2( 0, 0 )
-4/modulate = Color( 1, 1, 1, 1 )
-4/region = Rect2( 0, 32, 32, 32 )
-4/tile_mode = 0
-4/occluder_offset = Vector2( 16, 16 )
-4/navigation_offset = Vector2( 16, 16 )
-4/shape_offset = Vector2( 16, 16 )
-4/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-4/shape = SubResource( 1 )
-4/shape_one_way = false
-4/shape_one_way_margin = 1.0
-4/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-4/z_index = 0
-5/name = "BushExploding"
-5/texture = ExtResource( 1 )
-5/tex_offset = Vector2( 0, 0 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 32, 32, 32, 32 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 16, 16 )
-5/navigation_offset = Vector2( 16, 16 )
-5/shape_offset = Vector2( 16, 16 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 16, 16 )
-5/shape = SubResource( 1 )
-5/shape_one_way = false
-5/shape_one_way_margin = 1.0
-5/shapes = [ {
-"autotile_coord": Vector2( 0, 0 ),
-"one_way": false,
-"one_way_margin": 1.0,
-"shape": SubResource( 1 ),
-"shape_transform": Transform2D( 1, 0, 0, 1, 16, 16 )
-} ]
-5/z_index = 0
-6/name = "GroundDirt"
-6/texture = ExtResource( 1 )
-6/tex_offset = Vector2( 0, 0 )
-6/modulate = Color( 1, 1, 1, 1 )
-6/region = Rect2( 0, 0, 32, 32 )
-6/tile_mode = 0
-6/occluder_offset = Vector2( 16, 16 )
-6/navigation_offset = Vector2( 16, 16 )
-6/shape_offset = Vector2( 0, 0 )
-6/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-6/shape_one_way = false
-6/shape_one_way_margin = 0.0
-6/shapes = [  ]
-6/z_index = 0
-7/name = "GroundGrass"
-7/texture = ExtResource( 1 )
-7/tex_offset = Vector2( 0, 0 )
-7/modulate = Color( 1, 1, 1, 1 )
-7/region = Rect2( 32, 0, 32, 32 )
-7/tile_mode = 0
-7/occluder_offset = Vector2( 16, 16 )
-7/navigation_offset = Vector2( 16, 16 )
-7/shape_offset = Vector2( 0, 0 )
-7/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-7/shape_one_way = false
-7/shape_one_way_margin = 0.0
-7/shapes = [  ]
-7/z_index = 0
-8/name = "FlameSource1"
-8/texture = ExtResource( 1 )
-8/tex_offset = Vector2( 0, 0 )
-8/modulate = Color( 1, 1, 1, 1 )
-8/region = Rect2( 64, 64, 32, 32 )
-8/tile_mode = 0
-8/occluder_offset = Vector2( 16, 16 )
-8/navigation_offset = Vector2( 16, 16 )
-8/shape_offset = Vector2( 0, 0 )
-8/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-8/shape_one_way = false
-8/shape_one_way_margin = 0.0
-8/shapes = [  ]
-8/z_index = 0
-9/name = "FlameSmall1"
-9/texture = ExtResource( 1 )
-9/tex_offset = Vector2( 0, 0 )
-9/modulate = Color( 1, 1, 1, 1 )
-9/region = Rect2( 96, 64, 32, 32 )
-9/tile_mode = 0
-9/occluder_offset = Vector2( 16, 16 )
-9/navigation_offset = Vector2( 16, 16 )
-9/shape_offset = Vector2( 0, 0 )
-9/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-9/shape_one_way = false
-9/shape_one_way_margin = 0.0
-9/shapes = [  ]
-9/z_index = 0
-10/name = "FlameLongMiddle1"
-10/texture = ExtResource( 1 )
-10/tex_offset = Vector2( 0, 0 )
-10/modulate = Color( 1, 1, 1, 1 )
-10/region = Rect2( 32, 64, 32, 32 )
-10/tile_mode = 0
-10/occluder_offset = Vector2( 16, 16 )
-10/navigation_offset = Vector2( 16, 16 )
-10/shape_offset = Vector2( 0, 0 )
-10/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-10/shape_one_way = false
-10/shape_one_way_margin = 0.0
-10/shapes = [  ]
-10/z_index = 0
-11/name = "FlameLongTip1"
-11/texture = ExtResource( 1 )
-11/tex_offset = Vector2( 0, 0 )
-11/modulate = Color( 1, 1, 1, 1 )
-11/region = Rect2( 0, 64, 32, 32 )
-11/tile_mode = 0
-11/occluder_offset = Vector2( 16, 16 )
-11/navigation_offset = Vector2( 16, 16 )
-11/shape_offset = Vector2( 0, 0 )
-11/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-11/shape_one_way = false
-11/shape_one_way_margin = 0.0
-11/shapes = [  ]
-11/z_index = 0
-12/name = "FlameSource2"
-12/texture = ExtResource( 1 )
-12/tex_offset = Vector2( 0, 0 )
-12/modulate = Color( 1, 1, 1, 1 )
-12/region = Rect2( 64, 96, 32, 32 )
-12/tile_mode = 0
-12/occluder_offset = Vector2( 16, 16 )
-12/navigation_offset = Vector2( 16, 16 )
-12/shape_offset = Vector2( 0, 0 )
-12/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-12/shape_one_way = false
-12/shape_one_way_margin = 0.0
-12/shapes = [  ]
-12/z_index = 0
-13/name = "FlameSmall2"
-13/texture = ExtResource( 1 )
-13/tex_offset = Vector2( 0, 0 )
-13/modulate = Color( 1, 1, 1, 1 )
-13/region = Rect2( 96, 96, 32, 32 )
-13/tile_mode = 0
-13/occluder_offset = Vector2( 16, 16 )
-13/navigation_offset = Vector2( 16, 16 )
-13/shape_offset = Vector2( 0, 0 )
-13/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-13/shape_one_way = false
-13/shape_one_way_margin = 0.0
-13/shapes = [  ]
-13/z_index = 0
-14/name = "FlameLongMiddle2"
-14/texture = ExtResource( 1 )
-14/tex_offset = Vector2( 0, 0 )
-14/modulate = Color( 1, 1, 1, 1 )
-14/region = Rect2( 32, 96, 32, 32 )
-14/tile_mode = 0
-14/occluder_offset = Vector2( 16, 16 )
-14/navigation_offset = Vector2( 16, 16 )
-14/shape_offset = Vector2( 0, 0 )
-14/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-14/shape_one_way = false
-14/shape_one_way_margin = 0.0
-14/shapes = [  ]
-14/z_index = 0
-15/name = "FlameLongTip2"
-15/texture = ExtResource( 1 )
-15/tex_offset = Vector2( 0, 0 )
-15/modulate = Color( 1, 1, 1, 1 )
-15/region = Rect2( 0, 96, 32, 32 )
-15/tile_mode = 0
-15/occluder_offset = Vector2( 16, 16 )
-15/navigation_offset = Vector2( 16, 16 )
-15/shape_offset = Vector2( 0, 0 )
-15/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-15/shape_one_way = false
-15/shape_one_way_margin = 0.0
-15/shapes = [  ]
-15/z_index = 0
-16/name = "FlameSource3"
-16/texture = ExtResource( 1 )
-16/tex_offset = Vector2( 0, 0 )
-16/modulate = Color( 1, 1, 1, 1 )
-16/region = Rect2( 64, 128, 32, 32 )
-16/tile_mode = 0
-16/occluder_offset = Vector2( 16, 16 )
-16/navigation_offset = Vector2( 16, 16 )
-16/shape_offset = Vector2( 0, 0 )
-16/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-16/shape_one_way = false
-16/shape_one_way_margin = 0.0
-16/shapes = [  ]
-16/z_index = 0
-17/name = "FlameSmall3"
-17/texture = ExtResource( 1 )
-17/tex_offset = Vector2( 0, 0 )
-17/modulate = Color( 1, 1, 1, 1 )
-17/region = Rect2( 96, 128, 32, 32 )
-17/tile_mode = 0
-17/occluder_offset = Vector2( 16, 16 )
-17/navigation_offset = Vector2( 16, 16 )
-17/shape_offset = Vector2( 0, 0 )
-17/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-17/shape_one_way = false
-17/shape_one_way_margin = 0.0
-17/shapes = [  ]
-17/z_index = 0
-18/name = "FlameLongMiddle3"
-18/texture = ExtResource( 1 )
-18/tex_offset = Vector2( 0, 0 )
-18/modulate = Color( 1, 1, 1, 1 )
-18/region = Rect2( 32, 128, 32, 32 )
-18/tile_mode = 0
-18/occluder_offset = Vector2( 16, 16 )
-18/navigation_offset = Vector2( 16, 16 )
-18/shape_offset = Vector2( 0, 0 )
-18/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-18/shape_one_way = false
-18/shape_one_way_margin = 0.0
-18/shapes = [  ]
-18/z_index = 0
-19/name = "FlameLongTip3"
-19/texture = ExtResource( 1 )
-19/tex_offset = Vector2( 0, 0 )
-19/modulate = Color( 1, 1, 1, 1 )
-19/region = Rect2( 0, 128, 32, 32 )
-19/tile_mode = 0
-19/occluder_offset = Vector2( 16, 16 )
-19/navigation_offset = Vector2( 16, 16 )
-19/shape_offset = Vector2( 0, 0 )
-19/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-19/shape_one_way = false
-19/shape_one_way_margin = 0.0
-19/shapes = [  ]
-19/z_index = 0
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 1
+custom_data_layer_0/name = "name"
+custom_data_layer_0/type = 4
+sources/0 = SubResource("TileSetAtlasSource_0")
+sources/1 = SubResource("TileSetAtlasSource_1")
+sources/2 = SubResource("TileSetAtlasSource_2")
+sources/3 = SubResource("TileSetAtlasSource_3")
+sources/4 = SubResource("TileSetAtlasSource_4")
+sources/5 = SubResource("TileSetAtlasSource_5")
+sources/6 = SubResource("TileSetAtlasSource_6")
+sources/7 = SubResource("TileSetAtlasSource_7")
+sources/8 = SubResource("TileSetAtlasSource_8")
+sources/9 = SubResource("TileSetAtlasSource_9")
+sources/10 = SubResource("TileSetAtlasSource_10")
+sources/11 = SubResource("TileSetAtlasSource_11")
+sources/12 = SubResource("TileSetAtlasSource_12")
+sources/13 = SubResource("TileSetAtlasSource_13")
+sources/14 = SubResource("TileSetAtlasSource_14")
+sources/15 = SubResource("TileSetAtlasSource_15")
+sources/16 = SubResource("TileSetAtlasSource_16")
+sources/17 = SubResource("TileSetAtlasSource_17")
+sources/18 = SubResource("TileSetAtlasSource_18")
+sources/19 = SubResource("TileSetAtlasSource_19")

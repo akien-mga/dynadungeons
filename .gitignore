@@ -4,3 +4,4 @@
 # System/tool-specific ignores
 .directory
 *~
+.godot/

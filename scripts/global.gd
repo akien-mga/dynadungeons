@@ -76,11 +76,11 @@ func _ready():
 	load_config()
 
 	# Handle display
-	OS.set_window_size(Vector2(width, height))
-	OS.set_window_fullscreen(fullscreen)
+	get_window().set_size(Vector2(width, height))
+	get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (fullscreen) else Window.MODE_WINDOWED
 
 	# Save window size if changed by the user
-	get_tree().connect("screen_resized", self, "save_screen_size")
+	get_window().connect("size_changed", Callable(self, "save_screen_size"))
 
 	# Calculate the sum of the frequencies of all collectibles, to be used
 	# in calculations when a collectible has to be picked randomly
@@ -120,7 +120,7 @@ func load_config():
 		for i in range(1, 5):
 			for action in INPUT_ACTIONS:
 				action_name = str(i) + "_" + action
-				config.set_value("input", action_name, OS.get_scancode_string(InputMap.get_action_list(action_name)[0].scancode))
+				config.set_value("input", action_name, OS.get_keycode_string(InputMap.action_get_events(action_name)[0].keycode))
 
 		config.save(settings_filename)
 	else:
@@ -140,18 +140,18 @@ func load_config():
 		set_from_cfg(config, "gameplay", "nb_lives")
 
 		# User-defined input overrides
-		var scancode
+		var keycode
 		var event
 		for action in config.get_section_keys("input"):
 			# Get the key scancode corresponding to the saved human-readable string
-			scancode = OS.find_scancode_from_string(config.get_value("input", action))
+			keycode = OS.find_keycode_from_string(config.get_value("input", action))
 			# Create a new event object based on the saved scancode
 			event = InputEventKey.new()
-			event.scancode = scancode
+			event.keycode = keycode
 			# Replace old actions by the new one - apparently erasing the old action
 			# works better to get the control buttons properly initialised in the UI
 			# TODO: Handle multiple events per action in a better way
-			for old_event in InputMap.get_action_list(action):
+			for old_event in InputMap.action_get_events(action):
 				if old_event is InputEventKey:
 					InputMap.action_erase_event(action, old_event)
 			InputMap.action_add_event(action, event)
@@ -179,7 +179,7 @@ func save_to_config(section, key, value):
 
 func save_screen_size():
 	"""Save the screen size as two separate parameters"""
-	var screen_size = OS.get_window_size()
+	var screen_size = get_window().get_size()
 	width = int(screen_size.x)
 	height = int(screen_size.y)
 	save_to_config("display", "width", width)

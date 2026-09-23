@@ -30,11 +30,11 @@ func _ready():
 	for id in range(1, 5):
 		for action in global.INPUT_ACTIONS:
 			var button = get_node("Player" + str(id)).get_node(action)
-			button.connect("pressed", self, "wait_for_input", [id, action])
+			button.connect("pressed", Callable(self, "wait_for_input").bind(id, action))
 			# Initialise button text based on the current InputMap
-			for event in InputMap.get_action_list(str(id) + "_" + action):
+			for event in InputMap.action_get_events(str(id) + "_" + action):
 				if event is InputEventKey:
-					button.set_text(OS.get_scancode_string(event.scancode))
+					button.set_text(OS.get_keycode_string(event.keycode))
 
 func _input(event):
 	if event is InputEventKey:
@@ -43,7 +43,7 @@ func _input(event):
 		get_node("ContextHelp").set_text("Click a key binding to reassign it.")
 		# Unless the input is a cancel key, display the typed key and change the binding
 		if not event.is_action("ui_cancel"):
-			active_input.button.set_text(OS.get_scancode_string(event.scancode))
+			active_input.button.set_text(OS.get_keycode_string(event.keycode))
 			change_key(active_input.player_id, active_input.action, event)
 
 ### Functions ###
@@ -66,12 +66,12 @@ func change_key(player_id, action, event):
 	"""Do the actual key remapping in the InputMap, and save it in the config"""
 	var id_action = str(player_id) + "_" + str(action)
 	# Clean all previous bindings
-	for old_event in InputMap.get_action_list(id_action):
+	for old_event in InputMap.action_get_events(id_action):
 		#But don't remove gamepad bindings
 		if not old_event is InputEventJoypadButton:
 			InputMap.action_erase_event(id_action, old_event)
 	# Bind the new event to the chosen action
 	InputMap.action_add_event(id_action, event)
 	# Save the human-readable string in the config file
-	global.save_to_config("input", id_action, OS.get_scancode_string(event.scancode))
+	global.save_to_config("input", id_action, OS.get_keycode_string(event.keycode))
 

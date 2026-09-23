@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/hahaha.wav-cf88e899ec3ea04bc7ccc1b9c02a3d54.sample"
+type="AudioStreamWAV"
+uid="uid://blnfbqsc7rcex"
+path="res://.godot/imported/hahaha.wav-cf88e899ec3ea04bc7ccc1b9c02a3d54.sample"
 
 [deps]
 
 source_file="res://sounds/hahaha.wav"
-dest_files=[ "res://.import/hahaha.wav-cf88e899ec3ea04bc7ccc1b9c02a3d54.sample" ]
+dest_files=["res://.godot/imported/hahaha.wav-cf88e899ec3ea04bc7ccc1b9c02a3d54.sample"]
 
 [params]
 
@@ -17,5 +18,7 @@ force/max_rate=false
 force/max_rate_hz=44100
 edit/trim=true
 edit/normalize=true
-edit/loop=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
 compress/mode=0
